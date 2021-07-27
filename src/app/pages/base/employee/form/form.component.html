@@ -1,0 +1,199 @@
+<div class="app-content page-body">
+  <form [formGroup]="employeeForm.baseForm" (ngSubmit)="onAdd()">
+    <div class="container-fluid">
+      <!--Page header-->
+      <div class="page-header">
+        <div class="page-leftheader">
+          <h4 class="page-title">ADD EMPLOYEE</h4>
+        </div>
+        <div class="page-rightheader ml-auto d-lg-flex d-none">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+              <a href="#" class="d-flex"><svg class="svg-icon" xmlns="http://www.w3.org/2000/svg" height="24"
+                  viewBox="0 0 24 24" width="24">
+                  <path d="M0 0h24v24H0V0z" fill="none" />
+                  <path d="M12 3L2 12h3v8h6v-6h2v6h6v-8h3L12 3zm5 15h-2v-6H9v6H7v-7.81l5-4.5 5 4.5V18z" />
+                  <path d="M7 10.19V18h2v-6h6v6h2v-7.81l-5-4.5z" opacity=".3" />
+                </svg><span class="breadcrumb-icon"> MAIN PAGE </span></a>
+            </li>
+            <li class="breadcrumb-item"><a href="base/employee/list"><i class="fa fa-users"></i> EMPLOYEE LIST</a></li>
+            <li class="breadcrumb-item active" aria-current="page">
+              ADD EMPLOYEE
+            </li>
+          </ol>
+        </div>
+      </div>
+      <!--End Page header-->
+
+      <!-- Row -->
+      <div class="row">
+
+        <div class="col-xl-12 col-lg-12">
+          <div class="card">
+            <div class="card-header">
+              <div class="card-title">EMPLOYEE INFORMATION</div>
+            </div>
+            <div class="card-body">
+              <div class="row">
+                <div class="col-xl-4 col-lg-4 col-sm-12">
+                  <div class="text-center mb-5">
+                    <h2>PROFILE</h2>
+                    <img style="width: 120px; height:100px; border-radius: 100px;" [src]="url_profile">
+                    <div class="text-center mb-5">
+                      <h2>SIGNATURE</h2>
+                      <img style="width: 120px; height:100px; border-radius: 100px;" [src]="url_signature">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="exampleInputPassword1"><b style="color: red;">*</b>Password</label>
+                    <input type="password" class="form-control" formControlName="password">
+                    <div *ngIf="employeeForm.password.touched && employeeForm.password.invalid">
+                      <small *ngIf="employeeForm.password.errors.required" class="text-danger">Password is
+                        required<br></small>
+                      <small *ngIf="employeeForm.password.errors.minlength" class="text-danger">password must contain 6
+                        characters at least</small>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="repeatPassword"><b style="color: red;">*</b>Repeat Password</label>
+                    <input type="password" class="form-control" formControlName="confirm_password">
+                    <div *ngIf="employeeForm.confirm_password.touched && employeeForm.confirm_password.invalid">
+                      <small *ngIf="employeeForm.confirm_password.errors.required" class="text-danger">Repeat Password
+                        is required<br></small>
+                    </div>
+                    <div
+                      *ngIf="employeeForm.confirm_password.valid && employeeForm.confirm_password.value != employeeForm.password.value"
+                      class="text-danger">
+                      The passwords entered do not match
+                    </div>
+                  </div>
+                  <!-- <div class="form-group">
+                  <label class="form-label">Password</label>
+                  <input type="password" class="form-control" formControlName="password" placeholder="Password" />
+                </div>
+                  <div class="form-group">
+                    <label class="form-label">Comfirm Password</label>
+                    <input type="password" class="form-control" formControlName="confirm_password" placeholder="Comfirm Password" />
+                  </div> -->
+                  <!-- <div class="form-group">
+                  <label class="form-label">Confirm Password</label>
+                  <input type="password" class="form-control"  formControlName="password" placeholder="Confirm Password">
+                </div> -->
+                </div>
+                <div class="col-xl-4 col-lg-4 col-sm-12">
+                  <div class="form-group">
+                    <label class="form-label"><b style="color: red;">*</b>USER ID</label>
+                    <input type="text" formControlName="user_id" class="form-control" placeholder="User ID" />
+                    <div *ngIf="employeeForm.user_id.touched && employeeForm.user_id.invalid">
+                      <small *ngIf="employeeForm.user_id.errors.required" class="text-danger">User ID is required<br></small>
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <label class="form-label"><b style="color: red;">*</b>EMPLOYEE NAME</label>
+                    <input type="text" formControlName="name" class="form-control" placeholder="Employee Name" />
+                    <div *ngIf="employeeForm.name.touched && employeeForm.name.invalid">
+                      <small *ngIf="employeeForm.name.errors.required" class="text-danger">Employee Name is required<br></small>
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <label class="form-label"><b style="color: red;">*</b>EMAIL ADDRESS</label>
+                    <input type="email" formControlName="email" class="form-control" placeholder="Email" />
+                    <div *ngIf="employeeForm.email.touched && employeeForm.email.invalid">
+                      <small *ngIf="employeeForm.email.errors.pattern" class="text-danger"> Email not valid.</small>
+                    </div>
+                    <div *ngIf="employeeForm.email.touched && employeeForm.email.invalid">
+                      <small *ngIf="employeeForm.email.errors.required" class="text-danger">Email is
+                        required<br></small>
+                    </div>
+                  </div>
+                  <div class="custom-file mb-3">
+                    <input type="file" (change)='onChange($event)' class="custom-file-input" />
+                    <label class="custom-file-label" for="customFile">Choose Your Picture Profile</label>
+                  </div>
+                  <div class="custom-file mb-3">
+                    <input type="file" (change)='onChangeSignature($event)' class="custom-file-input" />
+                    <label class="custom-file-label" for="customFile">Choose Your Signature</label>
+                  </div>
+                  <!-- <div class="custom-file mb-3">
+                    <label class="form-label">Line Token</label>
+                    <input type="text" formControlName="line_token" class="form-control"/>
+                  </div> -->
+                </div>
+                <div class="col-xl-4 col-lg-4 col-sm-12">
+                  <div class="form-group">
+                    <label class="form-label"><b style="color: red;">*</b>BRANCH</label>
+                    <select class="custom-select" formControlName="branch_id">
+                      <option value="" disabled selected>--Select--</option>
+                      <option *ngFor="let item of BranchData; let i =index" value="{{ item.id }}">{{ item.name }}
+                      </option>
+                    </select>
+                    <div *ngIf="employeeForm.branch_id.touched && employeeForm.branch_id.invalid">
+                      <small *ngIf="employeeForm.branch_id.errors.required" class="text-danger">Branch is required<br></small>
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <label class="form-label"><b style="color: red;">*</b>Permission</label>
+                    <select class="custom-select" formControlName="permission_id">
+                      <option value="" disabled selected>--Select--</option>
+                      <option *ngFor="let item of PermissionData; let i =index" value="{{ item.id }}">{{ item.name }}
+                      </option>
+                    </select>
+                    <div *ngIf="employeeForm.permission_id.touched && employeeForm.permission_id.invalid">
+                      <small *ngIf="employeeForm.permission_id.errors.required" class="text-danger">Permission is required<br></small>
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <label class="form-label"><b style="color: red;">*</b>Department</label>
+                    <select class="custom-select" formControlName="department_id">
+                      <option value="" disabled selected>--Select--</option>
+                      <option *ngFor="let item of DepartmentData; let i =index" value="{{ item.id }}">{{ item.name }}
+                      </option>
+                    </select>
+                    <div *ngIf="employeeForm.department_id.touched && employeeForm.department_id.invalid">
+                      <small *ngIf="employeeForm.department_id.errors.required" class="text-danger">Department is required<br></small>
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <label class="form-label"><b style="color: red;">*</b>Position</label>
+                    <select class="custom-select" formControlName="position_id">
+                      <option value="" disabled selected>--Select--</option>
+                      <option *ngFor="let item of PositionData; let i =index" value="{{ item.id }}">{{ item.name }}
+                      </option>
+                    </select>
+                    <div *ngIf="employeeForm.position_id.touched && employeeForm.position_id.invalid">
+                      <small *ngIf="employeeForm.position_id.errors.required" class="text-danger">Position is required<br></small>
+                    </div>
+                  </div>
+
+                  <!-- <div class="custom-file mb-3">
+                    <label class="form-label">Account Status</label>
+                    <select class="custom-select"formControlName="status" >
+                      <option value="" disabled selected>--Select--</option>
+                      <option value="Yes">Enable</option>
+                      <option value="No">Disable</option>
+                    </select>
+                  </div> -->
+                </div>
+              </div>
+            </div>
+            <div class="card-footer text-right">
+              <button type="button" (click)=onAdd(); class="btn btn-primary" >
+                SAVE
+              </button>
+              &nbsp;
+              <a href="#" class="btn btn-danger">Clear</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- End Row-->
+    </div>
+  </form>
+</div>
+<!-- end app-content-->

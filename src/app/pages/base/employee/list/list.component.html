@@ -1,0 +1,101 @@
+<div class="app-content page-body">
+  <div class="container-fluid">
+    <!--Page header-->
+    <div class="page-header">
+      <div class="page-leftheader">
+        <h4 class="page-title">LIST OF EMPLOYEE</h4>
+      </div>
+      <div class="page-rightheader ml-auto d-lg-flex d-none">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+            <a href="#" class="d-flex"><svg class="svg-icon" xmlns="http://www.w3.org/2000/svg" height="24"
+                viewBox="0 0 24 24" width="24">
+                <path d="M0 0h24v24H0V0z" fill="none" />
+                <path d="M12 3L2 12h3v8h6v-6h2v6h6v-8h3L12 3zm5 15h-2v-6H9v6H7v-7.81l5-4.5 5 4.5V18z" />
+                <path d="M7 10.19V18h2v-6h6v6h2v-7.81l-5-4.5z" opacity=".3" />
+              </svg><span class="breadcrumb-icon"> MAIN PAGE</span></a>
+          </li>
+          <li class="breadcrumb-item">
+            <a routerLink="../request">REQUEST LINK</a>
+
+          <li class="breadcrumb-item active" aria-current="page"><i class="fa fa-users"></i> EMPLOYEE LIST</li>
+
+
+        </ol>
+      </div>
+    </div>
+    <!--End Page header-->
+
+    <!-- Row -->
+    <div class="row">
+      <div class="col-12">
+        <!--div-->
+        <div class="card">
+          <div class="card-body">
+            <div class="row">
+              <div class="col mb-4">
+                <div class="card-title">LIST OF EMPLOYEE</div>
+              </div>
+              <div class="col col-auto mb-4">
+                <div class="form-group w-100">
+                  <a routerLink="/base/employee/form" class="btn btn-primary"><i class="fe fe-plus"></i> ADD
+                    EMPLOYEE</a>
+                </div>
+              </div>
+            </div>
+            <div class="">
+              <div class="table-responsive">
+                <table datatable [dtOptions]="dtOptions" id="example"
+                  class="table table-striped card-table table-vcenter text-nowrap mb-0">
+                  <thead>
+                    <tr>
+                      <th class="border-bottom-0">NO.</th>
+                      <th class="border-bottom-0">PICTURE</th>
+                      <th class="border-bottom-0">NAME</th>
+                      <th class="border-bottom-0">DEPARTMENT</th>
+                      <th class="border-bottom-0">PERMISSION</th>
+                      <th class="border-bottom-0">BRANCH</th>
+                      <th class="border-bottom-0">CREATOR</th>
+                      <th class="border-bottom-0">STATUS</th>
+                      <th class="border-bottom-0">ACTION</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+
+                    <tr *ngFor="let item of dataRow; let i = index">
+                      <td>{{ i + 1 }}</td>
+                      <td *ngIf="item.image == null"><img style="width: 100%; height:70px; border-radius: 100px;"
+                          src="assets/images/noimage.png"></td>
+                      <td *ngIf="item.image != null"><img style="width: 100%; height:70px; border-radius: 100px;"
+                          src="{{ item.image }}"></td>
+                      <td>{{ item.name }}</td>
+                      <td>{{ item.department.name }}</td>
+                      <td>{{ item.permission.name }}</td>
+                      <td>{{ item.branch.name }}</td>
+                      <td>{{ item.create_by }}</td>
+                      <!-- <td>{{ item.created_at | date:'d/M/yy, h:mm:ss a' }}</td>
+                      <td>{{ item.updated_at | date:'d/M/yy, h:mm:ss a' }}</td> -->
+                      <td *ngIf="item.status == 'Yes'"><span class="badge badge-success badge-pill">Active</span></td>
+                      <td *ngIf="item.status == 'No'"><span class="badge badge-danger badge-pill">InActive</span></td>
+
+                      <td>
+                        <div class="btn-list">
+                          <button type="button" (click)="onEdit(item)" class="btn btn-icon btn-success">
+                            <i class="fa fa-edit"></i>
+                          </button>
+                        </div>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!--/div-->
+      </div>
+    </div>
+    <!-- /Row -->
+  </div>
+</div>
+<!-- end app-content-->

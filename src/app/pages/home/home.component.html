@@ -1,0 +1,281 @@
+<div class="app-content page-body">
+  <div class="container-fluid">
+    <!--Row-->
+    <div class="row">
+      <div class="col-xl-4 col-md-12 col-lg-3">
+        <div class="card expenses-card overflow-hidden">
+          <div class="card-body">
+            <div class="feature">
+              <i class="fa fa-university feature-icon"></i>
+              <h1 class="font-weight-bold mb-0 mt-4 fs-50">$12,345.00</h1>
+              <p class="text-muted fs-18 mb-0">Sale order this month</p>
+            </div>
+          </div>
+          <div class="chart-wrapper">
+            <canvas id="Chart" class="overflow-hidden"></canvas>
+          </div>
+        </div>
+      </div>
+      <div class="col-xl-8 col-md-12 col-lg-9">
+        <div class="card">
+          <div class="card-body">
+            <div class="row">
+              <div class="col-12 col-sm d-flex mb-4 mb-sm-0">
+                <i
+                  class="
+                    mdi mdi-basket-fill
+                    fs-60
+                    text-default
+                    icon-dropshadow-default
+                    mr-3
+                  "
+                ></i>
+                <div class="mt-5">
+                  <h6>Total Orders</h6>
+                  <h3 class="mb-0 font-weight-bold">1000</h3>
+                </div>
+              </div>
+              <div class="col-12 col-sm d-flex mb-4 mb-sm-0">
+                <i
+                  class="
+                    mdi mdi-basket-fill
+                    fs-60
+                    text-primary
+                    icon-dropshadow-primary
+                    mr-3
+                  "
+                ></i>
+                <div class="mt-5">
+                  <h6>Pending Order</h6>
+                  <h3 class="mb-0 font-weight-bold">450 (45%)</h3>
+                </div>
+              </div>
+              <div class="col-12 col-sm d-flex">
+                <i
+                  class="
+                    mdi mdi-basket-fill
+                    fs-60
+                    text-success
+                    icon-dropshadow-success
+                    mr-3
+                  "
+                ></i>
+                <div class="mt-5">
+                  <h6>Complate Orders</h6>
+                  <h3 class="mb-0 font-weight-bold">650 (65%)</h3>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xl-4 col-lg-4 col-md-6">
+            <div class="card">
+              <div class="card-body">
+                <p class="mb-1">Delivery Order</p>
+                <h2 class="mb-1 font-weight-bold">1000</h2>
+                <span class="mb-1 text-muted"
+                  ><!--span class="text-danger"
+                    ><i class="fa fa-caret-down mr-1"></i> 1000</span
+                  -->
+                  This month</span
+                >
+              </div>
+            </div>
+          </div>
+          <div class="col-xl-4 col-lg-4 col-md-6">
+            <div class="card">
+              <div class="card-body">
+                <p class="mb-1">Delivery Order</p>
+                <h2 class="mb-1 font-weight-bold">450</h2>
+                <span class="mb-1 text-muted"
+                  ><!--span class="text-success"
+                    ><i class="fa fa-caret-up mr-1"></i> 19.8</span
+                  -->
+                  This week</span
+                >
+              </div>
+            </div>
+          </div>
+          <div class="col-xl-4 col-lg-4 col-md-12">
+            <div class="card">
+              <div class="card-body">
+                <p class="mb-1">Delivery Order</p>
+                <h2 class="mb-1 font-weight-bold">90</h2>
+                <span class="mb-1 text-muted"
+                  ><!--span class="text-success"
+                    ><i class="fa fa-caret-up mr-1"></i> 0.8%</span
+                  -->
+                  To day</span
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row row-deck">
+      <div class="col-lg-12">
+        <div class="card">
+          <div class="card-header">
+            <h3 class="card-title">Productivity</h3>
+            <div class="d-flex ml-auto">
+              <div class="btn-group mb-0">
+                <button
+                  type="button"
+                  class="btn btn-white dropdown-toggle"
+                  data-toggle="dropdown"
+                  aria-haspopup="true"
+                  aria-expanded="false"
+                >
+                  This week
+                </button>
+                <div class="dropdown-menu">
+                  <a class="dropdown-item" href="#">Next Week</a>
+                  <div class="dropdown-divider"></div>
+                  <a class="dropdown-item" href="#"> Last Month</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="card-body p-5">
+            <div class="d-flex align-items-end justify-content-between mg-b-5">
+              <h6 class="">Finish Job</h6>
+              <h6 class="font-weight-bold mb-1">100</h6>
+            </div>
+            <div class="progress progress-sm mb-5">
+              <div class="progress-bar bg-primary" style="width: 100%"></div>
+            </div>
+            <div class="d-flex align-items-end justify-content-between mg-b-5">
+              <h6 class="">QC Pass</h6>
+              <h6 class="font-weight-bold mb-1">95%</h6>
+            </div>
+            <div class="progress progress-sm mb-5">
+              <div class="progress-bar bg-info" style="width: 95%"></div>
+            </div>
+            <div class="d-flex align-items-end justify-content-between mg-b-5">
+              <h6 class="">Rework</h6>
+              <h6 class="font-weight-bold mb-1">3%</h6>
+            </div>
+            <div class="progress progress-sm mb-5">
+              <div class="progress-bar bg-danger" style="width: 3%"></div>
+            </div>
+            <div class="d-flex align-items-end justify-content-between mg-b-5">
+              <h6 class="">Reject</h6>
+              <h6 class="font-weight-bold mb-1">2%</h6>
+            </div>
+            <div class="progress progress-sm mb-5">
+              <div class="progress-bar bg-secondary" style="width: 2%"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!--End row-->
+
+      <div class="row">
+        <div class="col-lg-4">
+          <div class="card">
+            <div class="card-body">
+              <ul id="treeview1">
+                <li>
+                  <a href="#">TECH</a>
+                  <ul>
+                    <li>Company Maintenance</li>
+                    <li>
+                      Employees
+                      <ul>
+                        <li>Reports</li>
+                      </ul>
+                    </li>
+                    <li>Human Resources</li>
+                  </ul>
+                </li>
+                <li>
+                  XRP
+                  <ul>
+                    <li>Company Maintenance</li>
+                    <li>
+                      Employees
+                      <ul>
+                        <li>Reports</li>
+                      </ul>
+                    </li>
+                    <li>Human Resources</li>
+                  </ul>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4">
+          <div class="card">
+            <div class="card-body">
+              <ul id="treeview2">
+                <li>
+                  <a href="#">TECH</a>
+                  <ul>
+                    <li>Company Maintenance</li>
+                    <li>
+                      Employees
+                      <ul>
+                        <li>Reports</li>
+                      </ul>
+                    </li>
+                    <li>Human Resources</li>
+                  </ul>
+                </li>
+                <li>
+                  XRP
+                  <ul>
+                    <li>Company Maintenance</li>
+                    <li>
+                      Employees
+                      <ul>
+                        <li>Reports</li>
+                      </ul>
+                    </li>
+                    <li>Human Resources</li>
+                  </ul>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4">
+          <div class="card">
+            <div class="card-body">
+              <ul id="treeview3">
+                <li>
+                  <a href="#">TECH</a>
+                  <ul>
+                    <li>Company Maintenance</li>
+                    <li>
+                      Employees
+                      <ul>
+                        <li>Reports</li>
+                      </ul>
+                    </li>
+                    <li>Human Resources</li>
+                  </ul>
+                </li>
+                <li>
+                  XRP
+                  <ul>
+                    <li>Company Maintenance</li>
+                    <li>
+                      Employees
+                      <ul>
+                        <li>Reports</li>
+                      </ul>
+                    </li>
+                    <li>Human Resources</li>
+                  </ul>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

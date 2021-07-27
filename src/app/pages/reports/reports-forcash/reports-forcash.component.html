@@ -1,0 +1,138 @@
+<div class="app-content page-body">
+  <div class="container-fluid">
+    <!--Page header-->
+    <div class="page-header">
+      <div class="page-leftheader">
+        <h4 class="page-title">Report FORECAST</h4>
+      </div>
+      <div class="page-rightheader ml-auto d-lg-flex d-none">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+            <a href="#" class="d-flex"><svg class="svg-icon" xmlns="http://www.w3.org/2000/svg" height="24"
+                viewBox="0 0 24 24" width="24">
+                <path d="M0 0h24v24H0V0z" fill="none" />
+                <path d="M12 3L2 12h3v8h6v-6h2v6h6v-8h3L12 3zm5 15h-2v-6H9v6H7v-7.81l5-4.5 5 4.5V18z" />
+                <path d="M7 10.19V18h2v-6h6v6h2v-7.81l-5-4.5z" opacity=".3" />
+              </svg><span class="breadcrumb-icon">Main</span></a>
+          </li>
+          <li class="breadcrumb-item">
+            <a routerLink="/reports">Report</a>
+          </li>
+          <li class="breadcrumb-item">
+            <a routerLink="/reports/item-tran">Item tran</a>
+          </li>
+        </ol>
+      </div>
+    </div>
+    <!--End Page header-->
+
+    <div class="row">
+      <div class="col-lg-12 col-md-12">
+        <div class="card">
+          <div class="card-body">
+            <form [formGroup]="formFillter">
+              <label class="col-md-3 form-label">Fillter</label>
+              <div class="row">
+                <div class="col-md-4">
+                  <select formControlName="customer_id" class="form-control">
+                    <option value="">Select Customer</option>
+                    <option *ngFor="let item of CustomerData; let i = index" [value]="item.id">
+                      {{item.name}} ({{item.id}})</option>
+                  </select>
+                </div>
+                <div class="col-md-2">
+                  <select formControlName="year" class="form-control">
+                    <option value="">Select Year</option>
+                    <option *ngFor="let item of YearData.year; let i = index" [value]="item">
+                      {{item}}</option>
+                  </select>
+                </div>
+
+
+                <div class="col-lg-3 col-md-3 text-left">
+                  <button type="button" class="btn btn-primary" (click)="loadTable(formFillter)">
+                    <i class="fa fa-search"></i> Fillter
+                  </button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-12 col-md-12">
+        <!--div-->
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title">FORECAST</div>
+          </div>
+          <div class="card-body">
+            <div class="">
+              <div class="table-responsive">
+                <table id="example" class="table table-bordered text-nowrap">
+                  <tbody *ngFor="let item1 of dataRow; let x = index">
+                    <tr>
+                      <td class="bg-dark text-white">FORECAST FOR {{item1.name}}</td>
+                    </tr>
+                      <tr>
+                        <th class="border-bottom-0">PART NAME</th>
+                        <th class="border-bottom-0">PART CODE</th>
+                        <th class="border-bottom-0">JAN-21</th>
+                        <th class="border-bottom-0">FEB-21</th>
+                        <th class="border-bottom-0">MAR-21</th>
+                        <th class="border-bottom-0">APR-21</th>
+                        <th class="border-bottom-0">MAY-21</th>
+                        <th class="border-bottom-0">JUN-21</th>
+                        <th class="border-bottom-0">JUL-21</th>
+                        <th class="border-bottom-0">AUG-21</th>
+                        <th class="border-bottom-0">SEP-21</th>
+                        <th class="border-bottom-0">OCT-21</th>
+                        <th class="border-bottom-0">NOV-21</th>
+                        <th class="border-bottom-0">DEC-21</th>
+                      </tr>
+                    <tr *ngFor="let item of item1.forcash; let i = index">
+                            <td>{{item.description}}</td>
+                            <td>{{item.item_id}}</td>
+                            <td>{{item.p_jan | number}}</td>
+                            <td>{{item.p_feb | number}}</td>
+                            <td>{{item.p_mar | number}}</td>
+                            <td>{{item.p_apr | number}}</td>
+                            <td>{{item.p_may | number}}</td>
+                            <td>{{item.p_jun | number}}</td>
+                            <td>{{item.p_jul | number}}</td>
+                            <td>{{item.p_aug | number}}</td>
+                            <td>{{item.p_sep | number}}</td>
+                            <td>{{item.p_oct | number}}</td>
+                            <td>{{item.p_nov | number}}</td>
+                            <td>{{item.p_dec | number}}</td>
+                    </tr>
+                    <tr class="bg-secondary font-weight-bold">
+                      <td colspan="2">TOTAL</td>
+                      <td>{{item1.sum_p1 }}</td>
+                      <td>{{item1.sum_p2 }}</td>
+                      <td>{{item1.sum_p3 }}</td>
+                      <td>{{item1.sum_p4 }}</td>
+                      <td>{{item1.sum_p5 }}</td>
+                      <td>{{item1.sum_p6 }}</td>
+                      <td>{{item1.sum_p7 }}</td>
+                      <td>{{item1.sum_p8 }}</td>
+                      <td>{{item1.sum_p9 }}</td>
+                      <td>{{item1.sum_p10 }}</td>
+                      <td>{{item1.sum_p11 }}</td>
+                      <td>{{item1.sum_p12 }}</td>
+
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!--/div-->
+      </div>
+    </div>
+    <!-- End Row -->
+  </div>
+</div>
+<!-- end app-content-->

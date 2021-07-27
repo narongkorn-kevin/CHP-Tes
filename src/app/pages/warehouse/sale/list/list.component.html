@@ -1,0 +1,121 @@
+<div class="app-content main-content">
+  <div class="side-app">
+    <!--Page header-->
+    <div class="page-header">
+      <div class="page-leftheader">
+        <h4 class="page-title">Sale Order List</h4>
+      </div>
+      <div class="page-rightheader ml-auto d-lg-flex d-none">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+            <a href="#" class="d-flex"
+              ><svg
+                class="svg-icon"
+                xmlns="http://www.w3.org/2000/svg"
+                height="24"
+                viewBox="0 0 24 24"
+                width="24"
+              >
+                <path d="M0 0h24v24H0V0z" fill="none" />
+                <path
+                  d="M12 3L2 12h3v8h6v-6h2v6h6v-8h3L12 3zm5 15h-2v-6H9v6H7v-7.81l5-4.5 5 4.5V18z"
+                />
+                <path
+                  d="M7 10.19V18h2v-6h6v6h2v-7.81l-5-4.5z"
+                  opacity=".3"
+                /></svg
+              ><span class="breadcrumb-icon"> Main</span></a
+            >
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">Sale Order</li>
+        </ol>
+      </div>
+    </div>
+    <!--End Page header-->
+
+    <!-- Row -->
+    <div class="row">
+      <div class="col-12">
+        <!--div-->
+        <div class="card">
+          <div class="card-body">
+            <div class="row">
+              <div class="col mb-4">
+                <div class="card-title">Sale Order</div>
+              </div>
+              <div class="col col-auto mb-4">
+                <div class="form-group w-100">
+                  <a routerLink="/warehouse/sale/form" class="btn btn-primary"
+                    ><i class="fe fe-plus"></i> Add New</a
+                  >
+                </div>
+              </div>
+            </div>
+            <div class="">
+              <div class="table-responsive">
+                <table
+                  datatable
+                  [dtOptions]="dtOptions"
+                  id="example"
+                  class="table table-bordered text-nowrap key-buttons"
+                >
+                  <thead>
+                    <tr>
+                      <th class="border-bottom-0">No</th>
+                      <th class="border-bottom-0">order_id</th>
+                      <th class="border-bottom-0">customer</th>
+                      <th class="border-bottom-0">Seller</th>
+                      <th class="border-bottom-0">date</th>
+                      <th class="border-bottom-0">Amount</th>
+                      <th class="border-bottom-0">status</th>
+                      <th class="border-bottom-0">MGMT</th>
+                    </tr>
+                  </thead>
+                  <tbody *ngIf="dataRow?.length != 0">
+                    <tr *ngFor="let item of dataRow; let i = index">
+                      <td>{{ i + 1 }}</td>
+                      <td>{{ item.order_id }}</td>
+                      <td>{{ item.customer.name }}</td>
+                      <td>{{ item.user.name }}</td>
+                      <td>{{ item.date }}</td>
+                      <td>{{ item.net_amount != null ? item.net_amount : '0.00' }} Baht</td>
+                      <td>{{ item.status }}</td>
+                      <td>
+                        <div class="btn-list">
+                          <button
+                            type="button"
+                            class="btn btn-icon btn-success"
+                            (click)="onEdit(item)"
+                          >
+                            <i class="fa fa-edit"></i>
+                          </button>
+                          <button
+                            type="button"
+                            (click)="onDelete(item.id)"
+                            class="btn btn-icon btn-danger"
+                          >
+                            <i class="fa fa-trash"></i>
+                          </button>
+                        </div>
+                      </td>
+                    </tr>
+                  </tbody>
+                  <tbody *ngIf="dataRow?.length == 0">
+                    <tr>
+                      <td colspan="8" class="no-data-available">
+                        No data found!
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!--/div-->
+      </div>
+    </div>
+    <!-- /Row -->
+  </div>
+</div>
+<!-- end app-content-->

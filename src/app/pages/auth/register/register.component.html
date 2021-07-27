@@ -1,0 +1,141 @@
+<form [formGroup]="registerForm.baseForm" (ngSubmit)="onRegister()">
+  <div class="d-md-flex">
+
+    <div class="w-40 bg-style h-100vh page-style">
+      <div class="page-content">
+        <div class="page-single-content">
+          <img src="../../assets/images/brand/logo1.png" alt="img" class="header-brand-img mb-5">
+          <div class="card-body text-white py-5 px-8 text-center">
+            <img src="../../assets/images/png/2.png" alt="img" class="w-100 text-center">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="w-80 page-content">
+      <div class="page-single-content">
+        <div class="card-body p-6">
+          <div class="row">
+            <div class="col-md-8 mx-auto d-block">
+              <h1 class="mb-2">Register</h1>
+              <p class="text-muted">Create New Account</p>
+              <div class="btn-list d-sm-flex">
+              </div>
+              <div class="input-group mb-3">
+                <input  type="text" class="form-control" formControlName="user_id" placeholder="Employee ID">
+              </div>
+              <div *ngIf="registerForm.user_id.touched && registerForm.user_id.invalid">
+                <small *ngIf="registerForm.user_id.errors.required" class="text-danger">Employee ID is
+                  required<br></small>
+              </div>
+              <div class="input-group mb-3">
+                <input type="text" class="form-control" formControlName="name" placeholder="Name">
+              </div>
+              <div *ngIf="registerForm.name.touched && registerForm.name.invalid">
+                <small *ngIf="registerForm.name.errors.required" class="text-danger">Name is required<br></small>
+              </div>
+              <div class="input-group mb-3">
+                <input type="text" class="form-control" formControlName="email" placeholder="Email">
+              </div>
+              <div *ngIf="registerForm.email.touched && registerForm.email.invalid">
+                <small *ngIf="registerForm.email.errors.pattern" class="text-danger"> Email not valid.</small>
+              </div>
+              <div *ngIf="registerForm.email.touched && registerForm.email.invalid">
+                <small *ngIf="registerForm.email.errors.required" class="text-danger">Email is required<br></small>
+              </div>
+              <div class="input-group mb-3">
+                <input type="password" class="form-control" formControlName="password" placeholder="Password">
+                <div class="input-group mb-4" *ngIf="registerForm.password.touched && registerForm.password.invalid">
+                  <small *ngIf="registerForm.password.errors.required" class="text-danger">Password is
+                    required<br></small>
+                  <small *ngIf="registerForm.password.errors.minlength" class="text-danger">password must contain 6
+                    characters at least</small>
+                </div>
+              </div>
+              <div class="input-group mb-3">
+                <input type="password" class="form-control" formControlName="confirm_password"
+                  placeholder="Confirm Password">
+                <div class="input-group mb-4"
+                  *ngIf="registerForm.confirm_password.touched && registerForm.confirm_password.invalid">
+                  <small *ngIf="registerForm.confirm_password.errors.required" class="text-danger">Repeat Password is
+                    required<br></small>
+                </div>
+                <div class="input-group mb-4"
+                  *ngIf="registerForm.confirm_password.valid && registerForm.confirm_password.value != registerForm.password.value">
+                  <small class="text-danger">
+                    The passwords entered do not match</small>
+                </div>
+              </div>
+              <div class="input-group mb-3">
+                <select class="custom-select" formControlName="department_id">
+                  <option value="" disabled selected>Select Your Department</option>
+                  <option *ngFor="let item of DepartmentData; let i =index" value="{{ item.id }}">Department : {{
+                    item.name }}</option>
+                </select>
+              </div>
+              <div *ngIf="registerForm.department_id.touched && registerForm.department_id.invalid">
+                <small *ngIf="registerForm.department_id.errors.required" class="text-danger">Department is
+                  required<br></small>
+              </div>
+              <div class="input-group mb-3">
+                <select class="custom-select" formControlName="position_id">
+                  <option value="" disabled selected>Select Your Position</option>
+                  <option *ngFor="let item of PositionData; let i =index" value="{{ item.id }}">Position : {{ item.name
+                    }}</option>
+                </select>
+              </div>
+              <div *ngIf="registerForm.position_id.touched && registerForm.position_id.invalid">
+                <small *ngIf="registerForm.position_id.errors.required" class="text-danger">Position is
+                  required<br></small>
+              </div>
+              <div class="input-group mb-3">
+                <select class="custom-select" formControlName="branch_id">
+                  <option value="" disabled selected>Select Your Branch</option>
+                  <option *ngFor="let item of BranchData; let i =index" value="{{ item.id }}">Branch : {{ item.name }}
+                  </option>
+                </select>
+              </div>
+              <div *ngIf="registerForm.branch_id.touched && registerForm.branch_id.invalid">
+                <small *ngIf="registerForm.branch_id.errors.required" class="text-danger">Branch is required<br></small>
+              </div>
+              <div class="custom-file mb-3">
+                <div class="input-group mb-3">
+                  <input type="file" (change)='onChange($event)' class="custom-file-input" />
+                  <label class="custom-file-label" for="customFile">Choose Your Picture Profile</label>
+                </div>
+              </div>
+              <div class="custom-file mb-3">
+                <div class="input-group mb-3">
+                  <input type="file" (change)='onChangeSignature($event)' class="custom-file-input" />
+                  <label class="custom-file-label" for="customFile">Choose Your Signature</label>
+
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="custom-control custom-checkbox">
+                  <input type="checkbox" class="custom-control-input" />
+
+                  <span class="custom-control-label">Agree the <a href="terms.html" class="btn-link">terms and
+                      policy</a></span>
+                </label>
+
+              </div>
+
+              <div class="row">
+                <div class="col-12">
+                  <button type="button" (click)=onRegister(); class="btn btn-lg btn-primary btn-block px-4"
+                    [disabled]="registerForm.baseForm.invalid || registerForm.confirm_password.value != registerForm.password.value"><i
+                      class="fe fe-arrow-right"></i> Create a new account</button>
+                </div>
+              </div>
+              <div class="pt-4">
+                <div class="font-weight-normal fs-16">You Already have an account <a class="btn-link font-weight-normal"
+                    href="#">Login Here</a></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</form>

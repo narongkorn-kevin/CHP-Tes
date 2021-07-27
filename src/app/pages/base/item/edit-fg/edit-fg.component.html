@@ -1,0 +1,306 @@
+<div class="app-content page-body">
+  <div class="container-fluid">
+    <!--Page header-->
+    <div class="page-header">
+      <div class="page-leftheader">
+        <h4 class="page-title">EDIT ITEM FINISH GOODS</h4>
+      </div>
+      <div class="page-rightheader ml-auto d-lg-flex d-none">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+            <a href="#" class="d-flex"><svg class="svg-icon" xmlns="http://www.w3.org/2000/svg" height="24"
+                viewBox="0 0 24 24" width="24">
+                <path d="M0 0h24v24H0V0z" fill="none" />
+                <path d="M12 3L2 12h3v8h6v-6h2v6h6v-8h3L12 3zm5 15h-2v-6H9v6H7v-7.81l5-4.5 5 4.5V18z" />
+                <path d="M7 10.19V18h2v-6h6v6h2v-7.81l-5-4.5z" opacity=".3" />
+              </svg><span class="breadcrumb-icon">MAIN</span></a>
+          </li>
+          <li class="breadcrumb-item">
+            <a routerLink="/base/item/list-fg">ITEM LIST</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">
+            EDIT ITEM
+          </li>
+        </ol>
+      </div>
+    </div>
+
+    <!--End Page header-->
+
+    <div class="row">
+      <div class="col-lg-12 col-md-12">
+        <div class="card">
+          <div class="card-header">
+            <h3 class="card-title">EDIT ITEM FG</h3>
+          </div>
+          <div class="card-body">
+            <form [formGroup]="itemForm.baseForm" (ngSubmit)="onUpdate()">
+              <div class="row">
+                <div class="col-lg-3 col-md-12">
+                  <div class="form-group">
+                    <label class="form-label"><b style="color: red;">*</b>ITEM TYPE</label>
+                    <select class="form-control nice-select select2" formControlName="item_type_id">
+                      <option *ngFor="let item of ItemTypeData; let i =index" value="{{ item.id }}"
+                        name="{{ item.id }}">{{ item.name }}
+                      </option>
+                    </select>
+                    <div *ngIf="itemForm.item_type_id.touched && itemForm.item_type_id.invalid">
+                      <small *ngIf="itemForm.item_type_id.errors.required" class="text-danger">Item is
+                        required<br></small>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-3 col-md-12">
+                  <div class="form-group">
+                    <label class="form-label"><b style="color: red;">*</b>ITEM ID</label>
+                    <input type="text" formControlName="item_id" class="form-control" />
+                    <div *ngIf="itemForm.item_id.touched && itemForm.item_id.invalid">
+                      <small *ngIf="itemForm.item_id.errors.required" class="text-danger">Item ID is
+                        required<br></small>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-3 col-md-12">
+                  <div class="form-group">
+                    <label class="form-label"><b style="color: red;">*</b>ITEM NAME</label>
+                    <input type="text" formControlName="name" class="form-control" />
+                    <div *ngIf="itemForm.name.touched && itemForm.name.invalid">
+                      <small *ngIf="itemForm.name.errors.required" class="text-danger">Name is required<br></small>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-3 col-md-12">
+                  <div class="form-group">
+                    <label class="form-label">SIZE</label>
+                    <input type="text" formControlName="size" class="form-control" />
+                  </div>
+                </div>
+                <div class="col-lg-3 col-md-12" *ngIf="itemForm.baseForm.value.item_type_id == '6'">
+                  <div class="form-group">
+                    <label class="form-label"><b style="color: red;">*</b>MIN</label>
+                    <input type="text" formControlName="min" class="form-control" />
+
+                  </div>
+                </div>
+                <div class="col-lg-3 col-md-12" *ngIf="itemForm.baseForm.value.item_type_id == '6'">
+                  <div class="form-group">
+                    <label class="form-label"><b style="color: red;">*</b>MAX</label>
+                    <input type="text" formControlName="max" class="form-control" />
+
+                  </div>
+                </div>
+                <!-- <div class="col-lg-12 col-md-12">
+                  <div class="custom-file mb-3">
+                    <input type="file" (change)='onChangePicture($event)' class="custom-file-input" />
+                    <label class="custom-file-label" for="customFile">Image Item</label>
+                  </div>
+                </div> -->
+                <div class="col-lg-6 col-md-12">
+                  <div class="form-group">
+                    <label class="form-label"><b style="color: red;">*</b>PRICE</label>
+                    <input type="text" formControlName="price" class="form-control" />
+                    <div *ngIf="itemForm.price.touched && itemForm.price.invalid">
+                      <small *ngIf="itemForm.price.errors.required" class="text-danger">Price is required<br></small>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-6 col-md-12" *ngIf="itemForm.baseForm.value.item_type_id == '7'">
+                  <div class="form-group">
+                    <label class="form-label">SPARE TYPE</label>
+                    <select class="form-control nice-select select2" formControlName="spare_type_id">
+                      <option value="" disabled selected>--Select--</option>
+                      <option *ngFor="let item of SpareTypeData; let i =index" value="{{ item.id }}">{{
+                        item.name }}
+                      </option>
+                    </select>
+                  </div>
+                </div>
+                <!-- <div class="col-lg-6 col-md-12">
+                  <div class="form-group">
+                    <label class="form-label">Price Per Set</label>
+                    <input type="text" formControlName="price_per_set" class="form-control" />
+                  </div>
+                </div> -->
+                <!-- <div class="col-lg-6 col-md-12">
+                  <div class="form-group">
+                    <label class="form-label">Price Per Set</label>
+                    <input type="text" formControlName="select_file" class="form-control" />
+                  </div>
+                </div> -->
+              </div>
+              <div div class="row">
+                <div class="col-lg-6 col-md-12">
+                  <div class="form-group">
+                    <label class="form-label"><b style="color: red;">*</b>UNIT SELL</label>
+                    <select class="form-control nice-select select2" formControlName="unit_sell_id">
+                      <option value="" disabled selected>--Select--</option>
+                      <option *ngFor="let item of UnitData; let i =index" value="{{ item.id }}">{{
+                        item.name }}
+                      </option>
+                    </select>
+                    <div *ngIf="itemForm.unit_sell_id.touched && itemForm.unit_sell_id.invalid">
+                      <small *ngIf="itemForm.unit_sell_id.errors.required" class="text-danger">Unit Sell is
+                        required<br></small>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-6 col-md-12">
+                  <div class="form-group">
+                    <label class="form-label"><b style="color: red;">*</b>UNIT BUY</label>
+                    <select class="form-control nice-select select2" formControlName="unit_buy_id">
+                      <option value="" disabled selected>--Select--</option>
+                      <option *ngFor="let item of UnitData; let i =index" value="{{ item.id }}">{{
+                        item.name }}
+                      </option>
+                    </select>
+                    <div *ngIf="itemForm.unit_buy_id.touched && itemForm.unit_buy_id.invalid">
+                      <small *ngIf="itemForm.unit_buy_id.errors.required" class="text-danger">Unit Buy is
+                        required<br></small>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-6 col-md-12">
+                  <div class="form-group">
+                    <label class="form-label"><b style="color: red;">*</b>UNIT STORE</label>
+                    <select class="form-control nice-select select2" formControlName="unit_store_id">
+                      <option value="" disabled selected>--Select--</option>
+                      <option *ngFor="let item of UnitData; let i =index" value="{{ item.id }}">{{
+                        item.name }}
+                      </option>
+                    </select>
+                    <div *ngIf="itemForm.unit_store_id.touched && itemForm.unit_store_id.invalid">
+                      <small *ngIf="itemForm.unit_store_id.errors.required" class="text-danger">Unit Store is
+                        required<br></small>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-6 col-md-12" *ngIf="itemForm.baseForm.value.item_type_id == 3">
+                  <div class="form-group">
+                    <label class="form-label"><b style="color: red;">*</b>MATERIAL TYPE</label>
+                    <select class="form-control nice-select select2" formControlName="material_type_id">
+                      <option value="" disabled selected>--Select--</option>
+                      <option *ngFor="let item of MaterialTypeData; let i =index" value="{{ item.id }}">{{
+                        item.name }}
+                      </option>
+                    </select>
+                  </div>
+                </div>
+                <div class="col-lg-6 col-md-12" *ngIf="itemForm.baseForm.value.item_type_id == 3">
+                  <div class="form-group">
+                    <label class="form-label"><b style="color: red;">*</b>MATERIAL GRADE</label>
+                    <select class="form-control nice-select select2" formControlName="material_grade_id">
+                      <option value="" disabled selected>--Select--</option>
+                      <option *ngFor="let item of MaterialGradeData; let i =index" value="{{ item.id }}">{{
+                        item.name }}
+                      </option>
+                    </select>
+                  </div>
+                </div>
+                <div class="col-lg-6 col-md-12" *ngIf="itemForm.baseForm.value.item_type_id == '3'">
+                  <div class="form-group">
+                    <label class="form-label"><b style="color: red;">*</b>MATERIAL COLOR</label>
+                    <select class="form-control nice-select select2" formControlName="material_color_id">
+                      <option value="" disabled selected>--Select--</option>
+                      <option *ngFor="let item of MaterialColorData; let i =index" value="{{ item.id }}">{{
+                        item.name }}
+                      </option>
+                    </select>
+                  </div>
+                </div>
+                <div class="col-lg-6 col-md-12" *ngIf="itemForm.baseForm.value.item_type_id == '3'">
+                  <div class="form-group">
+                    <label class="form-label"><b style="color: red;">*</b>MATERIAL MANUFACTURING</label>
+                    <select class="form-control nice-select select2" formControlName="material_manufactu_id">
+                      <option value="" disabled selected>--Select--</option>
+                      <option *ngFor="let item of MaterialManuFactuData; let i =index" value="{{ item.id }}">{{
+                        item.name }}
+                      </option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="col-lg-6 col-md-12">
+                  <div class="form-group">
+                    <label class="form-label">LOCATION ID</label>
+                    <select class="form-control nice-select select2" formControlName="location_id">
+                      <option value="" disabled selected>--Select--</option>
+                      <option *ngFor="let item of LocationData; let i =index" value="{{ item.id }}">{{
+                        item.name }}
+                      </option>
+                    </select>
+                  </div>
+                </div>
+                <div class="col-lg-6 col-md-12">
+                  <img [src]="url" width="900" height="300" class="center">
+                  <div class="custom-file mb-3">
+                    <input type="file" (change)='onChangePicture($event)' class="custom-file-input" accept="image/*" />
+                    <label class="custom-file-label" for="customFile">ITEM IMAGE</label>
+
+                  </div>
+                </div>
+                <div class="col-lg-6 col-md-12">
+                  <div class="form-group">
+
+                  </div>
+                </div>
+                <div class="col-1">
+                  <div class="form-group">
+                    <label>Status</label>
+                    <div class="material-switch pull-right">
+                      <input id="someSwitchOptionPrimary" type="checkbox" formControlName="status" >
+                      <label for="someSwitchOptionPrimary" class="label-primary"></label>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-lg-12 col-md-12 text-center">
+
+                  <div class="form-group mb-0 mt-4 row justify-content-end">
+                    <div class="col-md-12">
+                      <button type="button" (click)="onUpdate()" class="btn btn-primary">
+                        SAVE
+                      </button>
+                      &nbsp;
+                      <button type="reset" class="btn btn-secondary">
+                        CLEAR
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- <div>
+      <div class="card">
+        <div class="card-header">
+          <h3 class="card-title">Import Item</h3>
+        </div>
+        <div class="col-lg-6 col-md-12">
+          <div class="form-group">
+
+            <input type="file" (change)='onChange($event)' class="form-control" />
+          </div>
+          <div class="form-group mb-0 mt-4 row justify-content-end">
+            <div class="col-lg-6 col-md-12">
+              <button type="button" (click)="onImport()" class="btn btn-primary">
+                Import
+              </button>
+              &nbsp;
+
+            </div>
+          </div>
+        </div>
+
+
+
+      </div> -->
+
+  </div>
+  <!-- End Row -->
+</div>
+
+<!-- end app-content-->

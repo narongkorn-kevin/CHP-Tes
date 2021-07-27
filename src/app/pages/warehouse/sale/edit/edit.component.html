@@ -1,0 +1,387 @@
+<div class="app-content page-body">
+  <div class="container-fluid">
+    <!--Page header-->
+    <div class="page-header">
+      <div class="page-leftheader">
+        <h4 class="page-title">Sale Order</h4>
+      </div>
+      <div class="page-rightheader ml-auto d-lg-flex d-none">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+            <a href="#" class="d-flex"
+              ><svg
+                class="svg-icon"
+                xmlns="http://www.w3.org/2000/svg"
+                height="24"
+                viewBox="0 0 24 24"
+                width="24"
+              >
+                <path d="M0 0h24v24H0V0z" fill="none" />
+                <path
+                  d="M12 3L2 12h3v8h6v-6h2v6h6v-8h3L12 3zm5 15h-2v-6H9v6H7v-7.81l5-4.5 5 4.5V18z"
+                />
+                <path
+                  d="M7 10.19V18h2v-6h6v6h2v-7.81l-5-4.5z"
+                  opacity=".3"
+                /></svg
+              ><span class="breadcrumb-icon">Main</span></a
+            >
+          </li>
+          <li class="breadcrumb-item">
+            <a routerLink="/warehouse/sale/list">Sale</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">Sale Order</li>
+        </ol>
+      </div>
+    </div>
+    <!--End Page header-->
+
+    <!-- Row -->
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title">
+              View Order No. : {{ this.saleordersForm.value.order_id }}
+            </div>
+          </div>
+          <div class="table-responsive">
+            <form [formGroup]="saleordersForm">
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-12">
+                    <div class="form-group row">
+                      <div class="col-md-6 col-sm-12">
+                        <label class="form-label">Sales</label>
+                        <select
+                          class="form-control nice-select select2"
+                          formControlName="user_id"
+                        >
+                          <option value="" disabled selected>--Select--</option>
+                          <option
+                            *ngFor="let sale of SaleList; let i = index"
+                            value="{{ sale.id }}"
+                          >
+                            {{ sale.name }} | [Sale : Marketing]
+                          </option>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="form-group row">
+                      <div class="col-md-6">
+                        <label class="form-label">Ref No.</label>
+                        <input
+                          class="form-control"
+                          placeholder="Ref No"
+                          formControlName="ref_no"
+                          value=""
+                        />
+                      </div>
+                      <div class="col-md-6">
+                        <label class="form-label">Customer</label>
+                        <select
+                          class="form-control nice-select select2"
+                          formControlName="customer_id"
+                        >
+                          <option value="" disabled selected>--Select--</option>
+                          <option
+                            *ngFor="let Customer of CustomerList; let i = index"
+                            value="{{ Customer.id }}"
+                          >
+                            {{ Customer.name }}
+                          </option>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="form-group row">
+                      <div class="col-md-6">
+                        <label class="form-label">Date</label>
+                        <input
+                          class="form-control fc-datepicker hasDatepicker"
+                          placeholder="MM/DD/YYYY"
+                          type="Date"
+                          formControlName="date"
+                        />
+                      </div>
+                      <div class="col-md-6">
+                        <label class="form-label">Shipping Date</label>
+                        <input
+                          class="form-control fc-datepicker hasDatepicker"
+                          placeholder="MM/DD/YYYY"
+                          type="Date"
+                          formControlName="shipping_date"
+                        />
+                      </div>
+                    </div>
+                    <div class="form-group row">
+                      <div class="col-md-12">
+                        <label class="form-label">Shipping Terms</label>
+                        <textarea
+                          class="form-control"
+                          rows="4"
+                          formControlName="shipping_term"
+                          placeholder="Subject of Invoice"
+                        ></textarea>
+                      </div>
+                    </div>
+                    <div class="form-group row">
+                      <div class="col-md-12">
+                        <label class="form-label">Remark</label>
+                        <textarea
+                          class="form-control"
+                          rows="4"
+                          formControlName="remark"
+                          placeholder="Subject of Invoice"
+                        ></textarea>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="table-responsive">
+                  <table
+                    class="table nowrap text-nowrap border mt-5"
+                    formArrayName="order"
+                  >
+                    <thead>
+                      <tr>
+                        <th>No.</th>
+                        <th class="w-30">Item Type</th>
+                        <th class="w-20">Item</th>
+                        <th class="w-20">Item Name</th>
+                        <th class="w-10">QTY</th>
+                        <th>Unit Convertion Id</th>
+                        <th>Unit Price</th>
+                        <th>Amount</th>
+                        <th>Discount</th>
+                        <th>Total Price</th>
+                        <th>Add</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <th colspan="10">Add Item Order:</th>
+                        <!-- <th>
+                                      <input type="date" formControlName="date" class="form-control" />
+                                    </th>  -->
+                        <th width="150px">
+                          <button
+                            type="button"
+                            (click)="addItem()"
+                            class="btn btn-primary"
+                          >
+                            <i class="fe fe-plus"></i>
+                          </button>
+                        </th>
+                      </tr>
+                      <tr
+                        *ngFor="let item of itemsale().controls; let i = index"
+                        [formGroupName]="i"
+                      >
+                        <th scope="row">{{ i + 1 }}</th>
+                        <td>
+                          <select
+                            class="form-control nice-select select2"
+                            formControlName="item_type_id"
+                            (change)="onChangeType($event.target.value, i)"
+                          >
+                            <option value="" disabled selected>
+                              --Select--
+                            </option>
+                            <option
+                              *ngFor="
+                                let ItemType of ItemTypeData;
+                                let i = index
+                              "
+                              value="{{ ItemType.id }}"
+                            >
+                              {{ ItemType.name }}
+                            </option>
+                          </select>
+                        </td>
+                        <td>
+                          <select
+                            class="form-control nice-select select2"
+                            formControlName="item_id"
+                            (change)="onChange($event.target.value, i)"
+                          >
+                            <option value="" disabled selected>
+                              --Select--
+                            </option>
+                            <option
+                              *ngFor="let Item of ItemData[i]; let k = index"
+                              value="{{ Item.id }}"
+                            >
+                              {{ Item.name }}
+                            </option>
+                          </select>
+                        </td>
+                        <td>
+                          <input
+                            class="form-control"
+                            placeholder=""
+                            type="text"
+                            formControlName="item_name"
+                          />
+                        </td>
+                        <td>
+                          <input
+                            class="form-control"
+                            placeholder=""
+                            type="text"
+                            min="0"
+                            (keyup)="qtyChanged(i)"
+                            formControlName="qty"
+                          />
+                        </td>
+                        <td>
+                          <select
+                            class="form-control nice-select select2"
+                            formControlName="unit_convertion_id"
+                            (change)="onChangeUnit($event.target.value, i)"
+                          >
+                            <option value="" disabled selected>
+                              --Select--
+                            </option>
+                            <option
+                              *ngFor="let unit of UnitData[i]; let l = index"
+                              value="{{ unit.id }}|{{ unit.value }}"
+                            >
+                              {{ unit.name }} [{{ unit.value }}]
+                            </option>
+                          </select>
+                        </td>
+                        <td>
+                          <input
+                            class="form-control"
+                            placeholder=""
+                            type="text"
+                            min="0"
+                            readonly
+                            formControlName="unit_price"
+                          />
+                        </td>
+
+                        <td>
+                          <input
+                            class="form-control"
+                            placeholder=""
+                            type="text"
+                            min="0"
+                            readonly
+                            formControlName="amount"
+                          />
+                        </td>
+                        <td>
+                          <input
+                            class="form-control"
+                            placeholder=""
+                            type="text"
+                            min="0"
+                            (keyup)="discountChanged(i)"
+                            formControlName="discount"
+                          />
+                        </td>
+                        <td>
+                          <input
+                            class="form-control"
+                            placeholder=""
+                            type="text"
+                            min="0"
+                            readonly
+                            formControlName="total_price"
+                          />
+                        </td>
+                        <td>
+                          <button
+                            class="btn btn-danger"
+                            (click)="removeItem(i)"
+                          >
+                            <i class="fe fe-trash"></i>
+                          </button>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                <div class="form-group row">
+                  <div class="col-md-10 col-sm-12 text-right"></div>
+                  <div class="col-md-2 col-sm-12">
+                    <label class="form-label">Vat Rate %</label>
+                    <input
+                      class="form-control"
+                      placeholder="Vat Rate"
+                      readonly
+                      type="number"
+                      formControlName="tax"
+                    />
+                  </div>
+                </div>
+                <hr />
+                <div class="form-group row">
+                  <div class="col-md-10 col-sm-12 text-right"></div>
+                  <div class="col-md-2 col-sm-12">
+                    <label class="form-label">Total</label>
+                    <input
+                      readonly
+                      class="form-control"
+                      type="text"
+                      value="{{ total }}"
+                    />
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <div class="col-md-10 col-sm-12 text-right"></div>
+                  <div class="col-md-2 col-sm-12">
+                    <label class="form-label">Tax Amount</label>
+                    <input
+                      readonly
+                      value="{{ saleordersForm.get('tax_amount').value }}"
+                      class="form-control"
+                      type="text"
+                      formControlName="tax_amount"
+                    />
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <div class="col-md-10 col-sm-12 text-right"></div>
+                  <div class="col-md-2 col-sm-12">
+                    <label class="form-label">Net Amount</label>
+                    <input
+                      readonly
+                      value="{{ saleordersForm.get('net_amount').value }}"
+                      class="form-control"
+                      type="text"
+                      formControlName="net_amount"
+                    />
+                  </div>
+                </div>
+              </div>
+              <div class="card-footer">
+                <div class="row">
+                  <div class="col text-right">
+                    <button
+                      class="btn btn-success"
+                      type="button"
+                      (click)="approveOrder(1)"
+                    >
+                      <i class="fe fe-plus"></i> Approve Order
+                    </button>
+                    &nbsp;
+                    <button
+                      class="btn btn-danger"
+                      type="button"
+                      (click)="approveOrder(0)"
+                    >
+                      <i class="fe fe-remove"></i> Reject Order
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <!-- {{ this.saleordersForm.value | json }} -->
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

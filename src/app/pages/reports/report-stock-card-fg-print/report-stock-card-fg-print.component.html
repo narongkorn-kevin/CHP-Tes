@@ -1,0 +1,65 @@
+<div class="app-content page-body" style="margin: 0px;padding: 0px;">
+    <div class="row">
+        <div class="col-12 text-center">
+            <h3>บริษัท อะซาดะเคมีคอล จำกัด</h3>
+            <b>STOCK CARD PACKING วันที่ {{formFillter.value.date_start}} ถึง {{ formFillter.value.date_stop }}</b>
+        </div>
+    </div>
+    <div class="">
+        <table id="example" class="table table-bordered text-nowrap key-buttons">
+            <thead>
+                <tr>
+                    <th class="border-bottom-0">Row</th>
+                    <th class="border-bottom-0">Item Id</th>
+                    <th class="border-bottom-0">Item Name</th>
+                    <th class="border-bottom-0">Unit</th>
+                    <th class="border-bottom-0">Before {{formFillter.value.date_start}}</th>
+                    <th class="border-bottom-0">ADJ/IN</th>
+                    <th class="border-bottom-0">ADJ/OUT</th>
+                    <th class="border-bottom-0">EXC</th>
+                    <th class="border-bottom-0">QTY/IN</th>
+                    <th class="border-bottom-0">QTY/OUT</th>
+                    <th class="border-bottom-0">BALANCE</th>
+                </tr>
+            </thead>
+            <tbody *ngIf="dataRow?.length != 0">
+                <tr *ngFor="let item of dataRow; let i = index">
+                    <td>{{i+1}}</td>
+                    <td>{{item.item_id}}</td>
+                    <td>{{item.name}}</td>
+                    <td>{{item.unit_store.name}}</td>
+                    <td>{{item.sum_befor_date_start}}</td>
+                    <td>{{item.adj_input | number}}</td>
+                    <td>{{item.adj_output | number}}</td>
+                    <td>0</td>
+                    <td>{{item.qty_input | number}}</td>
+                    <td>{{item.qty_output | number}}</td>
+                    <td>{{item.balance | number}}</td>
+                </tr>
+                <tr>
+                    <td colspan="5" class="text-right"><b>Total</b></td>
+                    <td class=""><b>{{reduceBF(dataRow) | number}}</b></td>
+                    <td class=""><b>{{reduceAdjInput(dataRow) | number}}</b></td>
+                    <td class=""><b>{{reduceAdjOutput(dataRow) | number}}</b></td>
+                    <td class=""><b>{{reduceInput(dataRow) | number}}</b></td>
+                    <td class=""><b>{{reduceOutput(dataRow) | number}}</b></td>
+                    <td class=""><b>{{reduceBalance(dataRow) | number}}</b></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <div class="row py-4">
+        <div class="col-md-6 text-left">
+            REPORT BY  :………………………………………………………
+            <br>WAREHOUSE CONTROL
+            <br>DATE……………………………………………………………………     
+        </div>
+        <div class="col-md-6">
+            APPROVED  BY :  …………………………………………………
+            <br>MANAGER : …………………………………………………………
+            <br>DATE : ……………………………………………………………………     
+        </div>
+    </div>
+</div>
+<!-- end app-content-->

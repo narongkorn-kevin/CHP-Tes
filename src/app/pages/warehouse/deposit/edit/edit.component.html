@@ -1,0 +1,213 @@
+<div class="app-content page-body">
+    <div class="container-fluid">
+      <!--Page header-->
+      <div class="page-header">
+        <div class="page-leftheader">
+          <h4 class="page-title">Deposit</h4>
+        </div>
+        <div class="page-rightheader ml-auto d-lg-flex d-none">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+              <a href="#" class="d-flex"><svg class="svg-icon" xmlns="http://www.w3.org/2000/svg" height="24"
+                  viewBox="0 0 24 24" width="24">
+                  <path d="M0 0h24v24H0V0z" fill="none" />
+                  <path d="M12 3L2 12h3v8h6v-6h2v6h6v-8h3L12 3zm5 15h-2v-6H9v6H7v-7.81l5-4.5 5 4.5V18z" />
+                  <path d="M7 10.19V18h2v-6h6v6h2v-7.81l-5-4.5z" opacity=".3" />
+                </svg><span class="breadcrumb-icon">Main</span></a>
+            </li>
+            <li class="breadcrumb-item">
+              <a routerLink="/warehouse/deposit/list">Warehouse</a>
+            </li>
+            <li class="breadcrumb-item active" aria-current="page">Deposit</li>
+          </ol>
+        </div>
+      </div>
+      <!--End Page header-->
+      <form [formGroup]="depositsForm" (ngSubmit)="onSubmit()">
+        <div class="row">
+          <div class="col-12">
+            <div class="card">
+              <div class="card-body">
+                <div class="row">
+  
+                  <div class="col-md-3 col-lg-3">
+                    <label>Select Date</label>
+                    <div class="input-group">
+                      <div class="input-group-prepend">
+                        <div class="input-group-text">
+                          <svg class="svg-icon" xmlns="http://www.w3.org/2000/svg" height="18" viewBox="0 0 24 24"
+                            width="18">
+                            <path d="M0 0h24v24H0V0z" fill="none" />
+                            <path
+                              d="M20 3h-1V1h-2v2H7V1H5v2H4c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 2v3H4V5h16zM4 21V10h16v11H4z" />
+                            <path d="M4 5.01h16V8H4z" opacity=".3" />
+                          </svg>
+                        </div>
+                      </div>
+                      <input class="form-control fc-datepicker hasDatepicker" placeholder="MM/DD/YYYY" type="Date"
+                        formControlName="date" required readonly/>
+                    </div>
+                  </div>
+  
+  
+                  <!-- <div class="col-md-3 col-lg-3">
+                    <label>Select Item Type</label>
+                    <div class="input-group">
+                      <div class="input-group-prepend">
+                        <div class="input-group-text">
+                          <svg class="svg-icon" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24"
+                            width="24">
+                            <path d="M0 0h24v24H0V0z" fill="none"></path>
+                            <path d="M5 19h14V8H5v11zm5.55-6v-3h2.91v3H16l-4 4-4-4h2.55z" opacity=".3"></path>
+                            <path
+                              d="M16 13h-2.55v-3h-2.9v3H8l4 4zm4.54-7.77l-1.39-1.68C18.88 3.21 18.47 3 18 3H6c-.47 0-.88.21-1.16.55L3.46 5.23C3.17 5.57 3 6.02 3 6.5V19c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V6.5c0-.48-.17-.93-.46-1.27zM6.24 5h11.52l.81.97H5.44l.8-.97zM19 19H5V8h14v11z">
+                            </path>
+                          </svg>
+                        </div>
+                      </div>
+                      <select class="form-control nice-select select2" formControlName="item_type_id"
+                        (change)="onChangeType($event.target.value)" disable>
+                        <option value="" disabled selected>--Select--</option>
+                        <option *ngFor="let ItemType of ItemTypeData; let i = index" value="{{ ItemType.id }}" >
+                          {{ ItemType.name }}
+                        </option>
+                      </select>
+                    </div>
+                  </div> -->
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Row -->
+        <div class="row">
+          <div class="col-md-12 col-lg-12">
+            <div class="card">
+              <div class="card-header">
+                <h3 class="card-title">Deposit</h3>
+              </div>
+              <div class="table-responsive">
+                <table class="table card-table table-vcenter text-nowrap mb-0" formArrayName="deposit">
+                  <thead>
+                    <tr>
+                      <th>ID</th>
+                      <th colspan="2">PART NO. & PART NAME</th>
+                      <th>Location</th>
+                      <th>QTY</th>
+                      <th>Remark</th>
+                      <th>Management</th>
+                    </tr>
+                  </thead>
+  
+                  <tbody>
+                    <tr>
+                      <th colspan="6">Add Deposit:</th>
+                      <!-- <th>
+                                      <input type="date" formControlName="date" class="form-control" />
+                                    </th>  -->
+                      <th width="150px">
+                        <button type="button" (click)="addDeposit()" class="btn btn-primary">
+                          Add More
+                        </button>
+                      </th>
+                    </tr>
+  
+                    <tr *ngFor="depo; of: deposit().controls; let i = index" [formGroupName]="i">
+                      <th scope="row">{{ i + 1 }}</th>
+                      <td>
+                        <div>
+                          <input type="text" formControlName="item_part" class="form-control" placeholder="Part No"
+                          readonly />
+                          <input type="text" formControlName="item_id" class="form-control" placeholder="Part No"
+                            hidden />
+                            <input type="text" formControlName="trans_id" class="form-control" placeholder="Part No"
+                            hidden />
+  
+                        </div>
+                      </td>
+                      <td>
+                        <div>
+                          <input type="text" formControlName="item_name" class="form-control" placeholder="Part Name"
+                            readonly />
+                        </div>
+  
+                        <label *ngIf="
+                          deposit().controls[i].get('item_id').errors
+                            ?.required &&
+                          isValidFormSubmitted != null &&
+                          !isValidFormSubmitted
+                        " class="text-danger">
+                          Item required.
+                        </label>
+                      </td>
+                      <td>
+                        <!-- <input type="text" formControlName="location_1_id" class="form-control" value="location_1_id" disabled/> -->
+                        <select class="form-control nice-select select2" formControlName="location_1_id">
+                          <option value="" disabled selected>--Select--</option>
+                          <option *ngFor="let location of LocationData; let i = index" value="{{ location.id }}">
+                            {{ location.name }}
+                          </option>
+                        </select>
+                        <label *ngIf="
+                          deposit().controls[i].get('item_id').errors
+                            ?.required &&
+                          isValidFormSubmitted != null &&
+                          !isValidFormSubmitted
+                        " class="text-danger">
+                          Location required.
+                        </label>
+                      </td>
+                      <td>
+                        <input type="number" formControlName="qty" class="form-control" />
+                        <input type="number" formControlName="balance" class="form-control" hidden/>
+                      </td>
+                      <td>
+                        <input type="text" formControlName="remark" class="form-control" />
+                      </td>
+  
+                      <td>
+                        <button (click)="removeDeposit(i)" class="btn btn-danger">
+                          Remove
+                        </button>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+                <div class="card-footer">
+                  <div class="row">
+                    <div class="col text-right">
+                      <button
+                        class="btn btn-success"
+                        type="button"
+                        (click)="onUpdateTrans()"
+                      >
+                        <i class="fe fe-save"></i> Save
+                      </button>
+                      &nbsp;
+                      <button
+                        class="btn btn-success"
+                        type="button"
+                        (click)="approveDeposit(1)"
+                      >
+                        <i class="fe fe-plus"></i> Approve
+                      </button>
+                      &nbsp;
+                      <button
+                        class="btn btn-danger"
+                        type="button"
+                        (click)="approveDeposit(0)"
+                      >
+                        <i class="fe fe-delete"></i> Reject
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- table-responsive -->
+            </div>
+          </div>
+        </div>
+        <!--End row-->
+      </form>
+    </div>
+  </div>
