@@ -67,9 +67,9 @@ delete(benefitId: number): Observable<{}> {
   return this.http
     .delete<Benefit>(`${environment.API_URL}/api/service/${benefitId}`, this.httpOptions)
     .pipe(
-      // map((benefit: BenefitResponse) => {
-      //   return benefit;
-      // }),
+      map((benefit: BenefitResponse) => {
+        return benefit;
+      }),
       catchError((err) => this.handlerError(err))
       );
 

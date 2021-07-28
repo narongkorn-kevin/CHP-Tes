@@ -67,6 +67,7 @@ export class ListComponent implements AfterViewInit, OnInit, OnDestroy {
 
   loadTable(): void {
 
+
     const that = this;
 
     this.dtOptions = {
@@ -75,7 +76,7 @@ export class ListComponent implements AfterViewInit, OnInit, OnDestroy {
       serverSide: true,
       processing: true,
       ajax: (dataTablesParameters: any, callback) => {
-        that.benefitSvc  .getAll(dataTablesParameters).subscribe(resp => {
+        that.benefitSvc.getAll(dataTablesParameters).subscribe(resp => {
             that.dataRow = resp.data.data;
             console.log('datatable',that.dataRow);
             callback({
