@@ -31,29 +31,24 @@
                 <div class="row">
                     <div class="col-lg-12 col-md-12">
                         <h4 class="card-title">รายการการค้นหา</h4>
-                        <form [formGroup]="officerForm.baseForm">
+                        <form [formGroup]="officerForm.baseFormSearch">
                             <div class="row justify-content-center">
                                 <div class="col-md-2 mb-2">
                                     <label for="vfirstname">ชื่อ</label>
                                     <div class="input-group">
-                                        <input type="text" class="form-control" formControlName="firstname" placeholder="ชื่อ">
+                                        <input type="text" class="form-control" formControlName="fname" placeholder="ชื่อ">
                                     </div>
                                 </div>
                                 <div class="col-md-2 mb-2">
                                     <label for="vlastname">นามสกุล</label>
                                     <div class="input-group">
-                                        <input type="text" class="form-control" formControlName="lastname" placeholder="นามสกุล">
+                                        <input type="text" class="form-control" formControlName="lname" placeholder="นามสกุล">
                                     </div>
                                 </div>
                                 <div class="col-md-2 mb-2">
                                     <label for="vposition">ตำแหน่ง</label>
                                     <div class="input-group">
-                                        <select class="form-control" formControlName="position">
-                                            <option selected>เลือก</option>
-                                            <option value="1">1</option>
-                                            <option value="2">2</option>
-                                            <option value="3">3</option>
-                                        </select>
+                                        <input type="text" class="form-control" formControlName="position" placeholder="ตำแหน่ง">
                                     </div>
                                 </div>
                                 <div class="col-md-2 mb-2">

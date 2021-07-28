@@ -1291,8 +1291,8 @@ export interface ServiceResponse extends Service {
     total: number;
   };
 }
+
 export interface Officer {
-  id: number;
   name: string;
   create_by: string;
   update_by: string;

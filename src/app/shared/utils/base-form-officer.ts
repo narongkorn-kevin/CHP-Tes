@@ -8,33 +8,49 @@ export class BaseFormOfficer {
 
   constructor(private fb: FormBuilder) { }
 
-  baseForm = this.fb.group({
+  baseFormSearch = this.fb.group({
     id: [
       '',
     ],
-    firstname: [
+    fname: [
       '',
-     
     ],
-    lastname: [
+    lname: [
       '',
-     
     ],
     position: [
       '',
-     
     ],
     status: [
       '',
     ],
-    // name_en: [
-    //   '',
-    // ],
     role: ['',],
   });
 
+  baseForm = this.fb.group({
+    id: ['',],
+    id_card: ['',],
+    password: ['',],
+    prefix_th: ['',],
+    prefix_en: ['',],
+    fname_th: ['',],
+    lname_th: ['',],
+    fname_en: ['',],
+    lname_en: ['',],
+    position: ['',],
+    email: ['',],
+    village: ['',],
+    village_no: ['',],
+    alley: ['',],
+    road: ['',],
+    sub_district:['',],
+    district: ['',],
+    province: ['',],
+    postal_code: ['',],
+    phone: ['',],
+    mobile_phone: ['',],
+  })
 
-  
 
   isValidField(field: string): boolean {
     this.getErrorMessage(field);

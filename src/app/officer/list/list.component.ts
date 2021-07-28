@@ -16,7 +16,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { Subject } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { DataTableDirective } from 'angular-datatables';
-import { CustomerResponse } from '@app/shared/models/base.interface';
+import { OfficerResponse } from '@app/shared/models/base.interface';
 import { BaseFormOfficer } from '@shared/utils/base-form-officer';
 
 import { OfficeServiceService } from '../service/office-service.service';
@@ -80,13 +80,13 @@ export class ListComponent implements OnInit {
       },
       columns: [
         { data: 'id' },
-        { data: 'id' },
-        { data: 'id' },
-        { data: 'id' },
-        { data: 'id' },
-        { data: 'id' },
-        { data: 'id' },
-        { data: 'id' }
+        { data: 'fname_th' },
+        { data: 'lname_th' },
+        { data: 'position' },
+        { data: 'email' },
+        { data: 'phone' },
+        { data: 'edit' },
+        { data: 'del' }
       ]
     };
   }
