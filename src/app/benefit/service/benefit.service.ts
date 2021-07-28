@@ -1,3 +1,4 @@
+import { BenefitResponse } from './../../shared/models/base.interface';
 import {
   HttpClient,
   HttpRequest,
@@ -52,7 +53,16 @@ getDisease(): Observable<DiseaseResponse> {
     .get<any>(`${environment.API_URL}/api/disease`)
     .pipe(catchError(this.handlerError));
 }
- 
+
+getAll(dataTablesParameters: any): Observable<BenefitResponse> {
+  return this.http
+    .post<BenefitResponse>(`${environment.API_URL}/api/service_page`, dataTablesParameters, this.httpOptions)
+    .pipe(
+      map((benefit: BenefitResponse) => {
+        return benefit;
+      }));
+}
+
 
 
 }
