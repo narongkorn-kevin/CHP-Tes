@@ -1203,30 +1203,46 @@ export interface JobResponse extends Job {
   }
 }
 
-export interface Benefit {
+export interface Disease {
   id: number;
-  routing_id: number;
-  bom_id: number;
-  unit_convertion_id: number;
-  qty: number;
-  active: string;
-  start_date: string;
-  seq: string;
-  master_item_id: string;
-  status: string;
+  name: string;
   create_by: string;
   update_by: string;
   created_at: string;
   updated_at: string;
+  status: number;
 }
+
+export interface DiseaseResponse extends Item {
+  code: number;
+  status: string;
+  message: string;
+  data: {
+    data: any[];
+    draw: number;
+    to: number;
+    total: number;
+  };
+}
+
+export interface Benefit {
+  id: number;
+  name: string;
+  create_by: string;
+  update_by: string;
+  created_at: string;
+  updated_at: string;
+  status: number;
+}
+
 export interface BenefitResponse extends Benefit {
   code: number;
   status: string;
   message: string;
   data: {
-    data: any[],
+    data: any[];
     draw: number;
     to: number;
     total: number;
-  }
+  };
 }

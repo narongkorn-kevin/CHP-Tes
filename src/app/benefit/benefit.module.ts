@@ -8,6 +8,7 @@ import { FormComponent } from './form/form.component';
 import { EditComponent } from './edit/edit.component';
 import { ListComponent } from './list/list.component';
 import {MatTabsModule} from '@angular/material/tabs';
+import {MatSelectModule} from '@angular/material/select';
 
 
 @NgModule({
@@ -17,7 +18,8 @@ import {MatTabsModule} from '@angular/material/tabs';
     BenefitRoutingModule,
     DataTablesModule,
     ReactiveFormsModule,
-    MatTabsModule
+    MatTabsModule,
+    MatSelectModule,
   ]
 })
 export class BenefitModule { }
