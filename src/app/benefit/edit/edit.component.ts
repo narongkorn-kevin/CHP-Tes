@@ -49,6 +49,7 @@ export class EditComponent implements OnInit {
     })
 
     this.benefits1Form = fb.group({
+      id: '',
       service_group_id : '',
       name: '',
       group_taget: '',
