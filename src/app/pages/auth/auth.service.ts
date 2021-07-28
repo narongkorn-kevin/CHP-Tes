@@ -49,17 +49,17 @@ export class AuthService {
   public checkToken(): void {
     const user = JSON.parse(localStorage.getItem('user')) || '';
 
-    // if (user) {
-    //   const isExpired = helper.isTokenExpired(user.token);
+    if (user) {
+      const isExpired = helper.isTokenExpired(user.token);
 
-    //   if (isExpired) {
-    //     this.logout();
-    //   } else {
-    //     this.user.next(user);
-    //   }
-    // } else {
-    //   this.logout();
-    // }
+      if (isExpired) {
+        this.logout();
+      } else {
+        this.user.next(user);
+      }
+    } else {
+      this.logout();
+    }
   }
 
   private saveLocalStorage(user: UserResponse): void {

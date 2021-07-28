@@ -4,8 +4,7 @@
 
 export const environment = {
   production: true,
-  API_URL: 'https://asada.logo-design360.com/asada-api/public',
-  API_URLCHP: 'https://stock.logo-design360.com/chp-api/public'
+  API_URL: 'https://stock.logo-design360.com/chp-api/public',
 };
 
 /*

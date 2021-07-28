@@ -17,6 +17,7 @@ import { Subject } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { DataTableDirective } from 'angular-datatables';
 import { CustomerResponse } from '@app/shared/models/base.interface';
+import { BaseFormOfficer } from '@shared/utils/base-form-officer';
 
 import { OfficeServiceService } from '../service/office-service.service';
 declare var $: any;
@@ -35,6 +36,7 @@ export class ListComponent implements OnInit {
 
   private destroy$ = new Subject<any>();
   public dataRow: any[];
+  
 
   @ViewChild(DataTableDirective)
   dtElement!: DataTableDirective;
@@ -45,7 +47,8 @@ export class ListComponent implements OnInit {
     private officerServ: OfficeServiceService,
     private elementRef: ElementRef,
     private renderer: Renderer2,
-    private http: HttpClient
+    private http: HttpClient,
+    public officerForm: BaseFormOfficer
   ) {}
 
 
@@ -63,6 +66,7 @@ export class ListComponent implements OnInit {
       serverSide: true,
       processing: true,
       ajax: (dataTablesParameters: any, callback) => {
+        dataTablesParameters['status']='Yes'
         that.officerServ.getAll(dataTablesParameters).subscribe((resp) => {
           that.dataRow = resp.data.data;
           console.log('test',that.dataRow);
@@ -85,6 +89,21 @@ export class ListComponent implements OnInit {
         { data: 'id' }
       ]
     };
+  }
+
+  onSearch(): void {
+
+    // if (this.positionForm.baseForm.invalid) {
+    //   return;
+    // }
+
+    // const formValue = this.positionForm.baseForm.value;
+    // if (this.actionTODO === Action.NEW) {
+    //   this.positionSvc.new(formValue).subscribe((res) => {
+
+    //     this.router.navigate(['base/position/list']);
+    //   });
+    // }
   }
 
 }

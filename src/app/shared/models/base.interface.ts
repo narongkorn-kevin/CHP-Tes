@@ -1203,7 +1203,16 @@ export interface JobResponse extends Job {
   }
 }
 
-export interface OfficerResponse extends Item {
+export interface Disease {
+  id: number;
+  name: string;
+  create_by: string;
+  update_by: string;
+  created_at: string;
+  updated_at: string;
+}
+
+export interface DiseaseResponse extends Disease {
   code: number;
   status: string;
   message: string;
@@ -1213,6 +1222,96 @@ export interface OfficerResponse extends Item {
     to: number;
     total: number;
   };
-  role: Roles;
 }
+
+export interface Benefit {
+  id: number;
+  name: string;
+  create_by: string;
+  update_by: string;
+  created_at: string;
+  updated_at: string;
+  status: string;
+
+}
+
+export interface BenefitResponse extends Benefit {
+  code: number;
+  status: string;
+  message: string;
+  data: {
+    data: any[];
+    draw: number;
+    to: number;
+    total: number;
+  };
+}
+
+export interface ServiceGroup {
+  id: number;
+  name: string;
+  create_by: string;
+  update_by: string;
+  created_at: string;
+  updated_at: string;
+  status: string;
+
+}
+
+export interface ServiceGroupResponse extends ServiceGroup {
+  code: number;
+  status: string;
+  message: string;
+  data: {
+    data: any[];
+    draw: number;
+    to: number;
+    total: number;
+  };
+}
+export interface Service {
+  id: number;
+  name: string;
+  create_by: string;
+  update_by: string;
+  created_at: string;
+  updated_at: string;
+  status: string;
+
+}
+
+export interface ServiceResponse extends Service {
+  code: number;
+  status: string;
+  message: string;
+  data: {
+    data: any[];
+    draw: number;
+    to: number;
+    total: number;
+  };
+}
+export interface Officer {
+  id: number;
+  name: string;
+  create_by: string;
+  update_by: string;
+  created_at: string;
+  updated_at: string;
+  status: string;
+
+}
+
+export interface OfficerResponse extends Officer {
+  code: number;
+  status: string;
+  message: string;
+  data: {
+    data: any[];
+    draw: number;
+    to: number;
+    total: number;
+  };
+}
+
 

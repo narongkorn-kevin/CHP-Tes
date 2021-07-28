@@ -9,8 +9,8 @@ import {
 import { Observable, throwError } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { environment } from '@env/environment';
-import { OfficerResponse, Customer } from '@app/shared/models/base.interface';
 import { catchError, map } from 'rxjs/operators';
+import { OfficerResponse } from '@app/shared/models/base.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -34,9 +34,9 @@ export class OfficeServiceService {
     return requestWithHeader;
   }
  
-  getAll(dataTablesParameters: any): Observable<any> {
+  getAll(dataTablesParameters: any): Observable<OfficerResponse> {
     return this.http
-      .post<OfficerResponse>(`${environment.API_URLCHP}/api/user_page`, dataTablesParameters, this.httpOptions)
+      .post<OfficerResponse>(`${environment.API_URL}/api/user_page`, dataTablesParameters, this.httpOptions)
       .pipe(
         map((officer: OfficerResponse) => {
           return officer;

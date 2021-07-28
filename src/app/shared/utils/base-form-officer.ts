@@ -2,20 +2,39 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { Injectable } from '@angular/core';
 
 @Injectable({ providedIn: 'root' })
-export class BaseFormUser {
+export class BaseFormOfficer {
   private isValidEmail = /\S+@\S+\.\S+/;
   errorMessage = null;
 
   constructor(private fb: FormBuilder) { }
 
   baseForm = this.fb.group({
-    id_card: [
+    id: [
       '',
-      [Validators.required, Validators.minLength(5)],
     ],
-    password: ['', [Validators.required, Validators.minLength(5)]],
-    role: ['', [Validators.required]],
+    firstname: [
+      '',
+     
+    ],
+    lastname: [
+      '',
+     
+    ],
+    position: [
+      '',
+     
+    ],
+    status: [
+      '',
+    ],
+    // name_en: [
+    //   '',
+    // ],
+    role: ['',],
   });
+
+
+  
 
   isValidField(field: string): boolean {
     this.getErrorMessage(field);
