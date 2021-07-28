@@ -1,4 +1,3 @@
-import { ServiceGroupResponse } from './../../shared/models/base.interface';
 import {
   HttpClient,
   HttpRequest,
@@ -10,7 +9,7 @@ import {
 import { Observable, throwError } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { environment } from '@env/environment';
-import { Benefit, BenefitResponse, Disease, DiseaseResponse } from '@app/shared/models/base.interface';
+import { Benefit, BenefitResponse, Disease, DiseaseResponse,ServiceGroupResponse} from '@app/shared/models/base.interface';
 import { catchError, map } from 'rxjs/operators';
 const user = JSON.parse(localStorage.getItem('user')) || null;
 @Injectable({
@@ -100,4 +99,10 @@ getById(benefitId: number): Observable<BenefitResponse> {
     .get<any>(`${environment.API_URL}/api/service/${benefitId}`, this.httpOptions)
     .pipe(catchError(this.handlerError));
 }
+update(benefitId: number,benefit: Benefit): Observable<Benefit> {
+  return this.http
+    .patch<Benefit>(`${environment.API_URL}/api/service/${benefitId}`, benefit, this.httpOptions)
+    .pipe(catchError(this.handlerError));
+}
+
 }

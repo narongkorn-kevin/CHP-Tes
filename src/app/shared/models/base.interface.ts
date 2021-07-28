@@ -1227,6 +1227,12 @@ export interface DiseaseResponse extends Disease {
 export interface Benefit {
   id: number;
   name: string;
+  pregnant: number;
+  age: number;
+  sex: number;
+  disease_id: number;
+  service_group_id: number;
+  group_taget: string;
   create_by: string;
   update_by: string;
   created_at: string;

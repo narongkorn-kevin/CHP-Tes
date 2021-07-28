@@ -1,3 +1,4 @@
+import { BaseFormBenefit } from './../../shared/utils/base-form-benefit';
 import {
   AfterViewInit,
   Component,
@@ -10,10 +11,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { FormBuilder, FormArray, FormGroup, FormControl, Validators } from '@angular/forms';
 
-interface disease {
-  value: string;
-  viewValue: string;
-}
+
 
 enum Action {
   EDIT = 'edit',
@@ -25,33 +23,42 @@ enum Action {
   styleUrls: ['./edit.component.scss']
 })
 export class EditComponent implements OnInit {
-  selectedValue = new FormControl();
 
+  hide = true;
+  actionTODO = Action.EDIT;
   public diseaseData: any = [];
+  public ServiceGroupData: any = [];
   public BenefitbyIdData: any = [];
-  toppings = new FormControl();
-  toppingList: string[] = ['กลุ่มหญิงตั้งครรภ์', 'กลุ่มเด็กเล็ก 0-5 ปี', 'กลุ่มเด็กโตและวัยรุ่นอายุ 6-24 ปี ', 'กลุ่มผู้ใหญ่ 25-58 ปี', 'กลุ่มผู้สูงอายุ 60 ปีขึ้นไป'];
-  disease1: disease[] = [
-    {value: '0', viewValue: 'โรคอ้วน'},
-    {value: '1', viewValue: 'โรคเบาหวาน'},
-    {value: '22', viewValue: 'โรค HIV'}
-  ];
-
   benefitsForm : FormGroup;
+  benefits1Form : FormGroup;
+
   private subscription: Subscription = new Subscription();
 
 
   constructor(
     private benefitSvc: BenefitService,
-    private activatedRoute: ActivatedRoute,
     private router: Router,
     private fb: FormBuilder,
+    private activatedRoute: ActivatedRoute,
+    public benefitform: BaseFormBenefit
 
   ) {
     this.benefitsForm = this.fb.group({
-      benefit: this.fb.array([]),
+      event: this.fb.array([]),
+      service_id: '',
+    })
+
+    this.benefits1Form = fb.group({
+      service_group_id : '',
+      name: '',
+      group_taget: '',
+      pregnant: '',
+      age:'',
+      sex:'',
+      disease_id:'',
     })
    }
+
 
    ngOnDestroy(): void {
      this.subscription.unsubscribe();
@@ -61,11 +68,14 @@ export class EditComponent implements OnInit {
    }
    benefit(): FormArray {
 
-    return this.benefitsForm.get('benefit') as FormArray
+    return this.benefitsForm.get('event') as FormArray
   }
   newBenefit(): FormGroup {
     return this.fb.group({
-
+      name: '',
+      seq: '',
+      user_per_year: '',
+      remark: '',
     })
   }
   addBenefit(): void {
@@ -82,11 +92,14 @@ export class EditComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.GetDisease();
     this.activatedRoute.params.subscribe(params => {
       const id = params.id;
       this.GetBenefitById(id);
     });
+    this.GetDisease();
+    this.GetServiceGroup();
+
+
   }
 
 
@@ -98,30 +111,46 @@ export class EditComponent implements OnInit {
 
   }
 
-  GetBenefitById(id): void {
-    this.benefitSvc.getById(id).subscribe((resp) => {
-      this.BenefitbyIdData = resp.data;
-      this.benefitsForm.patchValue({
-        id: this.BenefitbyIdData.id,
-        name: this.BenefitbyIdData.name,
-        pregnant: this.BenefitbyIdData.pregnant,
-        age: this.BenefitbyIdData.age,
-        sex: this.BenefitbyIdData.sex,
-        disease_id: this.BenefitbyIdData.disease_id,
-
-      });
-      console.log('benefit',this.BenefitbyIdData)
-      const rows = this.benefitsForm.get('benefit') as FormArray;
-
-      this.BenefitbyIdData.benefit.map(d =>
-        this.benefit().push(this.fb.group({
-          seq: d.seq,
-
-        })))
+  GetServiceGroup(): void {
+    this.benefitSvc.get_service_group().subscribe((resp) => {
+      this.ServiceGroupData = resp.data;
+      console.log(this.ServiceGroupData);
     });
   }
 
+  onUpdate(): void {
+    if (this.benefits1Form.invalid) {
+      return;
+    }
+    const formValue = this.benefits1Form.value;
+    console.log('test',this.benefits1Form.value);
+    if (this.actionTODO === Action.EDIT) {
+      this.benefitSvc.update(formValue.id, formValue).subscribe((res) => {
+        console.log('Edit ', res);
+        this.router.navigate(['benefit/list']);
+      });
+    }
 
+}
 
+GetBenefitById(id): void {
+  this.benefitSvc.getById(id).subscribe((resp) => {
+    this.BenefitbyIdData = resp.data;
+    this.benefits1Form.patchValue({
+      id: this.BenefitbyIdData.id,
+      name: this.BenefitbyIdData.name,
+      pregnant: this.BenefitbyIdData.pregnant,
+      age: this.BenefitbyIdData.age,
+      sex: this.BenefitbyIdData.sex,
+      disease_id: this.BenefitbyIdData.disease_id,
+      group_taget: this.BenefitbyIdData.group_taget,
+      service_group_id: this.BenefitbyIdData.service_groups,
 
+    });
+    console.log('benefit',this.BenefitbyIdData)
+    console.log('benefits1Form',this.benefits1Form.value)
+    console.log('benefits1Form',this.benefits1Form.value.service_group_id)
+
+  });
+}
 }
