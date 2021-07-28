@@ -19,7 +19,7 @@ const user = JSON.parse(localStorage.getItem('user')) || null;
 export class BenefitService {
   constructor(private http: HttpClient) { }
   httpOptions = {
-    headers: new HttpHeaders({Authorization: `Bearer ${user.token}` })
+    headers: new HttpHeaders({ Authorization: `Bearer ${user.token}` })
   };
 
   httpOptionsFormdata = {
@@ -46,46 +46,52 @@ export class BenefitService {
     return throwError(errorMessage);
   }
 
-// //// Get////
+  // //// Get////
 
-getDisease(): Observable<DiseaseResponse> {
-  return this.http
-    .get<any>(`${environment.API_URL}/api/disease` , this.httpOptions)
-    .pipe(catchError(this.handlerError));
-}
+  getDisease(): Observable<DiseaseResponse> {
+    return this.http
+      .get<any>(`${environment.API_URL}/api/disease`, this.httpOptions)
+      .pipe(catchError(this.handlerError));
+  }
 
-getAll(dataTablesParameters: any): Observable<BenefitResponse> {
-  return this.http
-    .post<BenefitResponse>(`${environment.API_URL}/api/service_page`, dataTablesParameters, this.httpOptions)
-    .pipe(
-      map((benefit: BenefitResponse) => {
-        return benefit;
-      }));
-}
+  getAll(dataTablesParameters: any): Observable<BenefitResponse> {
+    return this.http
+      .post<BenefitResponse>(`${environment.API_URL}/api/service_page`, dataTablesParameters, this.httpOptions)
+      .pipe(
+        map((benefit: BenefitResponse) => {
+          return benefit;
+        }));
+  }
 
 
-delete(benefitId: number): Observable<{}> {
-  return this.http
-    .delete<Benefit>(`${environment.API_URL}/api/service/${benefitId}`, this.httpOptions)
-    .pipe(
-      map((benefit: BenefitResponse) => {
-        return benefit;
-      }),
-      catchError((err) => this.handlerError(err))
+  delete(benefitId: number): Observable<{}> {
+    return this.http
+      .delete<Benefit>(`${environment.API_URL}/api/service/${benefitId}`, this.httpOptions)
+      .pipe(
+        map((benefit: BenefitResponse) => {
+          return benefit;
+        }),
+        catchError((err) => this.handlerError(err))
       );
 
 
-}
+  }
 
-get_service_group(): Observable<ServiceGroupResponse> {
-  return this.http
-    .get<any>(`${environment.API_URL}/api/service_group` , this.httpOptions)
-    .pipe(catchError(this.handlerError));
-}
+  get_service_group(): Observable<ServiceGroupResponse> {
+    return this.http
+      .get<any>(`${environment.API_URL}/api/service_group`, this.httpOptions)
+      .pipe(catchError(this.handlerError));
+  }
 
-get_service(): Observable<ServiceGroupResponse> {
-  return this.http
-    .get<any>(`${environment.API_URL}/api/service` , this.httpOptions)
-    .pipe(catchError(this.handlerError));
+  get_service(): Observable<ServiceGroupResponse> {
+    return this.http
+      .get<any>(`${environment.API_URL}/api/service`, this.httpOptions)
+      .pipe(catchError(this.handlerError));
+  }
+
+  new(benefit: FormData): Observable<Benefit> {
+    return this.http
+      .post<Benefit>(`${environment.API_URL}/api/service`, benefit, this.httpOptions)
+      .pipe(catchError(this.handlerError));
 }
 }
