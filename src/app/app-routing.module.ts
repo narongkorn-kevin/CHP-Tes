@@ -1,3 +1,4 @@
+import { BenefitModule } from './benefit/benefit.module';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
@@ -25,6 +26,7 @@ const routes: Routes = [
   { path: 'dialog-unit', loadChildren: () => import('./shared/dialogs/dialog-unit/dialog-unit.module').then(m => m.DialogUnitModule) },
   { path: 'dialog-unit-convertion', loadChildren: () => import('./shared/dialogs/dialog-unit-convertion/dialog-unit-convertion.module').then(m => m.DialogUnitConvertionModule) },
   { path: 'dialog-bom', loadChildren: () => import('./shared/dialogs/dialog-bom/dialog-bom.module').then(m => m.DialogBomModule) },
+  { path: 'benefit', loadChildren: () => import('./benefit/benefit.module').then(m => m.BenefitModule) },
   {
     path: '**', loadChildren: () =>
       import('./pages/not-found/not-found.module').then(
