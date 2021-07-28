@@ -18,15 +18,15 @@ export class AppComponent implements OnInit, OnDestroy {
 
   constructor(private authSvc: AuthService, private utilsSvc: UtilsService, private router: Router) {
     router.events.forEach((event) => {
-      // if (event instanceof NavigationStart) {
+      if (event instanceof NavigationStart) {
 
 
-      //   if (event.url === '/login') {
-      //     this.IsLogin = false;
-      //   } else {
-      //     this.IsLogin = true;
-      //   }
-      // }
+        if (event.url === '/login') {
+          this.IsLogin = false;
+        } else {
+          this.IsLogin = true;
+        }
+      }
     });
   }
 
