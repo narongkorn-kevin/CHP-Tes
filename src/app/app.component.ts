@@ -18,21 +18,15 @@ export class AppComponent implements OnInit, OnDestroy {
 
   constructor(private authSvc: AuthService, private utilsSvc: UtilsService, private router: Router) {
     router.events.forEach((event) => {
-      if (event instanceof NavigationStart) {
-        // alert(event.url);
-        // tslint:disable-next-line:max-line-length
-        // if (event.url === '/' || event.url === '/home' || event.url === '/base' || event.url === '/time' || event.url === '/report' || event.url === '/setting' || event.url === '/dashboard' || event.url === '/base/company/list' || event.url === '/base/company/form') {
-        // this.IsLogin = true;
-        // } else {
-        //   // console.log("NU")
-        //   this.IsLogin = false;
-        // }
-        if (event.url === '/login') {
-          this.IsLogin = false;
-        } else {
-          this.IsLogin = true;
-        }
-      }
+      // if (event instanceof NavigationStart) {
+
+
+      //   if (event.url === '/login') {
+      //     this.IsLogin = false;
+      //   } else {
+      //     this.IsLogin = true;
+      //   }
+      // }
     });
   }
 
