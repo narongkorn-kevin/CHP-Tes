@@ -7,6 +7,7 @@ import { BenefitRoutingModule } from './benefit-routing.module';
 import { FormComponent } from './form/form.component';
 import { EditComponent } from './edit/edit.component';
 import { ListComponent } from './list/list.component';
+import {MatTabsModule} from '@angular/material/tabs';
 
 
 @NgModule({
@@ -15,7 +16,8 @@ import { ListComponent } from './list/list.component';
     CommonModule,
     BenefitRoutingModule,
     DataTablesModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatTabsModule
   ]
 })
 export class BenefitModule { }
