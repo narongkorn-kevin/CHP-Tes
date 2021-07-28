@@ -25,29 +25,26 @@
               <div class="col-md-2 mb-2">
                 <label for="validationCustomUsername">กลุ่มบริการ</label>
                 <div class="input-group">
-                  <select style="width: 200px;" class="form-control nice-select select2">
-                    <option value="" disabled selected>ทั้งหมด</option>
-                    <option value="TEST1">TEST1
-                    </option>
-                    <option value="TEST1">TEST1
-                    </option>
-                    <option value="TEST1">TEST1
-                    </option>
-                  </select>
+                  <mat-form-field appearance="fill">
+                  <mat-label>ทั้งหมด</mat-label>
+                  <mat-select class="form-control">
+                    <mat-option *ngFor="let item of ServiceGroupData" [value]="item.id">
+                      {{item.name}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+
                 </div>
               </div>
               <div class="col-md-2 mb-2">
                 <label for="validationCustomUsername">บริการ</label>
                 <div class="input-group">
-                  <select style="width: 200px;" class="form-control nice-select select2">
-                    <option value="" disabled selected>ทั้งหมด</option>
-                    <option value="TEST1">TEST1
-                    </option>
-                    <option value="TEST1">TEST1
-                    </option>
-                    <option value="TEST1">TEST1
-                    </option>
-                  </select>
+                  <mat-select class="form-control">
+                    <mat-option *ngFor="let item of ServiceData" [value]="item.id">
+                      {{item.name}}
+                    </mat-option>
+                    <mat-label>ทั้งหมด</mat-label>
+                  </mat-select>
                 </div>
               </div>
               <div class="col-md-2 mb-2">
@@ -89,7 +86,8 @@
                 </div>
                 <div class="">
                   <div class="table-responsive">
-                    <table id="example" class="table table-striped card-table table-vcenter text-nowrap mb-0">
+                    <table datatable [dtOptions]="dtOptions" id="example"
+                      class="table table-striped card-table table-vcenter text-nowrap mb-0">
                       <thead>
                         <tr>
                           <th class="border-bottom-0">ลำดับ.</th>
@@ -123,9 +121,9 @@
                       </tbody>
                       <tbody *ngIf="dataRow?.length == 0">
                         <tr>
-                            <td colspan="7" class="no-data-available">No data!</td>
+                          <td colspan="7" class="no-data-available">No data!</td>
                         </tr>
-                    </tbody>
+                      </tbody>
                     </table>
                   </div>
                 </div>

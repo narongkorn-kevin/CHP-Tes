@@ -26,7 +26,7 @@ enum Action {
 })
 export class FormComponent implements OnInit {
   selectedValue = new FormControl();
-  
+
   public diseaseData: any = [];
   toppings = new FormControl();
   toppingList: string[] = ['กลุ่มหญิงตั้งครรภ์', 'กลุ่มเด็กเล็ก 0-5 ปี', 'กลุ่มเด็กโตและวัยรุ่นอายุ 6-24 ปี ', 'กลุ่มผู้ใหญ่ 25-58 ปี', 'กลุ่มผู้สูงอายุ 60 ปีขึ้นไป'];
@@ -44,7 +44,7 @@ export class FormComponent implements OnInit {
     private benefitSvc: BenefitService,
     private router: Router,
     private fb: FormBuilder,
-    
+
   ) {
     this.benefitsForm = this.fb.group({
       benefit: this.fb.array([]),
@@ -54,6 +54,8 @@ export class FormComponent implements OnInit {
    ngOnDestroy(): void {
      this.subscription.unsubscribe();
      this.addBenefit();
+     this.dateBenefit();
+
    }
    benefit(): FormArray {
 
@@ -61,7 +63,7 @@ export class FormComponent implements OnInit {
   }
   newBenefit(): FormGroup {
     return this.fb.group({
-    
+
     })
   }
   addBenefit(): void {
@@ -78,10 +80,10 @@ export class FormComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    
+
   }
 
-  
+
   GetDisease(): void {
     this.benefitSvc.getDisease().subscribe(resp => {
       this.diseaseData = resp.data;

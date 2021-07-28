@@ -40,6 +40,8 @@ export class ListComponent implements AfterViewInit, OnInit, OnDestroy {
 
   private destroy$ = new Subject<any>();
   public dataRow: any[];
+  public ServiceGroupData: any = [];
+  public ServiceData: any = [];
 
 
   @ViewChild(DataTableDirective)
@@ -61,7 +63,9 @@ export class ListComponent implements AfterViewInit, OnInit, OnDestroy {
 
   ngOnInit(): void {
 
-   this.loadTable();
+    this.loadTable();
+    this.GetServiceGroup();
+    this.GetService();
 
   }
 
@@ -140,5 +144,20 @@ export class ListComponent implements AfterViewInit, OnInit, OnDestroy {
       dtInstance.ajax.reload();
     });
   }
+
+
+  GetServiceGroup(): void {
+    this.benefitSvc.get_service_group().subscribe((resp) => {
+      this.ServiceGroupData = resp.data;
+      console.log(this.ServiceGroupData);
+    });
+  }
+  GetService(): void {
+    this.benefitSvc.get_service().subscribe((resp) => {
+      this.ServiceData = resp.data;
+      console.log(this.ServiceData);
+    });
+  }
+
 
 }
