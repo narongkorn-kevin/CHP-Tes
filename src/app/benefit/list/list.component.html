@@ -100,23 +100,32 @@
                         </tr>
                       </thead>
                       <tbody>
-                        <tr>
-                          <td>1</td>
-                          <td>test</td>
-                          <td>test</td>
-                          <td>50</td>
+                        <tr *ngFor="let item of dataRow; let i = index">
+                          <td>{{ i + 1 }}</td>
+                          <td>{{ item.service_group_name }}</td>
+                          <td>{{ item.name }}</td>
+                          <td>{{ item.age }}</td>
+                          <!-- <td>{{ item.update_by }}</td>
+                          <td>{{ item.created_at }}</td>
+                          <td>{{ item.updated_at }}</td> -->
                           <td>
                             <div class="btn-list">
-                              <button type="button" class="btn btn-icon btn-warning">
+                              <button type="button" (click)="onEdit(item)" class="btn btn-icon btn-success">
                                 <i class="fa fa-edit"></i>
                               </button>
-                              <button type="button" class="btn btn-icon btn-danger">
+                              <button type="button" (click)="onDelete(item.id)" class="btn btn-icon btn-danger">
                                 <i class="fa fa-trash"></i>
+
                               </button>
                             </div>
                           </td>
                         </tr>
                       </tbody>
+                      <tbody *ngIf="dataRow?.length == 0">
+                        <tr>
+                            <td colspan="7" class="no-data-available">No data!</td>
+                        </tr>
+                    </tbody>
                     </table>
                   </div>
                 </div>

@@ -1202,3 +1202,31 @@ export interface JobResponse extends Job {
     total: number;
   }
 }
+
+export interface Benefit {
+  id: number;
+  routing_id: number;
+  bom_id: number;
+  unit_convertion_id: number;
+  qty: number;
+  active: string;
+  start_date: string;
+  seq: string;
+  master_item_id: string;
+  status: string;
+  create_by: string;
+  update_by: string;
+  created_at: string;
+  updated_at: string;
+}
+export interface BenefitResponse extends Benefit {
+  code: number;
+  status: string;
+  message: string;
+  data: {
+    data: any[],
+    draw: number;
+    to: number;
+    total: number;
+  }
+}
