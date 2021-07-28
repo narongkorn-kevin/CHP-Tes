@@ -49,7 +49,7 @@ export class BenefitService {
 
 getDisease(): Observable<DiseaseResponse> {
   return this.http
-    .get<any>(`${environment.API_URL}/api/disease`)
+    .get<any>(`${environment.API_URL}/api/disease` , this.httpOptions)
     .pipe(catchError(this.handlerError));
 }
 

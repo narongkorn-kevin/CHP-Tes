@@ -1210,10 +1210,9 @@ export interface Disease {
   update_by: string;
   created_at: string;
   updated_at: string;
-  status: number;
 }
 
-export interface DiseaseResponse extends Item {
+export interface DiseaseResponse extends Disease {
   code: number;
   status: string;
   message: string;
