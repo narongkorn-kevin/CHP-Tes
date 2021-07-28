@@ -1202,3 +1202,25 @@ export interface JobResponse extends Job {
     total: number;
   }
 }
+
+export interface Disease {
+  id: number;
+  name: string;
+  create_by: string;
+  update_by: string;
+  created_at: string;
+  updated_at: string;
+  status: number;
+}
+
+export interface DiseaseResponse extends Item {
+  code: number;
+  status: string;
+  message: string;
+  data: {
+    data: any[];
+    draw: number;
+    to: number;
+    total: number;
+  };
+}

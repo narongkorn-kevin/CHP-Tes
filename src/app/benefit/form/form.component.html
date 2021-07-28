@@ -90,10 +90,10 @@
                                             <label class="col-md-3 form-label">กลุ่มโรค :
                                             </label>
                                             <div class="col-md-9">
-                                                <mat-select [formControl]="selectedValue" name="food"
+                                                <mat-select 
                                                     class="form-control">
-                                                    <mat-option *ngFor="let item of disease1" [value]="item.value">
-                                                        {{item.viewValue}}
+                                                    <mat-option *ngFor="let item of diseaseData" [value]="item.id">
+                                                        {{item.name}}
                                                     </mat-option>
                                                 </mat-select>
                                             </div>
