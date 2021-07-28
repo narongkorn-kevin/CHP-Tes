@@ -48,12 +48,7 @@ export class ListComponent implements OnInit {
   
 
   @ViewChild(MatSort) sort: MatSort;
-  constructor(
-    private router: Router,
-    private elementRef: ElementRef,
-    private renderer: Renderer2,
-    private http: HttpClient
-  ) {}
+  constructor() {}
 
 
   ngOnInit(): void {
@@ -62,49 +57,5 @@ export class ListComponent implements OnInit {
     //this.loadTable();
   }
 
-  ngOnDestroy(): void {
-    this.destroy$.next({});
-    this.destroy$.complete();
-  }
-  ngAfterViewInit(): void {
-    this.dataSource.sort = this.sort;
-  }
-
-  loadTable(): void {
-    
-  }
-
-  onEdit(data): void {
-    console.log(data);
-    // return false
-    const navigationExtras: NavigationExtras = {
-      state: {
-        item: {
-          id: data.id,
-          name: data.name,
-          contact: data.contact,
-          email: data.email,
-          phone: data.phone,
-          adress: data.adress,
-          status: data.status,
-          role: '',
-        },
-      },
-    };
-
-    this.router.navigate(['base/customer/edit'], navigationExtras);
-  }
-
-  onDelete(customerId: number): void {
-
-  }
-
-
-
-  rerender(): void {
-    this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
-      dtInstance.ajax.reload();
-    });
-  }
 
 }
