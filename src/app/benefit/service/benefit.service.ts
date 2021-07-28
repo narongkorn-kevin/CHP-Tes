@@ -1,3 +1,4 @@
+import { ServiceGroupResponse } from './../../shared/models/base.interface';
 import {
   HttpClient,
   HttpRequest,
@@ -76,4 +77,15 @@ delete(benefitId: number): Observable<{}> {
 
 }
 
+get_service_group(): Observable<ServiceGroupResponse> {
+  return this.http
+    .get<any>(`${environment.API_URL}/api/service_group` , this.httpOptions)
+    .pipe(catchError(this.handlerError));
+}
+
+get_service(): Observable<ServiceGroupResponse> {
+  return this.http
+    .get<any>(`${environment.API_URL}/api/service` , this.httpOptions)
+    .pipe(catchError(this.handlerError));
+}
 }

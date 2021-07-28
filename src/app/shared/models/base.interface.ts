@@ -1247,3 +1247,48 @@ export interface BenefitResponse extends Benefit {
   };
 }
 
+export interface ServiceGroup {
+  id: number;
+  name: string;
+  create_by: string;
+  update_by: string;
+  created_at: string;
+  updated_at: string;
+  status: string;
+
+}
+
+export interface ServiceGroupResponse extends ServiceGroup {
+  code: number;
+  status: string;
+  message: string;
+  data: {
+    data: any[];
+    draw: number;
+    to: number;
+    total: number;
+  };
+}
+export interface Service {
+  id: number;
+  name: string;
+  create_by: string;
+  update_by: string;
+  created_at: string;
+  updated_at: string;
+  status: string;
+
+}
+
+export interface ServiceResponse extends Service {
+  code: number;
+  status: string;
+  message: string;
+  data: {
+    data: any[];
+    draw: number;
+    to: number;
+    total: number;
+  };
+}
+
