@@ -1,4 +1,3 @@
-import { BenefitResponse } from './../../shared/models/base.interface';
 import {
   HttpClient,
   HttpRequest,
@@ -10,7 +9,7 @@ import {
 import { Observable, throwError } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { environment } from '@env/environment';
-import { Disease, DiseaseResponse } from '@app/shared/models/base.interface';
+import { Benefit, BenefitResponse, Disease, DiseaseResponse } from '@app/shared/models/base.interface';
 import { catchError, map } from 'rxjs/operators';
 const user = JSON.parse(localStorage.getItem('user')) || null;
 @Injectable({
@@ -64,5 +63,17 @@ getAll(dataTablesParameters: any): Observable<BenefitResponse> {
 }
 
 
+delete(benefitId: number): Observable<{}> {
+  return this.http
+    .delete<Benefit>(`${environment.API_URL}/api/service/${benefitId}`, this.httpOptions)
+    .pipe(
+      // map((benefit: BenefitResponse) => {
+      //   return benefit;
+      // }),
+      catchError((err) => this.handlerError(err))
+      );
+
+
+}
 
 }

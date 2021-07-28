@@ -1232,7 +1232,8 @@ export interface Benefit {
   update_by: string;
   created_at: string;
   updated_at: string;
-  status: number;
+  status: string;
+
 }
 
 export interface BenefitResponse extends Benefit {
@@ -1246,3 +1247,4 @@ export interface BenefitResponse extends Benefit {
     total: number;
   };
 }
+
