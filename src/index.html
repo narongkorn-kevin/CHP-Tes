@@ -83,7 +83,7 @@
   <link href="assets/plugins/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet" />
 
 
-	<!-- treeview -->
+  <!-- treeview -->
   <link href="assets/plugins/treeview/treeview.css" rel="stylesheet" type="text/css" />
 
 
@@ -101,13 +101,20 @@
       }
     }
 
-    h1,h2,h3,h4,h5,h6,li {
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6,
+    li {
       text-transform: uppercase;
     }
-    .card-title
-    {
+
+    .card-title {
       text-transform: uppercase;
     }
+
   </style>
 </head>
 
@@ -120,13 +127,14 @@
   <div class="page">
     <div class="page-main">
       <!--aside open-->
-      <div class="app-sidebar2">
+      <div class="app-sidebar2" style="background-color:#06a6d6;">
         <div class="app-sidebar__logo no-print">
           <a class="header-brand" href="index.html">
-            <img src="assets/images/brand/logo.png" class="header-brand-img desktop-lgo" alt="Covido logo" />
-            <img src="assets/images/brand/logo1.png" class="header-brand-img dark-logo" alt="Covido logo" />
-            <img src="assets/images/brand/favicon.png" class="header-brand-img mobile-logo" alt="Covido logo" />
-            <img src="assets/images/brand/favicon1.png" class="header-brand-img darkmobile-logo" alt="Covido logo" />
+            <!-- <img src="assets/images/brand/logo.png" class="header-brand-img desktop-lgo" alt="Covido logo" /> -->
+            <!-- <img src="assets/images/brand/logo1.png" class="header-brand-img dark-logo" alt="Covido logo" /> -->
+            <img src="assets/images/chp/chp0.png" class="header-brand-img desktop-lgo" alt="Covido logo" />
+            <!-- <img src="assets/images/brand/favicon.png" class="header-brand-img mobile-logo" alt="Covido logo" /> -->
+            <!-- <img src="assets/images/brand/favicon1.png" class="header-brand-img darkmobile-logo" alt="Covido logo" /> -->
           </a>
         </div>
       </div>
@@ -144,16 +152,20 @@
           </li>
 
           <li>
-            <a href="#" class="slide-item"> การจัดการผู้ใช้งาน</a>
+            <a href="#" class="side-menu__item"><img src="assets/images/chp/chp1.png" width="30"
+                height="30" />การจัดการผู้ใช้งาน</a>
           </li>
           <li>
-            <a href="#" class="slide-item"> ข้อมูลสุขภาพ สสส.</a>
+            <a href="#" class="side-menu__item"><img src="assets/images/chp/chp2.png" width="30" height="30" />
+              ข้อมูลสุขภาพ สสส.</a>
           </li>
           <li>
-            <a href="/benefit/list" class="slide-item">จัดการสิทธิประโยชน์ส่งเสริมป้องกันโรค</a>
+            <a href="/benefit/list" class="side-menu__item"><img src="assets/images/chp/chp3.png" width="30"
+                height="30" />จัดการสิทธิประโยชน์ส่งเสริมป้องกันโรค</a>
           </li>
           <li>
-            <a href="#" class="slide-item"> สรุปรายงาน</a>
+            <a href="#" class="side-menu__item"><img src="assets/images/chp/chp4.png" width="30" height="30" />
+              สรุปรายงาน</a>
           </li>
 
           <!-- <li class="slide">
@@ -357,28 +369,29 @@
               </li>
             </ul>
           </li>
-        </ul> -->
-        <div class="app-sidebar-help">
-          <div class="dropdown text-center">
-            <div class="help d-flex">
-              <a href="#" class="nav-link p-0 help-dropdown" data-toggle="dropdown">
-                <span class="font-weight-bold">Help Info</span>
-                <i class="fa fa-angle-down ml-2"></i>
-              </a>
-              <div class="
+        </ul>-->
+
+          <div class="app-sidebar-help">
+            <div class="dropdown text-center">
+              <div class="help d-flex">
+                <a href="#" class="nav-link p-0 help-dropdown" data-toggle="dropdown">
+                  <span class="font-weight-bold">Help Info</span>
+                  <i class="fa fa-angle-down ml-2"></i>
+                </a>
+                <div class="
                     dropdown-menu dropdown-menu-right dropdown-menu-arrow
                     p-4
                   ">
-                <div class="border-bottom pb-3">
-                  <h4 class="font-weight-bold">Help</h4>
-                  <a class="text-primary d-block" href="#">Knowledge base</a>
-                  <a class="text-primary d-block" href="#">Contact@info.com</a>
-                  <a class="text-primary d-block" href="#">88 8888 8888</a>
-                </div>
-                <div class="border-bottom pb-3 pt-3 mb-3">
-                  <p class="mb-1">Your Fax Number</p>
-                  <a class="font-weight-bold" href="#">88 8888 8888</a>
-                </div>
+                  <div class="border-bottom pb-3">
+                    <h4 class="font-weight-bold">Help</h4>
+                    <a class="text-primary d-block" href="#">Knowledge base</a>
+                    <a class="text-primary d-block" href="#">Contact@info.com</a>
+                    <a class="text-primary d-block" href="#">88 8888 8888</a>
+                  </div>
+                  <div class="border-bottom pb-3 pt-3 mb-3">
+                    <p class="mb-1">Your Fax Number</p>
+                    <a class="font-weight-bold" href="#">88 8888 8888</a>
+                  </div>
       </aside>
       <!--aside closed-->
       <app-root></app-root>
@@ -418,9 +431,9 @@
   <script src="assets/plugins/p-scrollbar/p-scroll1.js"></script>
 
 
-		<!--Select2 js -->
-		<script src="../../assets/plugins/select2/select2.full.min.js"></script>
-		<script src="../../assets/js/select2.js"></script> -->
+  <!--Select2 js -->
+  <script src="../../assets/plugins/select2/select2.full.min.js"></script>
+  <script src="../../assets/js/select2.js"></script> -->
 
   <!-- Timepicker js -->
   <script src="assets/plugins/time-picker/jquery.timepicker.js"></script>
@@ -510,14 +523,14 @@
 
   <script src="assets/js/datatables.js"></script>
 
-    <!-- Treeview js -->
-    <script src="assets/plugins/treeview/treeview.js"></script>
+  <!-- Treeview js -->
+  <script src="assets/plugins/treeview/treeview.js"></script>
 
   <!-- Custom js-->
   <script src="assets/js/custom.js"></script>
 
   <script>
-    $('document').ready(()=>{
+    $('document').ready(() => {
       $("body").removeClass('sidenav-toggled');
     });
   </script>
