@@ -1202,3 +1202,17 @@ export interface JobResponse extends Job {
     total: number;
   }
 }
+
+export interface OfficerResponse extends Item {
+  code: number;
+  status: string;
+  message: string;
+  data: {
+    data: any[];
+    draw: number;
+    to: number;
+    total: number;
+  };
+  role: Roles;
+}
+
