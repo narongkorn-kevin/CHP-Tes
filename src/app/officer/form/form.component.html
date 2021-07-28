@@ -3,7 +3,7 @@
         <!--Page header-->
         <div class="page-header">
             <div class="page-leftheader">
-                <h4 class="page-title">การจัดการผู้ใช้งาน</h4>
+                <h4 class="page-title">การจัดการผู้ใช้งาน / สร้างข้อมูลเจ้าหน้าที่</h4>
             </div>
         </div>
         <!--End Page header-->
@@ -15,32 +15,33 @@
                         <h3 class="card-title">สร้างข้อมูลเจ้าหน้าที่</h3>
                     </div>
                     <div class="card-body">
-                        <form >
-
-                            <div class="row justify-content-center">
+               
+                        <form [formGroup]="officerForm.baseForm" (ngSubmit)="onSaveOfficer()">
+                            <div class="row justify-content-center" >
                                 <div class="col-md-3 mb-2">
                                     <label>คำนำหน้า</label>
                                     <div class="input-group">
-                                        <div class="input-group" formControlName="prefix">
-                                            <select class="form-control">
-                                                <option selected>เลือก</option>
-                                                <option value="1">1</option>
-                                                <option value="2">2</option>
-                                                <option value="3">3</option>
+                                        <div class="input-group">
+                                            <select class="form-control"  formControlName="prefix_th">
+                                                <option value="" selected disabled>เลือกคำนำหน้า (TH)</option>
+                                                <option value="นาย">นาย</option>
+                                                <option value="นาง">นาง</option>
+                                                <option value="นางสาว">นางสาว</option>
                                             </select>
                                         </div>
                                     </div>
                                 </div>
+       
                                 <div class="col-md-3 mb-2">
                                     <label>ชื่อ (TH)</label>
                                     <div class="input-group" >
-                                        <input type="text" class="form-control" formControlName="firstnameTh" placeholder="ชื่อ (TH)">
+                                        <input type="text" class="form-control" formControlName="fname_th" placeholder="ชื่อ (TH)">
                                     </div>
                                 </div>
                                 <div class="col-md-3 mb-2">
                                     <label>นามสกุล (TH)</label>
                                     <div class="input-group" >
-                                        <input type="text" class="form-control" formControlName="lastnameTh" placeholder="นามสกุล (TH)">
+                                        <input type="text" class="form-control" formControlName="lname_th" placeholder="นามสกุล (TH)">
                                     </div>
                                 </div>
                             </div>
@@ -48,20 +49,25 @@
                             <div class="row justify-content-center">
                                 <div class="col-md-3 mb-2">
                                     <label>Title</label>
-                                    <div class="input-group" >
-                                        <input type="text" class="form-control" formControlName="title" placeholder="Title">
+                                    <div class="input-group">
+                                        <select class="form-control" formControlName="prefix_en">
+                                            <option value="" selected disabled>เลือกคำนำหน้า (EN)</option>
+                                            <option value="Mr.">Mr.</option>
+                                            <option value="Mrs.">Mrs.</option>
+                                            <option value="Ms.">Ms.</option>
+                                        </select>
                                     </div>
                                 </div>
                                 <div class="col-md-3 mb-2">
                                     <label>ชื่อ (EN)</label>
                                     <div class="input-group" >
-                                        <input type="text" class="form-control" formControlName="firstnameEn" placeholder="ชื่อ (EN)">
+                                        <input type="text" class="form-control" formControlName="fname_en" placeholder="ชื่อ (EN)">
                                     </div>
                                 </div>
                                 <div class="col-md-3 mb-2">
                                     <label>นามสกุล (EN)</label>
                                     <div class="input-group" >
-                                        <input type="text" class="form-control" formControlName="lastnameEn" placeholder="นามสกุล (EN)">
+                                        <input type="text" class="form-control" formControlName="lname_en" placeholder="นามสกุล (EN)">
                                     </div>
                                 </div>
                             </div>
@@ -70,18 +76,13 @@
                                 <div class="col-md-3 mb-2">
                                     <label>เลขบัตรประชาชน</label>
                                     <div class="input-group" >
-                                        <input type="text" class="form-control" formControlName="idCard" placeholder="เลขบัตรประชาชน">
+                                        <input type="text" class="form-control" formControlName="id_card" placeholder="เลขบัตรประชาชน" maxlength="13">
                                     </div>
                                 </div>
                                 <div class="col-md-3 mb-2">
                                     <label>ตำแหน่ง</label>
                                     <div class="input-group">
-                                        <select class="form-control" formControlName="position">
-                                            <option selected>เลือก</option>
-                                            <option value="1">1</option>
-                                            <option value="2">2</option>
-                                            <option value="3">3</option>
-                                        </select>
+                                        <input type="text" class="form-control" formControlName="position" placeholder="ตำแหน่ง">
                                     </div>
                                 </div>
                                 <div class="col-md-3 mb-2">
@@ -96,19 +97,19 @@
                                 <div class="col-md-3 mb-2">
                                     <label>เลขที่</label>
                                     <div class="input-group" >
-                                        <input type="text" class="form-control" formControlName="idNo" placeholder="บ้านเลขที่">
+                                        <input type="text" class="form-control" formControlName="village" placeholder="บ้านเลขที่">
                                     </div>
                                 </div>
                                 <div class="col-md-3 mb-2">
                                     <label>หมู่ที่</label>
                                     <div class="input-group" >
-                                        <input type="text" class="form-control" formControlName="mooNo" placeholder="หมู่ที่">
+                                        <input type="text" class="form-control" formControlName="village_no" placeholder="หมู่ที่">
                                     </div>
                                 </div>
                                 <div class="col-md-3 mb-2">
                                     <label>ซอย</label>
                                     <div class="input-group" >
-                                        <input type="text" class="form-control" formControlName="soi" placeholder="ซอย">
+                                        <input type="text" class="form-control" formControlName="alley" placeholder="ซอย">
                                     </div>
                                 </div>
                             </div>
@@ -123,13 +124,23 @@
                                 <div class="col-md-3 mb-2">
                                     <label>จังหวัด</label>
                                     <div class="input-group" >
-                                        <input type="text" class="form-control" formControlName="provice" placeholder="จังหวัด">
+                                        <select class="form-control" formControlName="province" (change)='changProvince($event)'>
+                                        <option value="" selected>กรุณาเลือกจังหวัด</option>
+                                        <option *ngFor="let item of provinceData" [value]="item.name_th">
+                                            {{item.name_th}}
+                                        </option>
+                                    </select>
                                     </div>
                                 </div>
                                 <div class="col-md-3 mb-2">
                                     <label>อำเภอ/เขต</label>
                                     <div class="input-group" >
-                                        <input type="text" class="form-control" formControlName="distict" placeholder="อำเภอ/เขต">
+                                        <select class="form-control" formControlName="district" (change)='changDistrict($event)'>
+                                        <option value="" selected>กรุณาเลือกอำเภอ/เขต</option>
+                                        <option *ngFor="let item of districtData" [value]="item.name_th">
+                                            {{item.name_th}}
+                                        </option>
+                                    </select>
                                     </div>
                                 </div>
                             </div>
@@ -138,19 +149,24 @@
                                 <div class="col-md-3 mb-2">
                                     <label>ตำบล/แขวง</label>
                                     <div class="input-group" >
-                                        <input type="text" class="form-control" formControlName="subdistict" placeholder="ตำบล/แขวง">
+                                        <select class="form-control" formControlName="sub_district" (change)='changSubDistrict($event)'>
+                                            <option value="" selected>กรุณาเลือกตำบล/แขวง</option>
+                                            <option *ngFor="let item of subdistrictData" [value]="item.name_th">
+                                                {{item.name_th}}
+                                         </option>
+                                        </select>
                                     </div>
                                 </div>
                                 <div class="col-md-3 mb-2">
                                     <label>รหัสไปรษณีย์</label>
                                     <div class="input-group" >
-                                        <input type="text" class="form-control" formControlName="zipcode" placeholder="รหัสไปรษณีย์">
+                                        <input type="text" class="form-control" formControlName="postal_code" placeholder="รหัสไปรษณีย์">
                                     </div>
                                 </div>
                                 <div class="col-md-3 mb-2">
                                     <label>เบอร์โทรศัพท์</label>
                                     <div class="input-group" >
-                                        <input type="text" class="form-control" formControlName="homephone" placeholder="นามสกุล">
+                                        <input type="text" class="form-control" formControlName="phone" placeholder="เบอร์โทรศัพท์">
                                     </div>
                                 </div>
                             </div>
@@ -159,7 +175,13 @@
                                 <div class="col-md-3 mb-2">
                                     <label>เบอร์โทรศัพท์มือถือ</label>
                                     <div class="input-group" >
-                                        <input type="text" class="form-control" formControlName="phone" placeholder="เบอร์โทรศัพท์มือถือ">
+                                        <input type="text" class="form-control" formControlName="mobile_phone" placeholder="เบอร์โทรศัพท์มือถือ">
+                                    </div>
+                                </div>
+                                <div class="col-md-3 mb-2">
+                                    <label>รหัสผ่านเข้าระบบ</label>
+                                    <div class="input-group" >
+                                        <input type="text" class="form-control" formControlName="password" placeholder="รหัสผ่านเข้าระบบ">
                                     </div>
                                 </div>
                                 <div class="col-md-3 mb-2">
@@ -167,18 +189,13 @@
                                         <button class="btn btn-success" style="margin-top: 2rem !important;"
                                             id="btnSave" type="submit">บันทึก</button>
                                             <button class="btn btn-secondary mx-2" style="margin-top: 2rem !important;"
-                                            id="btnClear" type="button">ล้างข้อมูล</button>
-                                    </div>
-                                </div>
-                                <div class="col-md-3 mb-2">
-                                    <div class="input-group">
-                                       
+                                            id="btnClear" type="button" (click)="onClearData()">ล้างข้อมูล</button>
                                     </div>
                                 </div>
                             </div>
 
                         </form>
-                        
+
                     </div>
                 </div>
             </div>
