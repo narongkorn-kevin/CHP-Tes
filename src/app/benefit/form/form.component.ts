@@ -1,3 +1,4 @@
+import { BaseFormBenefit } from './../../shared/utils/base-form-benefit';
 import {
   AfterViewInit,
   Component,
@@ -10,10 +11,7 @@ import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { FormBuilder, FormArray, FormGroup, FormControl, Validators } from '@angular/forms';
 
-interface disease {
-  value: string;
-  viewValue: string;
-}
+
 
 enum Action {
   EDIT = 'edit',
@@ -25,18 +23,13 @@ enum Action {
   styleUrls: ['./form.component.scss']
 })
 export class FormComponent implements OnInit {
-  selectedValue = new FormControl();
-
+ 
+  hide = true;
+  actionTODO = Action.NEW;
   public diseaseData: any = [];
-  toppings = new FormControl();
-  toppingList: string[] = ['กลุ่มหญิงตั้งครรภ์', 'กลุ่มเด็กเล็ก 0-5 ปี', 'กลุ่มเด็กโตและวัยรุ่นอายุ 6-24 ปี ', 'กลุ่มผู้ใหญ่ 25-58 ปี', 'กลุ่มผู้สูงอายุ 60 ปีขึ้นไป'];
-  disease1: disease[] = [
-    {value: '0', viewValue: 'โรคอ้วน'},
-    {value: '1', viewValue: 'โรคเบาหวาน'},
-    {value: '22', viewValue: 'โรค HIV'}
-  ];
-
+  public ServiceGroupData: any = [];
   benefitsForm : FormGroup;
+  benefits1Form : FormGroup;
   private subscription: Subscription = new Subscription();
 
 
@@ -44,12 +37,25 @@ export class FormComponent implements OnInit {
     private benefitSvc: BenefitService,
     private router: Router,
     private fb: FormBuilder,
+    public benefitform: BaseFormBenefit
 
   ) {
     this.benefitsForm = this.fb.group({
-      benefit: this.fb.array([]),
+      event: this.fb.array([]),
+      service_id: '',
+    })
+
+    this.benefits1Form = fb.group({
+      service_group_id : '',
+      name: '',
+      group_taget: '',
+      pregnant: '',
+      age:'',
+      sex:'',
+      disease_id:'',
     })
    }
+   
 
    ngOnDestroy(): void {
      this.subscription.unsubscribe();
@@ -59,11 +65,14 @@ export class FormComponent implements OnInit {
    }
    benefit(): FormArray {
 
-    return this.benefitsForm.get('benefit') as FormArray
+    return this.benefitsForm.get('event') as FormArray
   }
   newBenefit(): FormGroup {
     return this.fb.group({
-
+      name: '',
+      seq: '',
+      user_per_year: '',
+      remark: '',
     })
   }
   addBenefit(): void {
@@ -81,6 +90,7 @@ export class FormComponent implements OnInit {
 
   ngOnInit(): void {
     this.GetDisease();
+    this.GetServiceGroup();
   }
 
 
@@ -92,4 +102,26 @@ export class FormComponent implements OnInit {
 
   }
 
+  GetServiceGroup(): void {
+    this.benefitSvc.get_service_group().subscribe((resp) => {
+      this.ServiceGroupData = resp.data;
+      console.log(this.ServiceGroupData);
+    });
+  }
+
+  onSubmit1(): void {
+    if (this.benefitform.baseForm.invalid) {
+      return;
+    }
+    const formValue = this.benefitform.baseForm.value;
+
+    console.log('test',this.benefitform.baseForm.value);
+    if (this.actionTODO === Action.NEW) {
+      this.benefitSvc.new(formValue).subscribe((res) => {
+        console.log('New ', res);
+        this.router.navigate(['benefit/list']);
+      });
+    }
+
+}
 }
