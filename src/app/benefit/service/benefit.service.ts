@@ -77,6 +77,12 @@ delete(benefitId: number): Observable<{}> {
 
 }
 
+getById(benefitId: number): Observable<BenefitResponse> {
+  return this.http
+    .get<any>(`${environment.API_URL}/api/service/${benefitId}`, this.httpOptions)
+    .pipe(catchError(this.handlerError));
+}
+
 get_service_group(): Observable<ServiceGroupResponse> {
   return this.http
     .get<any>(`${environment.API_URL}/api/service_group` , this.httpOptions)
