@@ -35,7 +35,7 @@
     "material-icons": "^0.7.6",
     "ng-multiselect-dropdown": "^0.3.4",
     "rxjs": "~6.5.5",
-    "sweetalert2": "^11.0.18",
+    "sweetalert2": "^11.0.20",
     "tslib": "^2.0.0",
     "zone.js": "~0.10.3"
   },
