@@ -1,1 +1,152 @@
-<p>list works!</p>
+<div class="app-content main-content">
+  <div class="side-app">
+    <!--Page header-->
+    <div class="page-header">
+      <div class="page-leftheader">
+        <h4 class="page-title">จัดการสิทธิประโยชน์ส่งเสริมป้องกันโรค / กลุ่มบริการ</h4>
+      </div>
+      <div class="page-rightheader ml-auto d-lg-flex d-none">
+
+      </div>
+    </div>
+    <!--End Page header-->
+
+    <!-- Row -->
+    <div class="row">
+      <div class="col-12">
+        <!--div-->
+        <div class="card">
+          <div class="card-body">
+            <table border="1" class="col-12">
+              <div>
+                <h4 class="page-title">ข้อมูลการค้นหา</h4>
+              </div>
+              <div class="row">
+
+
+                <div class="col mb-3">
+                  <div class="input-group">
+                    <div class="input-group-prepend">
+                      <div class="input-group-text">
+                        <b>
+                          กลุ่มบริการ</b>
+                      </div>
+                      <!-- <select style="width: 200px;" class="form-control nice-select select2" (change)="onChangeType($event.target.value)">
+                <option value="" disabled selected>--Select--</option>
+                <option *ngFor="let item of WarehouseData; let i =index" value="{{ item.id }}">{{ item.name }}
+                </option>
+               </select> -->
+                      <select style="width: 200px;" class="form-control nice-select select2">
+                        <option value="" disabled selected>ทั้งหมด</option>
+                        <option value="TEST1">TEST1
+                        </option>
+                        <option value="TEST1">TEST1
+                        </option>
+                        <option value="TEST1">TEST1
+                        </option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col mb-3">
+                  <div class="input-group">
+                    <div class="input-group-prepend">
+                      <div class="input-group-text">
+                        <b>
+                          บริการ</b>
+                      </div>
+                      <!-- <select style="width: 200px;" class="form-control nice-select select2" (change)="onChangeType($event.target.value)">
+                <option value="" disabled selected>--Select--</option>
+                <option *ngFor="let item of WarehouseData; let i =index" value="{{ item.id }}">{{ item.name }}
+                </option>
+               </select> -->
+                      <select style="width: 200px;" class="form-control nice-select select2">
+                        <option value="" disabled selected>ทั้งหมด</option>
+                        <option value="TEST1">TEST1
+                        </option>
+                        <option value="TEST1">TEST1
+                        </option>
+                        <option value="TEST1">TEST1
+                        </option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+                <div class="col mb-3">
+                  <div class="input-group">
+                    <div class="input-group-prepend">
+                      <div class="input-group-text">
+                        <b>
+                          ช่วงอายุ</b>
+                      </div>
+                      <!-- <select style="width: 200px;" class="form-control nice-select select2" (change)="onChangeType($event.target.value)">
+                <option value="" disabled selected>--Select--</option>
+                <option *ngFor="let item of WarehouseData; let i =index" value="{{ item.id }}">{{ item.name }}
+                </option>
+               </select> -->
+                      <select style="width: 200px;" class="form-control nice-select select2">
+                        <option value="" disabled selected>ทั้งหมด</option>
+                        <option value="TEST1">TEST1
+                        </option>
+                        <option value="TEST1">TEST1
+                        </option>
+                        <option value="TEST1">TEST1
+                        </option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+
+
+                <div class="col mb-3">
+                  <button class="btn-lg btn-primary"> <i class="fa fa-search"> </i>
+                    ค้นหา
+                  </button>
+                </div>
+
+              </div>
+            </table>
+            <div class="row">
+              <div class="col mb-4">
+                <div class="card-title">
+                  <h4 class="page-title">รายการทั่วไป</h4>
+                </div>
+              </div>
+              <div class="col col-auto mb-4">
+                <div class="form-group w-100">
+                  <a routerLink="/benefit/form" class="btn btn-primary"><i class="fe fe-plus"></i> เพิ่ม</a>
+                </div>
+              </div>
+            </div>
+            <div class="">
+              <div class="table-responsive">
+                <table id="example" class="table table-striped card-table table-vcenter text-nowrap mb-0">
+                  <thead>
+                    <tr>
+                      <th class="border-bottom-0">ลำดับ.</th>
+                      <th class="border-bottom-0">กลุ่มบริการ</th>
+                      <th class="border-bottom-0">บริการ</th>
+                      <th class="border-bottom-0">ช่วงอายุ</th>
+                      <th class="border-bottom-0">จัดการ</th>
+                    </tr>
+                  </thead>
+
+                  <tbody>
+                    <tr>
+                      <td colspan="8" class="no-data-available">
+                        No data found!
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!--/div-->
+      </div>
+    </div>
+    <!-- /Row -->
+  </div>
+  <!-- end app-content-->
