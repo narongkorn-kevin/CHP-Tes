@@ -27,6 +27,7 @@ const routes: Routes = [
   { path: 'dialog-unit-convertion', loadChildren: () => import('./shared/dialogs/dialog-unit-convertion/dialog-unit-convertion.module').then(m => m.DialogUnitConvertionModule) },
   { path: 'dialog-bom', loadChildren: () => import('./shared/dialogs/dialog-bom/dialog-bom.module').then(m => m.DialogBomModule) },
   { path: 'benefit', loadChildren: () => import('./benefit/benefit.module').then(m => m.BenefitModule) },
+  { path: 'officer', loadChildren: () => import('./officer/officer.module').then(m => m.OfficerModule) },
   {
     path: '**', loadChildren: () =>
       import('./pages/not-found/not-found.module').then(

@@ -1,0 +1,188 @@
+<div class="app-content page-body">
+    <div class="container-fluid">
+        <!--Page header-->
+        <div class="page-header">
+            <div class="page-leftheader">
+                <h4 class="page-title">การจัดการผู้ใช้งาน</h4>
+            </div>
+        </div>
+        <!--End Page header-->
+
+        <div class="row">
+            <div class="col-lg-12 col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">สร้างข้อมูลเจ้าหน้าที่</h3>
+                    </div>
+                    <div class="card-body">
+                        <form [formGroup]="customerForm.baseForm" (ngSubmit)="onAdd()">
+
+                            <div class="row justify-content-center">
+                                <div class="col-md-3 mb-2">
+                                    <label>คำนำหน้า</label>
+                                    <div class="input-group">
+                                        <div class="input-group" formControlName="prefix">
+                                            <select class="form-control">
+                                                <option selected>เลือก</option>
+                                                <option value="1">1</option>
+                                                <option value="2">2</option>
+                                                <option value="3">3</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 mb-2">
+                                    <label>ชื่อ (TH)</label>
+                                    <div class="input-group" >
+                                        <input type="text" class="form-control" formControlName="firstnameTh" placeholder="ชื่อ (TH)">
+                                    </div>
+                                </div>
+                                <div class="col-md-3 mb-2">
+                                    <label>นามสกุล (TH)</label>
+                                    <div class="input-group" >
+                                        <input type="text" class="form-control" formControlName="lastnameTh" placeholder="นามสกุล (TH)">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row justify-content-center">
+                                <div class="col-md-3 mb-2">
+                                    <label>Title</label>
+                                    <div class="input-group" >
+                                        <input type="text" class="form-control" formControlName="title" placeholder="Title">
+                                    </div>
+                                </div>
+                                <div class="col-md-3 mb-2">
+                                    <label>ชื่อ (EN)</label>
+                                    <div class="input-group" >
+                                        <input type="text" class="form-control" formControlName="firstnameEn" placeholder="ชื่อ (EN)">
+                                    </div>
+                                </div>
+                                <div class="col-md-3 mb-2">
+                                    <label>นามสกุล (EN)</label>
+                                    <div class="input-group" >
+                                        <input type="text" class="form-control" formControlName="lastnameEn" placeholder="นามสกุล (EN)">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row justify-content-center">
+                                <div class="col-md-3 mb-2">
+                                    <label>เลขบัตรประชาชน</label>
+                                    <div class="input-group" >
+                                        <input type="text" class="form-control" formControlName="idCard" placeholder="เลขบัตรประชาชน">
+                                    </div>
+                                </div>
+                                <div class="col-md-3 mb-2">
+                                    <label>ตำแหน่ง</label>
+                                    <div class="input-group">
+                                        <select class="form-control" formControlName="position">
+                                            <option selected>เลือก</option>
+                                            <option value="1">1</option>
+                                            <option value="2">2</option>
+                                            <option value="3">3</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 mb-2">
+                                    <label>อีเมล</label>
+                                    <div class="input-group" >
+                                        <input type="text" class="form-control" formControlName="email" placeholder="อีเมล">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row justify-content-center">
+                                <div class="col-md-3 mb-2">
+                                    <label>เลขที่</label>
+                                    <div class="input-group" >
+                                        <input type="text" class="form-control" formControlName="idNo" placeholder="บ้านเลขที่">
+                                    </div>
+                                </div>
+                                <div class="col-md-3 mb-2">
+                                    <label>หมู่ที่</label>
+                                    <div class="input-group" >
+                                        <input type="text" class="form-control" formControlName="mooNo" placeholder="หมู่ที่">
+                                    </div>
+                                </div>
+                                <div class="col-md-3 mb-2">
+                                    <label>ซอย</label>
+                                    <div class="input-group" >
+                                        <input type="text" class="form-control" formControlName="soi" placeholder="ซอย">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row justify-content-center">
+                                <div class="col-md-3 mb-2">
+                                    <label>ถนน</label>
+                                    <div class="input-group" >
+                                        <input type="text" class="form-control" formControlName="road" placeholder="ถนน">
+                                    </div>
+                                </div>
+                                <div class="col-md-3 mb-2">
+                                    <label>จังหวัด</label>
+                                    <div class="input-group" >
+                                        <input type="text" class="form-control" formControlName="provice" placeholder="จังหวัด">
+                                    </div>
+                                </div>
+                                <div class="col-md-3 mb-2">
+                                    <label>อำเภอ/เขต</label>
+                                    <div class="input-group" >
+                                        <input type="text" class="form-control" formControlName="distict" placeholder="อำเภอ/เขต">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row justify-content-center">
+                                <div class="col-md-3 mb-2">
+                                    <label>ตำบล/แขวง</label>
+                                    <div class="input-group" >
+                                        <input type="text" class="form-control" formControlName="subdistict" placeholder="ตำบล/แขวง">
+                                    </div>
+                                </div>
+                                <div class="col-md-3 mb-2">
+                                    <label>รหัสไปรษณีย์</label>
+                                    <div class="input-group" >
+                                        <input type="text" class="form-control" formControlName="zipcode" placeholder="รหัสไปรษณีย์">
+                                    </div>
+                                </div>
+                                <div class="col-md-3 mb-2">
+                                    <label>เบอร์โทรศัพท์</label>
+                                    <div class="input-group" >
+                                        <input type="text" class="form-control" formControlName="homephone" placeholder="นามสกุล">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row justify-content-center">
+                                <div class="col-md-3 mb-2">
+                                    <label>เบอร์โทรศัพท์มือถือ</label>
+                                    <div class="input-group" >
+                                        <input type="text" class="form-control" formControlName="phone" placeholder="เบอร์โทรศัพท์มือถือ">
+                                    </div>
+                                </div>
+                                <div class="col-md-3 mb-2">
+                                    <div class="input-group">
+                                        <button class="btn btn-success" style="margin-top: 2rem !important;"
+                                            id="btnSave" type="button">บันทึก</button>
+                                            <button class="btn btn-secondary mx-2" style="margin-top: 2rem !important;"
+                                            id="btnClear" type="button">ล้างข้อมูล</button>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 mb-2">
+                                    <div class="input-group">
+                                       
+                                    </div>
+                                </div>
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End Row -->
+    </div>
+</div>
+<!-- end app-content-->
