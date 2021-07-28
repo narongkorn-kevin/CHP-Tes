@@ -9,7 +9,7 @@ export class BaseFormUser {
   constructor(private fb: FormBuilder) { }
 
   baseForm = this.fb.group({
-    email: [
+    id_card: [
       '',
       [Validators.required, Validators.minLength(5)],
     ],
