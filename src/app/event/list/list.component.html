@@ -100,9 +100,9 @@
                         <tbody>
                           <tr *ngFor="let item of dataRow; let i = index">
                             <td>{{ i + 1 }}</td>
-                            <td>{{ item.name }}</td>
-                            <td>{{ item.seq }}</td>
-                            <td>{{ item.use_per_year }}</td>
+                            <td style="white-space:normal;" width=40%>{{ item.name }}</td>
+                            <td style="white-space:normal;" width=40%>{{ item.seq }}</td>
+                            <td width=10% >{{ item.use_per_year }}</td>
                             <td>
                               <div class="btn-list">
                                 <button type="button" (click)="onEdit(item)" class="btn btn-icon btn-success">
