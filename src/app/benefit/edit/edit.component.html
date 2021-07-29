@@ -26,10 +26,11 @@
                                           <label class="col-md-3 form-label">กลุ่มวัย :
                                           </label>
                                           <div class="col-md-9">
-                                              <mat-select formControlName="service_group_id" class="form-control" multiple>
+                                              <mat-select formControlName="service_group_id" class="form-control">
                                                   <mat-option *ngFor="let service of ServiceGroupData" [value]="service.id">
                                                       {{service.name}}</mat-option>
                                               </mat-select>
+                                              <!-- <input type="text" class="form-control" formControlName="service_group_id" /> -->
                                           </div>
                                       </div>
                                   </div>

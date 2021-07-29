@@ -98,7 +98,7 @@ export class EditComponent implements OnInit {
       this.GetBenefitById(id);
     });
     this.GetDisease();
-    this.GetServiceGroup();
+    
 
 
   }
@@ -112,8 +112,8 @@ export class EditComponent implements OnInit {
 
   }
 
-  GetServiceGroup(): void {
-    this.benefitSvc.get_service_group().subscribe((resp) => {
+  GetServiceGroup(id): void {
+    this.benefitSvc.get_service_group_update(id).subscribe((resp) => {
       this.ServiceGroupData = resp.data;
       console.log(this.ServiceGroupData);
     });
@@ -134,9 +134,11 @@ export class EditComponent implements OnInit {
 
 }
 
-GetBenefitById(id): void {
+GetBenefitById(id, ): void {
   this.benefitSvc.getById(id).subscribe((resp) => {
     this.BenefitbyIdData = resp.data;
+    
+    this.GetServiceGroup(this.BenefitbyIdData.service_groups[0].id);
     this.benefits1Form.patchValue({
       id: this.BenefitbyIdData.id,
       name: this.BenefitbyIdData.name,
@@ -145,12 +147,12 @@ GetBenefitById(id): void {
       sex: this.BenefitbyIdData.sex,
       disease_id: this.BenefitbyIdData.disease_id,
       group_taget: this.BenefitbyIdData.group_taget,
-      service_group_id: this.BenefitbyIdData.service_groups,
+      
 
     });
     console.log('benefit',this.BenefitbyIdData)
     console.log('benefits1Form',this.benefits1Form.value)
-    console.log('benefits1Form',this.benefits1Form.value.service_group_id)
+    console.log('benefits1Form',this.BenefitbyIdData.service_groups[0].id)
 
   });
 }

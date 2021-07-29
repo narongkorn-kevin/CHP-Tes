@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { ListComponent } from '../officer/list/list.component';
 import { FormComponent } from '../officer/form/form.component';
+import { EditComponent } from '../officer/edit/edit.component';
 
 const routes: Routes = [
   {
@@ -12,6 +13,10 @@ const routes: Routes = [
   {
     path: 'form',
     component: FormComponent
+  },
+  {
+    path: 'edit',
+    component: EditComponent
   },
 ];
 

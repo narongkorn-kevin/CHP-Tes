@@ -49,7 +49,25 @@ export class BaseFormOfficer {
     postal_code: ['',],
     phone: ['',],
     mobile_phone: ['',],
+    status: ['',],
+    role: ['',],
   })
+
+  baseFormEdit = this.fb.group({
+    id: [
+      '',
+    ],
+    id_card: [
+      '',
+    ],
+    status: [
+      '',
+    ],
+    // name_en: [
+    //   '',
+    // ],
+    role: ['',],
+  });
 
 
   isValidField(field: string): boolean {
