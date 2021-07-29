@@ -144,11 +144,6 @@ export class FormComponent implements OnInit {
       cancelButtonText: 'ยกเลิก'
     }).then((result) => {
       if (result.isConfirmed) {
-        // Swal.fire(
-        //   'Success!',
-        //   'ดำเนินการเสร็จสิ้น!',
-        //   'success'
-        // )
         if (this.officerForm.baseForm.invalid) {
           return;
         }
