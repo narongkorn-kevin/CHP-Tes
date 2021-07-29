@@ -10,6 +10,7 @@ import {
 import { ActivatedRoute, Router } from '@angular/router';
 import { BaseFormOfficer } from '@shared/utils/base-form-officer';
 import { Subscription } from 'rxjs';
+import Swal from 'sweetalert2';
 enum Action {
   EDIT = 'edit',
   NEW = 'new',
@@ -40,6 +41,9 @@ export class EditComponent implements OnInit {
     console.log('extras', this.router.getCurrentNavigation().extras.state.item);
     this.officerForm.baseForm.patchValue(this.router.getCurrentNavigation().extras.state.item);
     this.getProvince();
+    setTimeout(() => {
+      this.onEditProvince(this.officerForm.baseForm.value.province);
+    }, 1500);
   }
 
   ngOnDestroy(): void {
@@ -53,10 +57,7 @@ export class EditComponent implements OnInit {
   ngOnInit(): void {
     this.officerForm.baseForm.get('role').setValidators(null);
     this.officerForm.baseForm.get('role').updateValueAndValidity();
-
-    setTimeout(() => {
-      this.onEditProvince(this.officerForm.baseForm.value.province);
-    }, 1000);
+    this.officerForm.baseForm.value.status = 'Yes';
   }
 
   onUpdate(): void {
@@ -64,13 +65,25 @@ export class EditComponent implements OnInit {
       return;
     }
     const formValue = this.officerForm.baseForm.value;
-    console.log(formValue);
-    // if (this.actionTODO === Action.EDIT)
-    // {
-    //   this.officeServ.Update(formValue.id, formValue).subscribe((res) => {
-    //     this.router.navigate(['officer/list']);
-    //   });
-    // }
+    //console.log(formValue);
+    if (this.actionTODO === Action.EDIT)
+    {
+      this.officerServ.Update(formValue.id, formValue).subscribe((res) => {
+        this.officerForm.baseForm.value.status = 'Yes';
+          Swal.fire({
+            title: 'Success!',
+            text: "ดำเนินการเสร็จสิ้น!",
+            icon: 'success',
+            showCancelButton: false,
+            confirmButtonColor: '#28a745',
+            confirmButtonText: 'ตกลง',
+          }).then((result) => {
+            if (result.isConfirmed) {
+              this.router.navigate(['officer/list']);
+            }
+          })       
+      });
+    }
   }
   
   getSubDistrict(id): void {
@@ -79,7 +92,7 @@ export class EditComponent implements OnInit {
     }
     this.officerServ.getSubDistrict(postData).subscribe(resp => {
       this.subdistrictData = resp.data;
-      console.log(this.subdistrictData);
+      //console.log(this.subdistrictData);
     });
   }
 
@@ -89,14 +102,14 @@ export class EditComponent implements OnInit {
     }
     this.officerServ.getDistrict(postData).subscribe(resp => {
       this.districtData = resp.data;
-      console.log(this.districtData);
+      //console.log(this.districtData);
     });
   }
 
   getProvince(): void {
     this.officerServ.getProvince().subscribe(resp => {
       this.provinceData = resp.data;
-      console.log(this.provinceData);
+      //console.log(this.provinceData);
     });
   }
 

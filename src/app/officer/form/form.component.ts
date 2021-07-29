@@ -75,7 +75,7 @@ export class FormComponent implements OnInit {
     private fb: FormBuilder
   ) {
 
-    this.officerFormData = this.fb.group({
+    this.officerForm.baseForm = this.fb.group({
       //id: '',
       id_card: '',
       password: '',
@@ -111,27 +111,6 @@ export class FormComponent implements OnInit {
     // this.dateOfficer();
   }
 
-  officer(): FormArray {
-    return this.officerData.get('event') as FormArray
-  }
-
-  newOfficerData(): FormGroup {
-    return this.fb.group({
-      name: '',
-      seq: '',
-      user_per_year: '',
-      remark: '',
-    })
-  }
-
-  addOfficer(): void {
-    this.officer().push(this.newOfficerData());
-  }
-
-  dateOfficer(): void {
-    this.officer().push(this.newOfficerData());
-  }
-
   onSaveOfficer(): void {
     Swal.fire({
       title: 'Warning!',
@@ -144,11 +123,6 @@ export class FormComponent implements OnInit {
       cancelButtonText: 'ยกเลิก'
     }).then((result) => {
       if (result.isConfirmed) {
-        // Swal.fire(
-        //   'Success!',
-        //   'ดำเนินการเสร็จสิ้น!',
-        //   'success'
-        // )
         if (this.officerForm.baseForm.invalid) {
           return;
         }
@@ -199,7 +173,7 @@ export class FormComponent implements OnInit {
   getProvince(): void {
     this.officerServ.getProvince().subscribe(resp => {
       this.provinceData = resp.data;
-      console.log(this.provinceData);
+      //console.log(this.provinceData);
     });
   }
 

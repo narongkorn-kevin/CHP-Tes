@@ -88,7 +88,7 @@
                             <div class="card-body">
                                 <div class="row">
                                     <div class="col mb-4">
-                                        <div class="card-title">รายการทั่วไป</div>
+                                        <div class="page-title">รายการทั่วไป</div>
                                     </div>
                                     <div class="col col-auto mb-4">
                                         <div class="form-group w-100">
@@ -111,8 +111,7 @@
                                                     <th class="border-bottom-0">ตำแหน่ง</th>
                                                     <th class="border-bottom-0">เบอร์โทรศัพท์</th>
                                                     <th class="border-bottom-0">อีเมล</th>
-                                                    <th class="border-bottom-0">แก้ไข</th>
-                                                    <th class="border-bottom-0">ลบ</th>
+                                                    <th class="border-bottom-0">จัดการ</th>
                                                 </tr>
                                             </thead>
                                             <tbody *ngIf="dataRow?.length != 0">
@@ -121,19 +120,16 @@
                                                     <td>{{ item.fname_th }}</td>
                                                     <td>{{ item.lname_th }}</td>
                                                     <td>{{ item.position }}</td>
-                                                    <td>{{ item.email }}</td>
                                                     <td>{{ item.phone }}</td>
+                                                    <td>{{ item.email }}</td>
                                                     <td style="text-align: center;">
                                                         <div class="btn-list">
-                                                            <button type="button" class="btn btn-icon btn-warning"
+                                                            <button type="button" class="btn btn-icon btn-warning mx-3" title="แก้ไขข้อมูล"
                                                                 (click)="onEdit(item)">
                                                                 <i class="fa fa-edit"></i>
                                                             </button>
-                                                        </div>
-                                                    </td>
-                                                    <td style="text-align: center;">
-                                                        <div class="btn-list">
-                                                            <button type="button" (click)="onDelete(item.id)"
+
+                                                            <button type="button" (click)="onDelete(item.id)"  title="ลบข้อมูล"
                                                                 class="btn btn-icon btn-danger">
                                                                 <i class="fa fa-trash"></i>
                                                             </button>

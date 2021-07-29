@@ -60,10 +60,21 @@ export class OfficeServiceService {
       .pipe(catchError(this.handlerError));
   }
 
-  Update(officerId: number, officer: Officer): Observable<Officer> {
+  Update(officerId: number, officer: OfficerResponse): Observable<OfficerResponse> {
     return this.http
-      .patch<Officer>(`${environment.API_URL}/api/user/${officerId}`, officer, this.httpOptions)
+      .patch<OfficerResponse>(`${environment.API_URL}/api/user/${officerId}`, officer, this.httpOptions)
       .pipe(catchError(this.handlerError));
+  }
+
+  Delete(officerId: number): Observable<{}> {
+    return this.http
+      .delete<Officer>(`${environment.API_URL}/api/user/${officerId}`, this.httpOptions)
+      .pipe(
+        map((benefit: OfficerResponse) => {
+          return benefit;
+        }),
+        catchError((err) => this.handlerError(err))
+      );
   }
 
   getDistrict(dataTablesParameters: any): Observable<OfficerResponse> {
