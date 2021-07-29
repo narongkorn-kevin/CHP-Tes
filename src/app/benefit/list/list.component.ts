@@ -51,16 +51,17 @@ export class ListComponent implements AfterViewInit, OnInit, OnDestroy {
   dtElement!: DataTableDirective;
 
   @ViewChild(MatSort) sort: MatSort;
-  constructor(private router: Router ,
+  constructor(private router: Router,
     private benefitSvc: BenefitService,
     private elementRef: ElementRef,
     public fb: FormBuilder,
     private renderer: Renderer2) {
-      this.formFillter = this.fb.group({
-        customer_id: [''],
-        year: [''],
-      });
-    }
+    this.formFillter = this.fb.group({
+      service_group_id: [''],
+      service_id: [''],
+      age_id: [''],
+    });
+  }
 
   ngOnDestroy(): void {
     this.destroy$.next({});
@@ -90,14 +91,14 @@ export class ListComponent implements AfterViewInit, OnInit, OnDestroy {
       processing: true,
       ajax: (dataTablesParameters: any, callback) => {
         that.benefitSvc.getAll(dataTablesParameters).subscribe(resp => {
-            that.dataRow = resp.data.data;
-            console.log('datatable',that.dataRow);
-            callback({
-              recordsTotal: resp.data.total,
-              recordsFiltered: resp.data.total,
-              data: []
-            });
+          that.dataRow = resp.data.data;
+          console.log('datatable', that.dataRow);
+          callback({
+            recordsTotal: resp.data.total,
+            recordsFiltered: resp.data.total,
+            data: []
           });
+        });
       },
       columns: [
         { data: 'No' },
@@ -130,7 +131,7 @@ export class ListComponent implements AfterViewInit, OnInit, OnDestroy {
     //   }
     // };
 
-    this.router.navigate(['benefit/edit',data.id]);
+    this.router.navigate(['benefit/edit', data.id]);
   }
 
   onDelete(benefitId: number): void {
@@ -139,11 +140,11 @@ export class ListComponent implements AfterViewInit, OnInit, OnDestroy {
         .delete(benefitId)
         .pipe(takeUntil(this.destroy$))
         .subscribe((res: BenefitResponse) => {
-          if (res.code == 201){
+          if (res.code == 201) {
             this.rerender();
           }
           // this.branchSvc.getAll().subscribe((branch) => {
-            // this.dataRow = branch.data;
+          // this.dataRow = branch.data;
           // });
         });
     }
@@ -168,5 +169,42 @@ export class ListComponent implements AfterViewInit, OnInit, OnDestroy {
     });
   }
 
+
+  Onsearch(form: FormGroup): void {
+    console.log('test',form.value);
+    const that = this;
+    this.dtOptions = {
+      pagingType: 'full_numbers',
+      pageLength: 10,
+      serverSide: true,
+      processing: true,
+      ajax: (dataTablesParameters: any, callback) => {
+        dataTablesParameters['service_group_id'] = form.value.service_group_id;
+        dataTablesParameters['service_id'] = form.value.service_id;
+        dataTablesParameters['age_id'] = form.value.age_id;
+        that.benefitSvc.getAll(dataTablesParameters).subscribe(resp => {
+          that.dataRow = resp.data.data;
+          console.log('datatable', that.dataRow);
+          callback({
+            recordsTotal: resp.data.total,
+            recordsFiltered: resp.data.total,
+            data: []
+          });
+        });
+      },
+      columns: [
+        { data: 'No' },
+        { data: 'service_group_name' },
+        { data: 'name' },
+        { data: 'age' },
+        // { data: 'updated_at' },
+        // { data: 'created_at' },
+        // { data: 'update_by' },
+        // { data: 'status' },
+        { data: 'action', orderable: false }
+      ]
+    };
+
+  }
 
 }
