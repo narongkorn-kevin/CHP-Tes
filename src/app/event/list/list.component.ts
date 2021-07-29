@@ -96,10 +96,6 @@ export class ListComponent implements AfterViewInit, OnInit, OnDestroy {
         { data: 'name' },
         { data: 'seq' },
         { data: 'use_per_year' },
-        // { data: 'updated_at' },
-        // { data: 'created_at' },
-        // { data: 'update_by' },
-        // { data: 'status' },
         { data: 'action', orderable: false }
       ]
     };

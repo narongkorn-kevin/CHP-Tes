@@ -105,4 +105,19 @@ update(benefitId: number,benefit: Benefit): Observable<Benefit> {
     .pipe(catchError(this.handlerError));
 }
 
+// getItem(ItemTypeID: String): Observable<ItemResponse> {
+//   return this.http
+//     .post<any>(`${environment.API_URL}/api/get_item`, { item_type_id: ItemTypeID }, this.httpOptions)
+//     .pipe(catchError(this.handlerError));
+// }
+
+get_service_group_update(benefitId: number): Observable<BenefitResponse> {
+  return this.http
+    .get<any>(`${environment.API_URL}/api/service/${benefitId}`, this.httpOptions)
+    .pipe(catchError(this.handlerError));
+}
+
+
+
+
 }
