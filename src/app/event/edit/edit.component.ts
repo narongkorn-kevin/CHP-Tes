@@ -53,7 +53,11 @@ export class EditComponent implements OnInit {
 
     this.eventsForm = this.fb.group({
       service_id: '',
-      event: this.fb.array([], [Validators.required]),
+      id: '',
+      name: '',
+      seq: '',
+      use_per_year: '',
+      remark: '',
 
 
     });
@@ -123,41 +127,43 @@ export class EditComponent implements OnInit {
   //   });
   // }
 
+ 
+
+
   GetEventByID(id): void {
+
+  
     this.eventSvc.getById(id).subscribe(resp => {
       this.ItemData = resp.data;
+      var stringToConvert = this.ItemData.seq;
+      var numberValue = Number(this.ItemData.seq)
+      this.GetSequence(numberValue);
       this.GetService(this.ItemData.service_id);
-      this.GetSequence(this.ItemData.seq);
-      console.log(this.ItemData.service_id)
+      
+      console.log('number',this.ItemData)
       this.eventsForm.patchValue(this.ItemData);
       this.eventsForm.patchValue({
         service_id: this.ItemData.service_id,
+        id: this.ItemData.id,
+        name: this.ItemData.name,
+          seq: this.ItemData.seq,
+          use_per_year: this.ItemData.use_per_year,
+          remark: this.ItemData.remark,
         
       });
-      
-      this.ItemData.map( d=>
-        this.event().push(this.fb.group({
-          name: d.name,
-          seq: d.seq,
-          use_per_year: d.use_per_year,
-          remark: d.remark,
-          
-        }))
-        
-      );
     });
   }
 
   onUpdate(): void {
-    if (this.benefits1Form.invalid) {
+    if (this.eventsForm.invalid) {
       return;
     }
-    const formValue = this.benefits1Form.value;
-    console.log('test',this.benefits1Form.value);
+    const formValue = this.eventsForm.value;
+    console.log('test',formValue.id);
     if (this.actionTODO === Action.EDIT) {
       this.eventSvc.update(formValue.id, formValue).subscribe((res) => {
         console.log('Edit ', res);
-        this.router.navigate(['benefit/list']);
+        this.router.navigate(['/event/list']);
       });
     }
 
@@ -166,7 +172,7 @@ export class EditComponent implements OnInit {
 GetSequence(id): void {
   this.eventSvc.getSequence().subscribe((resp) => {
     this.SeqData = resp.data;
-    console.log(this.SeqData);
+    console.log('seq',this.SeqData);
   });
 }
 

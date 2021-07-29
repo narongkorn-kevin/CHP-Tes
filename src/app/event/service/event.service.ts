@@ -105,9 +105,9 @@ getById(eventId: number): Observable<BenefitResponse> {
     .get<any>(`${environment.API_URL}/api/event/${eventId}`, this.httpOptions)
     .pipe(catchError(this.handlerError));
 }
-update(benefitId: number,benefit: Benefit): Observable<Benefit> {
+update(eventId: number,benefit: Benefit): Observable<Event> {
   return this.http
-    .patch<Benefit>(`${environment.API_URL}/api/service/${benefitId}`, benefit, this.httpOptions)
+    .patch<Event>(`${environment.API_URL}/api/event/${eventId}`, benefit, this.httpOptions)
     .pipe(catchError(this.handlerError));
 }
 

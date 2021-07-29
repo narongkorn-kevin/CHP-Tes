@@ -44,9 +44,11 @@
                   <label for="validationCustomUsername">กลุ่มกิจกรรมที่ได้รับ</label>
                   <div class="input-group">
                       <mat-select class="form-control" placeholder="ทั้งหมด" (selectionChange)="onChangeType($event.value)" >
+                        <mat-option [value]="" >--Select--</mat-option>
                         <mat-option *ngFor="let item of ServiceData" [value]="item.id" >
                           {{item.name}}
                         </mat-option>
+                        
                       </mat-select>
 
                       <!-- <select class="form-control" placeholder="ทั้งหมด" (change)="onChangeType($event.target.value)" >
