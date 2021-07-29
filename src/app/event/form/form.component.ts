@@ -33,6 +33,7 @@ export class FormComponent implements AfterViewInit, OnInit, OnDestroy {
   isValidFormSubmitted = null;
   private subscription: Subscription = new Subscription();
   public ServiceGroupData: any = [];
+  public ServiceData: any = [];
   public SeqData: any = [];
 
   constructor(
@@ -111,12 +112,16 @@ export class FormComponent implements AfterViewInit, OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.GetServiceGroup();
+    this.GetService();
     this.GetSequence();
   }
 
-
-
+  GetService(): void {
+    this.eventSvc.get_service().subscribe((resp) => {
+      this.ServiceData = resp.data;
+      console.log('service',this.ServiceData);
+    });
+  }
 
   GetServiceGroup(): void {
     this.eventSvc.get_service_group().subscribe((resp) => {
