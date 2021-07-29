@@ -54,6 +54,7 @@ export class BenefitService {
   }
 
   getAll(dataTablesParameters: any): Observable<BenefitResponse> {
+    console.log('dataTablesParameters2',dataTablesParameters)
     return this.http
       .post<BenefitResponse>(`${environment.API_URL}/api/service_page`, dataTablesParameters, this.httpOptions)
       .pipe(
