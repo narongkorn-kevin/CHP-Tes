@@ -65,7 +65,7 @@ export class FormComponent implements OnInit {
    }
    benefit(): FormArray {
 
-    return this.benefitsForm.get('event') as FormArray
+    return this.benefitsForm.get('benefit') as FormArray
   }
   newBenefit(): FormGroup {
     return this.fb.group({

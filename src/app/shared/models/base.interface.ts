@@ -1320,4 +1320,27 @@ export interface OfficerResponse extends Officer {
   };
 }
 
+export interface Event {
+  id: number;
+  name: string;
+  create_by: string;
+  update_by: string;
+  created_at: string;
+  updated_at: string;
+  status: string;
+
+}
+
+export interface EventResponse extends Event {
+  code: number;
+  status: string;
+  message: string;
+  data: {
+    data: any[];
+    draw: number;
+    to: number;
+    total: number;
+  };
+}
+
 
