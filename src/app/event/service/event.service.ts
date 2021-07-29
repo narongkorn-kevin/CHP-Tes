@@ -9,13 +9,13 @@ import {
 import { Observable, throwError } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { environment } from '@env/environment';
-import { Benefit, BenefitResponse, Disease, DiseaseResponse,ServiceGroupResponse} from '@app/shared/models/base.interface';
+import { Benefit, BenefitResponse, Disease, DiseaseResponse,ServiceGroupResponse, EventResponse, Event} from '@app/shared/models/base.interface';
 import { catchError, map } from 'rxjs/operators';
 const user = JSON.parse(localStorage.getItem('user')) || null;
 @Injectable({
   providedIn: 'root'
 })
-export class BenefitService {
+export class EventService {
   constructor(private http: HttpClient) { }
   httpOptions = {
     headers: new HttpHeaders({ Authorization: `Bearer ${user.token}` })
@@ -53,12 +53,12 @@ export class BenefitService {
       .pipe(catchError(this.handlerError));
   }
 
-  getAll(dataTablesParameters: any): Observable<BenefitResponse> {
+  getAll(dataTablesParameters: any): Observable<EventResponse> {
     return this.http
-      .post<BenefitResponse>(`${environment.API_URL}/api/service_page`, dataTablesParameters, this.httpOptions)
+      .post<EventResponse>(`${environment.API_URL}/api/event_page`, dataTablesParameters, this.httpOptions)
       .pipe(
-        map((benefit: BenefitResponse) => {
-          return benefit;
+        map((event: EventResponse) => {
+          return event;
         }));
   }
 
@@ -82,15 +82,21 @@ export class BenefitService {
       .pipe(catchError(this.handlerError));
   }
 
+  getSequence(): Observable<ServiceGroupResponse> {
+    return this.http
+      .get<any>(`${environment.API_URL}/api/sequence`, this.httpOptions)
+      .pipe(catchError(this.handlerError));
+  }
+
   get_service(): Observable<ServiceGroupResponse> {
     return this.http
       .get<any>(`${environment.API_URL}/api/service`, this.httpOptions)
       .pipe(catchError(this.handlerError));
   }
 
-  new(benefit: FormData): Observable<Benefit> {
+  new(event: FormData): Observable<Event> {
     return this.http
-      .post<Benefit>(`${environment.API_URL}/api/service`, benefit, this.httpOptions)
+      .post<Event>(`${environment.API_URL}/api/event`, event, this.httpOptions)
       .pipe(catchError(this.handlerError));
 }
 
@@ -104,20 +110,5 @@ update(benefitId: number,benefit: Benefit): Observable<Benefit> {
     .patch<Benefit>(`${environment.API_URL}/api/service/${benefitId}`, benefit, this.httpOptions)
     .pipe(catchError(this.handlerError));
 }
-
-// getItem(ItemTypeID: String): Observable<ItemResponse> {
-//   return this.http
-//     .post<any>(`${environment.API_URL}/api/get_item`, { item_type_id: ItemTypeID }, this.httpOptions)
-//     .pipe(catchError(this.handlerError));
-// }
-
-get_service_group_update(benefitId: number): Observable<BenefitResponse> {
-  return this.http
-    .get<any>(`${environment.API_URL}/api/service/${benefitId}`, this.httpOptions)
-    .pipe(catchError(this.handlerError));
-}
-
-
-
 
 }

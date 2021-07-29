@@ -1227,6 +1227,12 @@ export interface DiseaseResponse extends Disease {
 export interface Benefit {
   id: number;
   name: string;
+  pregnant: number;
+  age: number;
+  sex: number;
+  disease_id: number;
+  service_group_id: number;
+  group_taget: string;
   create_by: string;
   update_by: string;
   created_at: string;
@@ -1303,6 +1309,29 @@ export interface Officer {
 }
 
 export interface OfficerResponse extends Officer {
+  code: number;
+  status: string;
+  message: string;
+  data: {
+    data: any[];
+    draw: number;
+    to: number;
+    total: number;
+  };
+}
+
+export interface Event {
+  id: number;
+  name: string;
+  create_by: string;
+  update_by: string;
+  created_at: string;
+  updated_at: string;
+  status: string;
+
+}
+
+export interface EventResponse extends Event {
   code: number;
   status: string;
   message: string;

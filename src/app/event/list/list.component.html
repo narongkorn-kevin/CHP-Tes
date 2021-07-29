@@ -1,0 +1,136 @@
+<div class="app-content main-content">
+    <div class="side-app">
+      <!--Page header-->
+      <div class="page-header">
+        <div class="page-leftheader">
+          <h4 class="page-title">จัดการสิทธิประโยชน์ส่งเสริมป้องกันโรค / กลุ่มบริการ</h4>
+        </div>
+        <div class="page-rightheader ml-auto d-lg-flex d-none">
+  
+        </div>
+      </div>
+      <!--End Page header-->
+  
+      <!-- Row -->
+      <div class="row">
+        <div class="col-12">
+          <!--div-->
+          <div class="card">
+            <div class="card-body">
+  
+              <!-- <div>
+                <h4 class="page-title">ข้อมูลการค้นหา</h4>
+              </div>
+              <div class="row justify-content-center">
+                <div class="col-md-2 mb-2">
+                  <label for="validationCustomUsername">กลุ่มบริการ</label>
+                  <div class="input-group">
+                      <mat-select class="form-control" placeholder="ทั้งหมด">
+                        <mat-option *ngFor="let item of ServiceGroupData" [value]="item.id" >
+                          {{item.name}}
+                        </mat-option>
+                      </mat-select>
+                  </div>
+                </div>
+                <div class="col-md-2 mb-2">
+                  <label for="validationCustomUsername">บริการ</label>
+                  <div class="input-group">
+                    <mat-select class="form-control" placeholder="ทั้งหมด">
+                      <mat-option *ngFor="let item of ServiceData" [value]="item.id">
+                        {{item.name}}
+                      </mat-option>
+                    </mat-select>
+                  </div>
+                </div>
+                <div class="col-md-2 mb-2">
+                  <label for="validationCustomUsername">ช่วงอายุ</label>
+                  <div class="input-group">
+                    <mat-select class="form-control" placeholder="ทั้งหมด">
+                      <mat-option value="1">
+                          แรกเกิด - 20 ปี
+                      </mat-option>
+                      <mat-option value="2">
+                          20 - 60 ปี
+                      </mat-option>
+                  </mat-select>
+                  </div>
+                </div>
+                <div class="col-md-2 mb-2">
+                  <div class="input-group">
+                    <button class="btn btn-primary" style="margin-top: 2rem !important;" id="btnSearch"
+                      type="button">ค้นหา</button>
+                  </div>
+                </div>
+              </div> -->
+              <br />
+              <div class="card">
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col mb-4">
+                      <div class="card-title">
+                        <h4 class="page-title">รายการทั่วไป</h4>
+                      </div>
+                    </div>
+                    <div class="col col-auto mb-4">
+                      <div class="form-group w-100">
+                        <a routerLink="/event/form" class="btn btn-success" style="width: 150px;"><i
+                            class="fe fe-plus"></i> เพิ่ม</a>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="">
+                    <div class="table-responsive">
+                      <table datatable [dtOptions]="dtOptions" id="example"
+                        class="table table-striped card-table table-vcenter text-nowrap mb-0">
+                        <thead>
+                          <tr>
+                            <th class="border-bottom-0">ลำดับ.</th>
+                            <th class="border-bottom-0">กิจกรรมหลัก</th>
+                            <th class="border-bottom-0">กิจกรรมสำคัญที่จะได้รับ</th>
+                            <th class="border-bottom-0">ความถี่</th>
+                            <th class="border-bottom-0">เบิกได้/ปี</th>
+                            <th class="border-bottom-0">จัดการ</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr *ngFor="let item of dataRow; let i = index">
+                            <td>{{ i + 1 }}</td>
+                            <td>{{ item.service_id }}</td>
+                            <td>{{ item.name }}</td>
+                            <td>{{ item.seq }}</td>
+                            <td>{{ item.use_per_year }}</td>
+                            <!-- <td>{{ item.update_by }}</td>
+                            <td>{{ item.created_at }}</td>
+                            <td>{{ item.updated_at }}</td> -->
+                            <td>
+                              <div class="btn-list">
+                                <button type="button" (click)="onEdit(item)" class="btn btn-icon btn-success">
+                                  <i class="fa fa-edit"></i>
+                                </button>
+                                <button type="button" (click)="onDelete(item.id)" class="btn btn-icon btn-danger">
+                                  <i class="fa fa-trash"></i>
+  
+                                </button>
+                              </div>
+                            </td>
+                          </tr>
+                        </tbody>
+                        <tbody *ngIf="dataRow?.length == 0">
+                          <tr>
+                            <td colspan="7" class="no-data-available">No data!</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!--/div-->
+        </div>
+      </div>
+      <!-- /Row -->
+    </div>
+    <!-- end app-content-->
+  

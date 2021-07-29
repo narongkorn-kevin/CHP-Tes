@@ -32,7 +32,6 @@ export class FormComponent implements OnInit {
   benefits1Form : FormGroup;
   private subscription: Subscription = new Subscription();
 
-
   constructor(
     private benefitSvc: BenefitService,
     private router: Router,
@@ -65,7 +64,7 @@ export class FormComponent implements OnInit {
    }
    benefit(): FormArray {
 
-    return this.benefitsForm.get('event') as FormArray
+    return this.benefitsForm.get('benefit') as FormArray
   }
   newBenefit(): FormGroup {
     return this.fb.group({
