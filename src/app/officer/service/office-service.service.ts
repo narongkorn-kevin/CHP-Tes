@@ -60,9 +60,9 @@ export class OfficeServiceService {
       .pipe(catchError(this.handlerError));
   }
 
-  Update(officerId: number, officer: Officer): Observable<Officer> {
+  Update(officerId: number, officer: OfficerResponse): Observable<OfficerResponse> {
     return this.http
-      .patch<Officer>(`${environment.API_URL}/api/user/${officerId}`, officer, this.httpOptions)
+      .patch<OfficerResponse>(`${environment.API_URL}/api/user/${officerId}`, officer, this.httpOptions)
       .pipe(catchError(this.handlerError));
   }
 

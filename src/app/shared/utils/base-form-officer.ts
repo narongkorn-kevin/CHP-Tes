@@ -49,6 +49,7 @@ export class BaseFormOfficer {
     postal_code: ['',],
     phone: ['',],
     mobile_phone: ['',],
+    status: ['',],
     role: ['',],
   })
 

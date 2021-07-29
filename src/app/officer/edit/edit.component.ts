@@ -10,6 +10,7 @@ import {
 import { ActivatedRoute, Router } from '@angular/router';
 import { BaseFormOfficer } from '@shared/utils/base-form-officer';
 import { Subscription } from 'rxjs';
+import Swal from 'sweetalert2';
 enum Action {
   EDIT = 'edit',
   NEW = 'new',
@@ -53,7 +54,7 @@ export class EditComponent implements OnInit {
   ngOnInit(): void {
     this.officerForm.baseForm.get('role').setValidators(null);
     this.officerForm.baseForm.get('role').updateValueAndValidity();
-
+    this.officerForm.baseForm.value.status = 'Yes';
     setTimeout(() => {
       this.onEditProvince(this.officerForm.baseForm.value.province);
     }, 1000);
@@ -65,12 +66,24 @@ export class EditComponent implements OnInit {
     }
     const formValue = this.officerForm.baseForm.value;
     console.log(formValue);
-    // if (this.actionTODO === Action.EDIT)
-    // {
-    //   this.officeServ.Update(formValue.id, formValue).subscribe((res) => {
-    //     this.router.navigate(['officer/list']);
-    //   });
-    // }
+    if (this.actionTODO === Action.EDIT)
+    {
+      this.officerServ.Update(formValue.id, formValue).subscribe((res) => {
+        this.officerForm.baseForm.value.status = '';
+          Swal.fire({
+            title: 'Success!',
+            text: "ดำเนินการเสร็จสิ้น!",
+            icon: 'success',
+            showCancelButton: false,
+            confirmButtonColor: '#28a745',
+            confirmButtonText: 'ตกลง',
+          }).then((result) => {
+            if (result.isConfirmed) {
+              this.router.navigate(['officer/list']);
+            }
+          })       
+      });
+    }
   }
   
   getSubDistrict(id): void {
