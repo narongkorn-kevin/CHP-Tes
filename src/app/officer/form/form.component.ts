@@ -75,7 +75,7 @@ export class FormComponent implements OnInit {
     private fb: FormBuilder
   ) {
 
-    this.officerFormData = this.fb.group({
+    this.officerForm.baseForm = this.fb.group({
       //id: '',
       id_card: '',
       password: '',
@@ -109,27 +109,6 @@ export class FormComponent implements OnInit {
     this.subscription.unsubscribe();
     // this.addOfficer();
     // this.dateOfficer();
-  }
-
-  officer(): FormArray {
-    return this.officerData.get('event') as FormArray
-  }
-
-  newOfficerData(): FormGroup {
-    return this.fb.group({
-      name: '',
-      seq: '',
-      user_per_year: '',
-      remark: '',
-    })
-  }
-
-  addOfficer(): void {
-    this.officer().push(this.newOfficerData());
-  }
-
-  dateOfficer(): void {
-    this.officer().push(this.newOfficerData());
   }
 
   onSaveOfficer(): void {
@@ -194,7 +173,7 @@ export class FormComponent implements OnInit {
   getProvince(): void {
     this.officerServ.getProvince().subscribe(resp => {
       this.provinceData = resp.data;
-      console.log(this.provinceData);
+      //console.log(this.provinceData);
     });
   }
 

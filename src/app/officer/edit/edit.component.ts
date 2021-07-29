@@ -43,7 +43,7 @@ export class EditComponent implements OnInit {
     this.getProvince();
     setTimeout(() => {
       this.onEditProvince(this.officerForm.baseForm.value.province);
-    }, 1000);
+    }, 1500);
   }
 
   ngOnDestroy(): void {
@@ -65,11 +65,11 @@ export class EditComponent implements OnInit {
       return;
     }
     const formValue = this.officerForm.baseForm.value;
-    console.log(formValue);
+    //console.log(formValue);
     if (this.actionTODO === Action.EDIT)
     {
       this.officerServ.Update(formValue.id, formValue).subscribe((res) => {
-        this.officerForm.baseForm.value.status = '';
+        this.officerForm.baseForm.value.status = 'Yes';
           Swal.fire({
             title: 'Success!',
             text: "ดำเนินการเสร็จสิ้น!",
@@ -92,7 +92,7 @@ export class EditComponent implements OnInit {
     }
     this.officerServ.getSubDistrict(postData).subscribe(resp => {
       this.subdistrictData = resp.data;
-      console.log(this.subdistrictData);
+      //console.log(this.subdistrictData);
     });
   }
 
@@ -102,14 +102,14 @@ export class EditComponent implements OnInit {
     }
     this.officerServ.getDistrict(postData).subscribe(resp => {
       this.districtData = resp.data;
-      console.log(this.districtData);
+      //console.log(this.districtData);
     });
   }
 
   getProvince(): void {
     this.officerServ.getProvince().subscribe(resp => {
       this.provinceData = resp.data;
-      console.log(this.provinceData);
+      //console.log(this.provinceData);
     });
   }
 
