@@ -69,38 +69,39 @@ export class ListComponent implements AfterViewInit, OnInit, OnDestroy {
 
   }
 
-  loadTable(): void {
+  // loadTable(): void {
 
 
-    const that = this;
+  //   const that = this;
 
-    this.dtOptions = {
-      pagingType: 'full_numbers',
-      pageLength: 10,
-      serverSide: true,
-      processing: true,
-      ajax: (dataTablesParameters: any, callback) => {
-        that.benefitSvc.getAll(dataTablesParameters).subscribe(resp => {
-            that.dataRow = resp.data.data;
-            console.log('datatable',that.dataRow);
-            callback({
-              recordsTotal: resp.data.total,
-              recordsFiltered: resp.data.total,
-              data: []
-            });
-          });
-      },
-      columns: [
-        { data: 'No' },
-        { data: 'service_id' },
-        { data: 'name' },
-        { data: 'seq' },
-        { data: 'use_per_year' },
-        { data: 'action', orderable: false }
-      ]
-    };
+  //   this.dtOptions = {
+  //     pagingType: 'full_numbers',
+  //     pageLength: 10,
+  //     serverSide: true,
+  //     processing: true,
+  //     ajax: (dataTablesParameters: any, callback) => {
+  //       dataTablesParameters['service_id']= null;
+  //       that.benefitSvc.getAll(dataTablesParameters).subscribe(resp => {
+  //           that.dataRow = resp.data.data;
+  //           console.log('datatable',that.dataRow);
+  //           callback({
+  //             recordsTotal: resp.data.total,
+  //             recordsFiltered: resp.data.total,
+  //             data: []
+  //           });
+  //         });
+  //     },
+  //     columns: [
+  //       { data: 'No' },
+  //       { data: 'service_id' },
+  //       { data: 'name' },
+  //       { data: 'seq' },
+  //       { data: 'use_per_year' },
+  //       { data: 'action', orderable: false }
+  //     ]
+  //   };
 
-  }
+  // }
 
   onEdit(data): void {
     // console.log(data);
@@ -156,5 +157,100 @@ export class ListComponent implements AfterViewInit, OnInit, OnDestroy {
     });
   }
 
+  onChangeType(event: any): void {
+    // this.loadTable();
+    var data = {
+      draw: 1,
+      columns: [
+        {
+          data: 'id',
+          name: '',
+          searchable: true,
+          orderable: true,
+          search: { value: '', regex: false },
+        },
+        {
+          data: 'service_id',
+          name: '',
+          searchable: true,
+          orderable: true,
+          search: { value: '', regex: false },
+        },
+        {
+          data: 'name',
+          name: '',
+          searchable: true,
+          orderable: true,
+          search: { value: '', regex: false },
+        },
+        {
+          data: 'seq',
+          name: '',
+          searchable: true,
+          orderable: true,
+          search: { value: '', regex: false },
+        },
+        {
+          data: 'use_per_year',
+          name: '',
+          searchable: true,
+          orderable: true,
+          search: { value: '', regex: false },
+        },
+        {
+          data: 'action',
+          name: '',
+          searchable: true,
+          orderable: false,
+          search: { value: '', regex: false },
+        },
+      ],
+      order: [{ column: 0, dir: 'asc' }],
+      start: 0,
+      length: 10,
+      search: { value: '', regex: false },
+    };
+    // this.dataRow = this.dataRowFilter.filter((item) => {
+    //   if (item.warehouse_id == event) {
+    //      return item;
+    //   }
+    // });
+    data['service_id'] = event;
+    this.benefitSvc.getAll(data).subscribe((resp) => {
+    this.dataRow = resp.data.data;
+    console.log('555',this.dataRow)
+    });
+    
+  }
+
+  loadTable(): void {
+    const that = this;
+    this.dtOptions = {
+      pagingType: 'full_numbers',
+      pageLength: 10,
+      serverSide: true,
+      processing: true,
+      ajax: (dataTablesParameters: any, callback) => {
+        dataTablesParameters['service_id']= null;
+        that.benefitSvc.getAll(dataTablesParameters).subscribe((resp) => {
+          that.dataRow = resp.data.data;
+          // that.dataRowFilter = that.dataRow;
+          callback({
+            recordsTotal: resp.data.total,
+            recordsFiltered: resp.data.total,
+            data: [],
+          });
+        });
+      },
+      columns: [
+        { data: 'id' },
+        { data: 'service_id' },
+        { data: 'name' },
+        { data: 'seq' },
+        { data: 'use_per_year' },
+        { data: 'action', orderable: false }
+      ],
+    };
+  }
 
 }
