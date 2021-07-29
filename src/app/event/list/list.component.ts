@@ -1,5 +1,5 @@
 import { EventService } from './../service/event.service';
-import { BenefitResponse } from './../../shared/models/base.interface';
+import { EventResponse } from './../../shared/models/base.interface';
 
 import { takeUntil } from 'rxjs/operators';
 import {
@@ -49,7 +49,7 @@ export class ListComponent implements AfterViewInit, OnInit, OnDestroy {
 
   @ViewChild(MatSort) sort: MatSort;
   constructor(private router: Router ,
-    private benefitSvc: EventService,
+    private eventSvc: EventService,
     private elementRef: ElementRef,
     private renderer: Renderer2) { }
 
@@ -69,40 +69,7 @@ export class ListComponent implements AfterViewInit, OnInit, OnDestroy {
 
   }
 
-  // loadTable(): void {
-
-
-  //   const that = this;
-
-  //   this.dtOptions = {
-  //     pagingType: 'full_numbers',
-  //     pageLength: 10,
-  //     serverSide: true,
-  //     processing: true,
-  //     ajax: (dataTablesParameters: any, callback) => {
-  //       dataTablesParameters['service_id']= null;
-  //       that.benefitSvc.getAll(dataTablesParameters).subscribe(resp => {
-  //           that.dataRow = resp.data.data;
-  //           console.log('datatable',that.dataRow);
-  //           callback({
-  //             recordsTotal: resp.data.total,
-  //             recordsFiltered: resp.data.total,
-  //             data: []
-  //           });
-  //         });
-  //     },
-  //     columns: [
-  //       { data: 'No' },
-  //       { data: 'service_id' },
-  //       { data: 'name' },
-  //       { data: 'seq' },
-  //       { data: 'use_per_year' },
-  //       { data: 'action', orderable: false }
-  //     ]
-  //   };
-
-  // }
-
+ 
   onEdit(data): void {
     // console.log(data);
     // // return false
@@ -119,15 +86,15 @@ export class ListComponent implements AfterViewInit, OnInit, OnDestroy {
     //   }
     // };
 
-    this.router.navigate(['benefit/edit',data.id]);
+    this.router.navigate(['event/edit',data.id]);
   }
 
-  onDelete(benefitId: number): void {
+  onDelete(eventId: number): void {
     if (window.confirm('Do you really want remove this data')) {
-      this.benefitSvc
-        .delete(benefitId)
+      this.eventSvc
+        .delete(eventId)
         .pipe(takeUntil(this.destroy$))
-        .subscribe((res: BenefitResponse) => {
+        .subscribe((res: EventResponse) => {
           if (res.code == 201){
             this.rerender();
           }
@@ -145,13 +112,13 @@ export class ListComponent implements AfterViewInit, OnInit, OnDestroy {
 
 
   GetServiceGroup(): void {
-    this.benefitSvc.get_service_group().subscribe((resp) => {
+    this.eventSvc.get_service_group().subscribe((resp) => {
       this.ServiceGroupData = resp.data;
       console.log(this.ServiceGroupData);
     });
   }
   GetService(): void {
-    this.benefitSvc.get_service().subscribe((resp) => {
+    this.eventSvc.get_service().subscribe((resp) => {
       this.ServiceData = resp.data;
       console.log(this.ServiceData);
     });
@@ -216,7 +183,7 @@ export class ListComponent implements AfterViewInit, OnInit, OnDestroy {
     //   }
     // });
     data['service_id'] = event;
-    this.benefitSvc.getAll(data).subscribe((resp) => {
+    this.eventSvc.getAll(data).subscribe((resp) => {
     this.dataRow = resp.data.data;
     console.log('555',this.dataRow)
     });
@@ -232,7 +199,7 @@ export class ListComponent implements AfterViewInit, OnInit, OnDestroy {
       processing: true,
       ajax: (dataTablesParameters: any, callback) => {
         dataTablesParameters['service_id']= null;
-        that.benefitSvc.getAll(dataTablesParameters).subscribe((resp) => {
+        that.eventSvc.getAll(dataTablesParameters).subscribe((resp) => {
           that.dataRow = resp.data.data;
           // that.dataRowFilter = that.dataRow;
           callback({
@@ -244,7 +211,6 @@ export class ListComponent implements AfterViewInit, OnInit, OnDestroy {
       },
       columns: [
         { data: 'id' },
-        { data: 'service_id' },
         { data: 'name' },
         { data: 'seq' },
         { data: 'use_per_year' },

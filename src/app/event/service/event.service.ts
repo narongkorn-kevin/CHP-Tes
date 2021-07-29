@@ -63,9 +63,9 @@ export class EventService {
   }
 
 
-  delete(benefitId: number): Observable<{}> {
+  delete(eventId: number): Observable<{}> {
     return this.http
-      .delete<Benefit>(`${environment.API_URL}/api/service/${benefitId}`, this.httpOptions)
+      .delete<Benefit>(`${environment.API_URL}/api/event/${eventId}`, this.httpOptions)
       .pipe(
         map((benefit: BenefitResponse) => {
           return benefit;
@@ -100,9 +100,9 @@ export class EventService {
       .pipe(catchError(this.handlerError));
 }
 
-getById(benefitId: number): Observable<BenefitResponse> {
+getById(eventId: number): Observable<BenefitResponse> {
   return this.http
-    .get<any>(`${environment.API_URL}/api/service/${benefitId}`, this.httpOptions)
+    .get<any>(`${environment.API_URL}/api/event/${eventId}`, this.httpOptions)
     .pipe(catchError(this.handlerError));
 }
 update(benefitId: number,benefit: Benefit): Observable<Benefit> {

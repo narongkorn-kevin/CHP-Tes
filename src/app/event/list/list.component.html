@@ -91,7 +91,6 @@
                         <thead>
                           <tr>
                             <th class="border-bottom-0">ลำดับ.</th>
-                            <th class="border-bottom-0">กิจกรรมหลัก</th>
                             <th class="border-bottom-0">กิจกรรมสำคัญที่จะได้รับ</th>
                             <th class="border-bottom-0">ความถี่</th>
                             <th class="border-bottom-0">เบิกได้/ปี</th>
@@ -101,13 +100,9 @@
                         <tbody>
                           <tr *ngFor="let item of dataRow; let i = index">
                             <td>{{ i + 1 }}</td>
-                            <td>{{ item.service_id }}</td>
                             <td>{{ item.name }}</td>
                             <td>{{ item.seq }}</td>
                             <td>{{ item.use_per_year }}</td>
-                            <!-- <td>{{ item.update_by }}</td>
-                            <td>{{ item.created_at }}</td>
-                            <td>{{ item.updated_at }}</td> -->
                             <td>
                               <div class="btn-list">
                                 <button type="button" (click)="onEdit(item)" class="btn btn-icon btn-success">
