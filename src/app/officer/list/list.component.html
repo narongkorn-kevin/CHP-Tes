@@ -1,5 +1,6 @@
 <style>
-    thead, th {
+    thead,
+    th {
         border: 1px solid #dddddd;
         color: #fff;
         font-size: 18px;
@@ -8,7 +9,7 @@
     }
 
     td {
-        border: 1px solid #dddddd; 
+        border: 1px solid #dddddd;
     }
 
     tr {
@@ -17,18 +18,33 @@
 </style>
 <div class="app-content page-body">
     <div class="container-fluid">
+
         <!--Page header-->
         <div class="page-header">
             <div class="page-leftheader">
                 <h4 class="page-title">การจัดการผู้ใช้งาน</h4>
             </div>
+            <div class="page-rightheader ml-auto d-lg-flex d-none">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item">
+                        <a href="#" class="d-flex"><svg class="svg-icon" xmlns="http://www.w3.org/2000/svg" height="24"
+                                viewBox="0 0 24 24" width="24">
+                                <path d="M0 0h24v24H0V0z" fill="none" />
+                                <path d="M12 3L2 12h3v8h6v-6h2v6h6v-8h3L12 3zm5 15h-2v-6H9v6H7v-7.81l5-4.5 5 4.5V18z" />
+                                <path d="M7 10.19V18h2v-6h6v6h2v-7.81l-5-4.5z" opacity=".3" />
+                            </svg><span class="breadcrumb-icon"> หน้าหลัก </span></a>
+                    </li>
+                    <li class="breadcrumb-item active" aria-current="page">การจัดการผู้ใช้งาน</li>
+                </ol>
+            </div>
         </div>
         <!--End Page header-->
+
         <!--Row-->
         <div class="card">
             <div class="card-body">
 
-                <div class="row">
+                <!-- <div class="row">
                     <div class="col-lg-12 col-md-12">
                         <h4 class="card-title">รายการการค้นหา</h4>
                         <form [formGroup]="officerForm.baseFormSearch">
@@ -62,7 +78,7 @@
                         </form>
                     </div>
                 </div>
-                <br />
+                <br /> -->
 
                 <!-- Row -->
                 <div class="row">
@@ -76,29 +92,30 @@
                                     </div>
                                     <div class="col col-auto mb-4">
                                         <div class="form-group w-100">
-                                            <a routerLink="/officer/form" class="btn btn-success" style="width: 150px;"><i
-                                                    class="fe fe-plus"></i>เพิ่ม</a>
-                                                    
+                                            <a routerLink="/officer/form" class="btn btn-success"
+                                                style="width: 150px;"><i class="fe fe-plus"></i>เพิ่ม</a>
+
                                         </div>
                                     </div>
                                 </div>
                                 <div class="">
                                     <div class="table-responsive">
                                         <!-- datatable [dtOptions]="dtOptions"-->
-                                         <table datatable [dtOptions]="dtOptions" class="table table-striped card-table table-vcenter text-nowrap mb-0">
+                                        <table datatable [dtOptions]="dtOptions"
+                                            class="table table-striped card-table table-vcenter text-nowrap mb-0">
                                             <thead>
-                                                <tr >
+                                                <tr>
                                                     <th class="border-bottom-0">ลำดับ</th>
                                                     <th class="border-bottom-0">ชื่อ</th>
                                                     <th class="border-bottom-o">นามสกุล</th>
-                                                    <th class="border-bottom-0" >ตำแหน่ง</th>
+                                                    <th class="border-bottom-0">ตำแหน่ง</th>
                                                     <th class="border-bottom-0">เบอร์โทรศัพท์</th>
-                                                    <th class="border-bottom-0" >อีเมล</th>
-                                                    <th class="border-bottom-0" >แก้ไข</th>
-                                                    <th class="border-bottom-0" >ลบ</th>
+                                                    <th class="border-bottom-0">อีเมล</th>
+                                                    <th class="border-bottom-0">แก้ไข</th>
+                                                    <th class="border-bottom-0">ลบ</th>
                                                 </tr>
                                             </thead>
-                                            <tbody  *ngIf="dataRow?.length != 0">
+                                            <tbody *ngIf="dataRow?.length != 0">
                                                 <tr *ngFor="let item of dataRow">
                                                     <td style="text-align: center;">{{ item.id }}</td>
                                                     <td>{{ item.fname_th }}</td>
@@ -106,16 +123,17 @@
                                                     <td>{{ item.position }}</td>
                                                     <td>{{ item.email }}</td>
                                                     <td>{{ item.phone }}</td>
-                                                    <td style="text-align: center;"> 
+                                                    <td style="text-align: center;">
                                                         <div class="btn-list">
-                                                            <button type="button" class="btn btn-icon btn-warning">
+                                                            <button type="button" class="btn btn-icon btn-warning"
+                                                                (click)="onEdit(item)">
                                                                 <i class="fa fa-edit"></i>
                                                             </button>
                                                         </div>
                                                     </td>
                                                     <td style="text-align: center;">
                                                         <div class="btn-list">
-                                                            <button type="button"
+                                                            <button type="button" (click)="onDelete(item.id)"
                                                                 class="btn btn-icon btn-danger">
                                                                 <i class="fa fa-trash"></i>
                                                             </button>

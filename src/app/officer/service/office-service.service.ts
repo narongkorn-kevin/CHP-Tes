@@ -60,6 +60,12 @@ export class OfficeServiceService {
       .pipe(catchError(this.handlerError));
   }
 
+  Update(officerId: number, officer: Officer): Observable<Officer> {
+    return this.http
+      .patch<Officer>(`${environment.API_URL}/api/user/${officerId}`, officer, this.httpOptions)
+      .pipe(catchError(this.handlerError));
+  }
+
   getDistrict(dataTablesParameters: any): Observable<OfficerResponse> {
     return this.http
       .post<OfficerResponse>(`${environment.API_URL}/api/get_district`, dataTablesParameters, this.httpOptions)

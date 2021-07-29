@@ -48,7 +48,7 @@ export class ListComponent implements OnInit {
     private elementRef: ElementRef,
     private renderer: Renderer2,
     private http: HttpClient,
-    public officerForm: BaseFormOfficer
+    //public officerForm: BaseFormOfficer
   ) {}
 
 
@@ -105,5 +105,67 @@ export class ListComponent implements OnInit {
     //   });
     // }
   }
+
+  onEdit(data): void {
+    console.log(data);
+    // return false
+    const navigationExtras: NavigationExtras = {
+      state: {
+        item: {
+          id: data.id,
+          //name: data.name,
+          id_card: data.id_card,
+          //password:  data.password,
+          prefix_th:  data.prefix_th,
+          prefix_en:  data.prefix_en,
+          fname_th:  data.fname_th,
+          lname_th:  data.lname_th,
+          fname_en:  data.fname_en,
+          lname_en: data.lname_en,
+          position: data.position,
+          email: data.email,
+          village:  data.village,
+          village_no: data.village_no,
+          alley:  data.alley,
+          road: data.road,
+          sub_district:  data.sub_district,
+          district:  data.district,
+          province:  data.province,
+          postal_code:  data.postal_code,
+          phone:  data.phone,
+          mobile_phone: data.mobile_phone,
+          status: data.status,
+          // name_th: data.name_th,
+          // name_en: data.name_en,
+          role: '',
+        }
+      }
+    };
+
+    this.router.navigate(['officer/edit'], navigationExtras);
+  }
+
+  onDelete(offierId : number): void {
+    console.log(offierId);
+    // if (window.confirm('Do you really want remove this data')) {
+    //   this.positionSvc
+    //     .delete(positionId)
+    //     .pipe(takeUntil(this.destroy$))
+    //     .subscribe((res: PositionResponse) => {
+    //       if (res.code == 201){
+    //         this.rerender();
+    //       }
+    //       // this.branchSvc.getAll().subscribe((branch) => {
+    //         // this.dataRow = branch.data;
+    //       // });
+    //     });
+    // }
+  }
+  rerender(): void {
+    this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
+      dtInstance.ajax.reload();
+    });
+  }
+
 
 }
