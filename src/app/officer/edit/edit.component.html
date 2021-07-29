@@ -3,7 +3,25 @@
         <!--Page header-->
         <div class="page-header">
             <div class="page-leftheader">
-                <h4 class="page-title">การจัดการผู้ใช้งาน / แก้ไขข้อมูลเจ้าหน้าที่</h4>
+                <h4 class="page-title">แก้ไขข้อมูลเจ้าหน้าที่</h4>
+            </div>
+            <div class="page-rightheader ml-auto d-lg-flex d-none">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item">
+                        <a href="#" class="d-flex"><svg class="svg-icon" xmlns="http://www.w3.org/2000/svg" height="24"
+                                viewBox="0 0 24 24" width="24">
+                                <path d="M0 0h24v24H0V0z" fill="none" />
+                                <path d="M12 3L2 12h3v8h6v-6h2v6h6v-8h3L12 3zm5 15h-2v-6H9v6H7v-7.81l5-4.5 5 4.5V18z" />
+                                <path d="M7 10.19V18h2v-6h6v6h2v-7.81l-5-4.5z" opacity=".3" />
+                            </svg><span class="breadcrumb-icon"> หน้าหลัก </span></a>
+                    </li>
+                    <li class="breadcrumb-item">
+                        <a routerLink="/officer/list">การจัดการผู้ใช้งาน</a>
+                    </li>
+                    <li class="breadcrumb-item active" aria-current="page">
+                        แก้ไขข้อมูลเจ้าหน้าที่
+                    </li>
+                </ol>
             </div>
         </div>
         <!--End Page header-->
@@ -12,34 +30,38 @@
             <div class="col-lg-12 col-md-12">
                 <div class="card">
                     <div class="card-header">
-                        <h3 class="card-title">สร้างข้อมูลเจ้าหน้าที่</h3>
+                        <h3 class="card-title">ข้อมูลเจ้าหน้าที่</h3>
                     </div>
                     <div class="card-body">
-                        <form >
-                           <div class="row justify-content-center">
+
+                        <form [formGroup]="officerForm.baseForm" (ngSubmit)="onUpdate()">
+                            <div class="row justify-content-center">
                                 <div class="col-md-3 mb-2">
                                     <label>คำนำหน้า</label>
                                     <div class="input-group">
-                                        <div class="input-group" formControlName="prefix">
-                                            <select class="form-control">
-                                                <option selected>เลือก</option>
-                                                <option value="1">1</option>
-                                                <option value="2">2</option>
-                                                <option value="3">3</option>
+                                        <div class="input-group">
+                                            <select class="form-control" formControlName="prefix_th">
+                                                <option value="" selected disabled>เลือกคำนำหน้า (TH)</option>
+                                                <option value="นาย">นาย</option>
+                                                <option value="นาง">นาง</option>
+                                                <option value="นางสาว">นางสาว</option>
                                             </select>
                                         </div>
                                     </div>
                                 </div>
+
                                 <div class="col-md-3 mb-2">
                                     <label>ชื่อ (TH)</label>
-                                    <div class="input-group" >
-                                        <input type="text" class="form-control" formControlName="firstnameTh" placeholder="ชื่อ (TH)">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" formControlName="fname_th"
+                                            placeholder="ชื่อ (TH)">
                                     </div>
                                 </div>
                                 <div class="col-md-3 mb-2">
                                     <label>นามสกุล (TH)</label>
-                                    <div class="input-group" >
-                                        <input type="text" class="form-control" formControlName="lastnameTh" placeholder="นามสกุล (TH)">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" formControlName="lname_th"
+                                            placeholder="นามสกุล (TH)">
                                     </div>
                                 </div>
                             </div>
@@ -47,20 +69,27 @@
                             <div class="row justify-content-center">
                                 <div class="col-md-3 mb-2">
                                     <label>Title</label>
-                                    <div class="input-group" >
-                                        <input type="text" class="form-control" formControlName="title" placeholder="Title">
+                                    <div class="input-group">
+                                        <select class="form-control" formControlName="prefix_en">
+                                            <option value="" selected disabled>เลือกคำนำหน้า (EN)</option>
+                                            <option value="Mr.">Mr.</option>
+                                            <option value="Mrs.">Mrs.</option>
+                                            <option value="Ms.">Ms.</option>
+                                        </select>
                                     </div>
                                 </div>
                                 <div class="col-md-3 mb-2">
                                     <label>ชื่อ (EN)</label>
-                                    <div class="input-group" >
-                                        <input type="text" class="form-control" formControlName="firstnameEn" placeholder="ชื่อ (EN)">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" formControlName="fname_en"
+                                            placeholder="ชื่อ (EN)">
                                     </div>
                                 </div>
                                 <div class="col-md-3 mb-2">
                                     <label>นามสกุล (EN)</label>
-                                    <div class="input-group" >
-                                        <input type="text" class="form-control" formControlName="lastnameEn" placeholder="นามสกุล (EN)">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" formControlName="lname_en"
+                                            placeholder="นามสกุล (EN)">
                                     </div>
                                 </div>
                             </div>
@@ -68,25 +97,23 @@
                             <div class="row justify-content-center">
                                 <div class="col-md-3 mb-2">
                                     <label>เลขบัตรประชาชน</label>
-                                    <div class="input-group" >
-                                        <input type="text" class="form-control" formControlName="idCard" placeholder="เลขบัตรประชาชน">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" formControlName="id_card"
+                                            placeholder="เลขบัตรประชาชน" maxlength="13">
                                     </div>
                                 </div>
                                 <div class="col-md-3 mb-2">
                                     <label>ตำแหน่ง</label>
                                     <div class="input-group">
-                                        <select class="form-control" formControlName="position">
-                                            <option selected>เลือก</option>
-                                            <option value="1">1</option>
-                                            <option value="2">2</option>
-                                            <option value="3">3</option>
-                                        </select>
+                                        <input type="text" class="form-control" formControlName="position"
+                                            placeholder="ตำแหน่ง">
                                     </div>
                                 </div>
                                 <div class="col-md-3 mb-2">
                                     <label>อีเมล</label>
-                                    <div class="input-group" >
-                                        <input type="text" class="form-control" formControlName="email" placeholder="อีเมล">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" formControlName="email"
+                                            placeholder="อีเมล">
                                     </div>
                                 </div>
                             </div>
@@ -94,20 +121,23 @@
                             <div class="row justify-content-center">
                                 <div class="col-md-3 mb-2">
                                     <label>เลขที่</label>
-                                    <div class="input-group" >
-                                        <input type="text" class="form-control" formControlName="idNo" placeholder="บ้านเลขที่">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" formControlName="village"
+                                            placeholder="บ้านเลขที่">
                                     </div>
                                 </div>
                                 <div class="col-md-3 mb-2">
                                     <label>หมู่ที่</label>
-                                    <div class="input-group" >
-                                        <input type="text" class="form-control" formControlName="mooNo" placeholder="หมู่ที่">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" formControlName="village_no"
+                                            placeholder="หมู่ที่">
                                     </div>
                                 </div>
                                 <div class="col-md-3 mb-2">
                                     <label>ซอย</label>
-                                    <div class="input-group" >
-                                        <input type="text" class="form-control" formControlName="soi" placeholder="ซอย">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" formControlName="alley"
+                                            placeholder="ซอย">
                                     </div>
                                 </div>
                             </div>
@@ -115,20 +145,39 @@
                             <div class="row justify-content-center">
                                 <div class="col-md-3 mb-2">
                                     <label>ถนน</label>
-                                    <div class="input-group" >
-                                        <input type="text" class="form-control" formControlName="road" placeholder="ถนน">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" formControlName="road"
+                                            placeholder="ถนน">
                                     </div>
                                 </div>
                                 <div class="col-md-3 mb-2">
                                     <label>จังหวัด</label>
-                                    <div class="input-group" >
-                                        <input type="text" class="form-control" formControlName="provice" placeholder="จังหวัด">
+                                    <div class="input-group">
+                                        <!-- <select class="form-control" formControlName="province" (change)='changProvince($event)'>
+                                        <option value="" selected>กรุณาเลือกจังหวัด</option>
+                                        <option *ngFor="let item of provinceData" [value]="item.name_th">
+                                            {{item.name_th}}
+                                        </option>
+                                         </select> -->
+                                        <input list="pcode" type="text" class="form-control" formControlName="province"
+                                            (change)='changProvince($event)' placeholder="จังหวัด"
+                                            title="กรุณาเลือกจังหวัด">
+                                        <datalist id="pcode">
+                                            <option *ngFor="let item of provinceData" [value]="item.name_th">
+                                                {{item.name_th}}</option>
+                                        </datalist>
                                     </div>
                                 </div>
                                 <div class="col-md-3 mb-2">
                                     <label>อำเภอ/เขต</label>
-                                    <div class="input-group" >
-                                        <input type="text" class="form-control" formControlName="distict" placeholder="อำเภอ/เขต">
+                                    <div class="input-group">
+                                        <input list="dcode" type="text" class="form-control" formControlName="district"  
+                                            (change)='changDistrict($event)' placeholder="อำเภอ/เขต"
+                                            title="กรุณากรอกอำเภอ/เขต">
+                                        <datalist id="dcode">
+                                            <option *ngFor="let item of districtData" [value]="item.name_th">
+                                                {{item.name_th}}</option>
+                                        </datalist>
                                     </div>
                                 </div>
                             </div>
@@ -136,20 +185,28 @@
                             <div class="row justify-content-center">
                                 <div class="col-md-3 mb-2">
                                     <label>ตำบล/แขวง</label>
-                                    <div class="input-group" >
-                                        <input type="text" class="form-control" formControlName="subdistict" placeholder="ตำบล/แขวง">
+                                    <div class="input-group">
+                                        <input list="sdcode" type="text" class="form-control" formControlName="sub_district"
+                                            (change)='changSubDistrict($event)' placeholder="ตำบล/แขวง"
+                                            title="กรุณากรอกตำบล/แขวง">
+                                        <datalist id="sdcode">
+                                            <option *ngFor="let item of subdistrictData" [value]="item.name_th">
+                                                {{item.name_th}}</option>
+                                        </datalist>
                                     </div>
                                 </div>
                                 <div class="col-md-3 mb-2">
                                     <label>รหัสไปรษณีย์</label>
-                                    <div class="input-group" >
-                                        <input type="text" class="form-control" formControlName="zipcode" placeholder="รหัสไปรษณีย์">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" formControlName="postal_code"
+                                            placeholder="รหัสไปรษณีย์">
                                     </div>
                                 </div>
                                 <div class="col-md-3 mb-2">
                                     <label>เบอร์โทรศัพท์</label>
-                                    <div class="input-group" >
-                                        <input type="text" class="form-control" formControlName="homephone" placeholder="นามสกุล">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" formControlName="phone"
+                                            placeholder="เบอร์โทรศัพท์">
                                     </div>
                                 </div>
                             </div>
@@ -157,32 +214,35 @@
                             <div class="row justify-content-center">
                                 <div class="col-md-3 mb-2">
                                     <label>เบอร์โทรศัพท์มือถือ</label>
-                                    <div class="input-group" >
-                                        <input type="text" class="form-control" formControlName="phone" placeholder="เบอร์โทรศัพท์มือถือ">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" formControlName="mobile_phone"
+                                            placeholder="เบอร์โทรศัพท์มือถือ">
                                     </div>
+                                </div>
+                                <div class="col-md-3 mb-2">
+                                    <!-- <label>รหัสผ่านเข้าระบบ</label>
+                                    <div class="input-group" >
+                                        <input type="text" class="form-control" formControlName="password" placeholder="รหัสผ่านเข้าระบบ">
+                                    </div> -->
                                 </div>
                                 <div class="col-md-3 mb-2">
                                     <div class="input-group">
                                         <button class="btn btn-success" style="margin-top: 2rem !important;"
                                             id="btnSave" type="submit">บันทึก</button>
-                                            <button class="btn btn-secondary mx-2" style="margin-top: 2rem !important;"
-                                            id="btnClear" type="button">ล้างข้อมูล</button>
-                                    </div>
-                                </div>
-                                <div class="col-md-3 mb-2">
-                                    <div class="input-group">
-                                       
+                                        <button class="btn btn-secondary mx-2" style="margin-top: 2rem !important;"
+                                            id="btnClear" type="reset">ล้างข้อมูล</button>
                                     </div>
                                 </div>
                             </div>
 
                         </form>
-                        
+
                     </div>
                 </div>
             </div>
         </div>
         <!-- End Row -->
+
     </div>
 </div>
 <!-- end app-content-->

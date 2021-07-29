@@ -199,7 +199,7 @@ export class FormComponent implements OnInit {
   getProvince(): void {
     this.officerServ.getProvince().subscribe(resp => {
       this.provinceData = resp.data;
-      //console.log(this.provinceData);
+      console.log(this.provinceData);
     });
   }
 
@@ -207,6 +207,9 @@ export class FormComponent implements OnInit {
     let namepro = e.target.value;
     let list = this.provinceData.filter(x => x.name_th === namepro)[0];
     console.log(list);
+    this.officerForm.baseForm.patchValue({ 
+      district : ''
+    });
     this.getDistrict(list.id);
   }
 
@@ -214,6 +217,10 @@ export class FormComponent implements OnInit {
     let name = e.target.value;
     let list = this.districtData.filter(x => x.name_th === name)[0];
     console.log(list);
+    this.officerForm.baseForm.patchValue({ 
+      sub_district : '',
+      postal_code : ''
+    });
     this.getSubDistrict(list.id);
   }
 
@@ -225,33 +232,6 @@ export class FormComponent implements OnInit {
     this.officerForm.baseForm.patchValue({ 
       postal_code : list.zip_code 
     });
-  }
-
-
-  onClearData(): void {
-    this.officerForm.baseForm.patchValue({
-      id: '',
-      id_card: '',
-      password: '',
-      prefix_th: '',
-      prefix_en: '',
-      fname_th: '',
-      lname_th: '',
-      fname_en: '',
-      lname_en: '',
-      position: '',
-      email: '',
-      village: '',
-      village_no: '',
-      alley: '',
-      road: '',
-      sub_district:'',
-      district: '',
-      province: '',
-      postal_code: '',
-      phone: '',
-      mobile_phone: '',
-    })
   }
 
 }

@@ -3,7 +3,25 @@
         <!--Page header-->
         <div class="page-header">
             <div class="page-leftheader">
-                <h4 class="page-title">การจัดการผู้ใช้งาน / สร้างข้อมูลเจ้าหน้าที่</h4>
+                <h4 class="page-title">สร้างข้อมูลเจ้าหน้าที่</h4>
+            </div>
+            <div class="page-rightheader ml-auto d-lg-flex d-none">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item">
+                        <a href="#" class="d-flex"><svg class="svg-icon" xmlns="http://www.w3.org/2000/svg" height="24"
+                                viewBox="0 0 24 24" width="24">
+                                <path d="M0 0h24v24H0V0z" fill="none" />
+                                <path d="M12 3L2 12h3v8h6v-6h2v6h6v-8h3L12 3zm5 15h-2v-6H9v6H7v-7.81l5-4.5 5 4.5V18z" />
+                                <path d="M7 10.19V18h2v-6h6v6h2v-7.81l-5-4.5z" opacity=".3" />
+                            </svg><span class="breadcrumb-icon"> หน้าหลัก </span></a>
+                    </li>
+                    <li class="breadcrumb-item">
+                        <a routerLink="/officer/list">การจัดการผู้ใช้งาน</a>
+                      </li>
+                      <li class="breadcrumb-item active" aria-current="page">
+                        สร้างข้อมูลเจ้าหน้าที่
+                      </li>
+                </ol>
             </div>
         </div>
         <!--End Page header-->
@@ -12,7 +30,7 @@
             <div class="col-lg-12 col-md-12">
                 <div class="card">
                     <div class="card-header">
-                        <h3 class="card-title">สร้างข้อมูลเจ้าหน้าที่</h3>
+                        <h3 class="card-title">ข้อมูลเจ้าหน้าที่</h3>
                     </div>
                     <div class="card-body">
                
@@ -123,24 +141,32 @@
                                 </div>
                                 <div class="col-md-3 mb-2">
                                     <label>จังหวัด</label>
-                                    <div class="input-group" >
-                                        <select class="form-control" formControlName="province" (change)='changProvince($event)'>
+                                    <div class="input-group">
+                                        <!-- <select class="form-control" formControlName="province" (change)='changProvince($event)'>
                                         <option value="" selected>กรุณาเลือกจังหวัด</option>
                                         <option *ngFor="let item of provinceData" [value]="item.name_th">
                                             {{item.name_th}}
                                         </option>
-                                    </select>
+                                         </select> -->
+                                        <input list="pcode" type="text" class="form-control" formControlName="province"
+                                            (change)='changProvince($event)' placeholder="จังหวัด"
+                                            title="กรุณาเลือกจังหวัด">
+                                        <datalist id="pcode">
+                                            <option *ngFor="let item of provinceData" [value]="item.name_th">
+                                                {{item.name_th}}</option>
+                                        </datalist>
                                     </div>
                                 </div>
                                 <div class="col-md-3 mb-2">
                                     <label>อำเภอ/เขต</label>
-                                    <div class="input-group" >
-                                        <select class="form-control" formControlName="district" (change)='changDistrict($event)'>
-                                        <option value="" selected>กรุณาเลือกอำเภอ/เขต</option>
-                                        <option *ngFor="let item of districtData" [value]="item.name_th">
-                                            {{item.name_th}}
-                                        </option>
-                                    </select>
+                                    <div class="input-group">
+                                        <input list="dcode" type="text" class="form-control" formControlName="district"  
+                                            (change)='changDistrict($event)' placeholder="อำเภอ/เขต"
+                                            title="กรุณากรอกอำเภอ/เขต">
+                                        <datalist id="dcode">
+                                            <option *ngFor="let item of districtData" [value]="item.name_th">
+                                                {{item.name_th}}</option>
+                                        </datalist>
                                     </div>
                                 </div>
                             </div>
@@ -148,13 +174,14 @@
                             <div class="row justify-content-center">
                                 <div class="col-md-3 mb-2">
                                     <label>ตำบล/แขวง</label>
-                                    <div class="input-group" >
-                                        <select class="form-control" formControlName="sub_district" (change)='changSubDistrict($event)'>
-                                            <option value="" selected>กรุณาเลือกตำบล/แขวง</option>
+                                    <div class="input-group">
+                                        <input list="sdcode" type="text" class="form-control" formControlName="sub_district"
+                                            (change)='changSubDistrict($event)' placeholder="ตำบล/แขวง"
+                                            title="กรุณากรอกตำบล/แขวง">
+                                        <datalist id="sdcode">
                                             <option *ngFor="let item of subdistrictData" [value]="item.name_th">
-                                                {{item.name_th}}
-                                         </option>
-                                        </select>
+                                                {{item.name_th}}</option>
+                                        </datalist>
                                     </div>
                                 </div>
                                 <div class="col-md-3 mb-2">
@@ -189,7 +216,7 @@
                                         <button class="btn btn-success" style="margin-top: 2rem !important;"
                                             id="btnSave" type="submit">บันทึก</button>
                                             <button class="btn btn-secondary mx-2" style="margin-top: 2rem !important;"
-                                            id="btnClear" type="button" (click)="onClearData()">ล้างข้อมูล</button>
+                                            id="btnClear" type="reset">ล้างข้อมูล</button>
                                     </div>
                                 </div>
                             </div>
@@ -201,6 +228,7 @@
             </div>
         </div>
         <!-- End Row -->
+        
     </div>
 </div>
 <!-- end app-content-->
