@@ -78,6 +78,7 @@ export class FormComponent implements OnInit {
     this.officerFormData = this.fb.group({
       //id: '',
       id_card: '',
+      password: '',
       prefix_th: '',
       prefix_en: '',
       fname_th: '',
@@ -221,14 +222,36 @@ export class FormComponent implements OnInit {
     let name = e.target.value;
     let list = this.subdistrictData.filter(x => x.name_th === name)[0];
     console.log(list);
-    this.officerFormData.patchValue({ 
+    this.officerForm.baseForm.patchValue({ 
       postal_code : list.zip_code 
     });
   }
 
 
   onClearData(): void {
-
+    this.officerForm.baseForm.patchValue({
+      id: '',
+      id_card: '',
+      password: '',
+      prefix_th: '',
+      prefix_en: '',
+      fname_th: '',
+      lname_th: '',
+      fname_en: '',
+      lname_en: '',
+      position: '',
+      email: '',
+      village: '',
+      village_no: '',
+      alley: '',
+      road: '',
+      sub_district:'',
+      district: '',
+      province: '',
+      postal_code: '',
+      phone: '',
+      mobile_phone: '',
+    })
   }
 
 }
