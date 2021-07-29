@@ -1,3 +1,4 @@
+import { FormGroup, FormBuilder } from '@angular/forms';
 import { BenefitService } from './../service/benefit.service';
 import { BenefitResponse } from './../../shared/models/base.interface';
 
@@ -42,6 +43,8 @@ export class ListComponent implements AfterViewInit, OnInit, OnDestroy {
   public dataRow: any[];
   public ServiceGroupData: any = [];
   public ServiceData: any = [];
+  formFillter: FormGroup;
+
 
 
   @ViewChild(DataTableDirective)
@@ -51,7 +54,13 @@ export class ListComponent implements AfterViewInit, OnInit, OnDestroy {
   constructor(private router: Router ,
     private benefitSvc: BenefitService,
     private elementRef: ElementRef,
-    private renderer: Renderer2) { }
+    public fb: FormBuilder,
+    private renderer: Renderer2) {
+      this.formFillter = this.fb.group({
+        customer_id: [''],
+        year: [''],
+      });
+    }
 
   ngOnDestroy(): void {
     this.destroy$.next({});
