@@ -41,6 +41,9 @@ export class EditComponent implements OnInit {
     console.log('extras', this.router.getCurrentNavigation().extras.state.item);
     this.officerForm.baseForm.patchValue(this.router.getCurrentNavigation().extras.state.item);
     this.getProvince();
+    setTimeout(() => {
+      this.onEditProvince(this.officerForm.baseForm.value.province);
+    }, 1000);
   }
 
   ngOnDestroy(): void {
@@ -55,9 +58,6 @@ export class EditComponent implements OnInit {
     this.officerForm.baseForm.get('role').setValidators(null);
     this.officerForm.baseForm.get('role').updateValueAndValidity();
     this.officerForm.baseForm.value.status = 'Yes';
-    setTimeout(() => {
-      this.onEditProvince(this.officerForm.baseForm.value.province);
-    }, 1000);
   }
 
   onUpdate(): void {
