@@ -159,10 +159,10 @@ export class EditComponent implements OnInit {
       return;
     }
     const formValue = this.eventsForm.value;
+    
     console.log('test',formValue.id);
     if (this.actionTODO === Action.EDIT) {
       this.eventSvc.update(formValue.id, formValue).subscribe((res) => {
-        console.log('Edit ', res);
         this.router.navigate(['event/list']);
       });
     }
