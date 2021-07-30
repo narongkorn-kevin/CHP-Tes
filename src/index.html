@@ -117,12 +117,11 @@
   </style>
 </head>
 
-<body class="">
+<body class="app sidebar-mini light-mode light-sidebar">
   <!---Global-loader -->
   <div id="global-loader">
     <img src="assets/images/svgs/loader.svg" alt="loader" />
   </div>
-
   <div class="page">
     <div class="page-main">
       <!--aside open-->
@@ -150,38 +149,78 @@
               <span class="side-menu__label" style="color: white !important">Menu </span>
             </a>
           </li>
+          <li class="slide">
+            <a class="side-menu__item" data-toggle="slide" href="#">
+              <i class="fa fa-users fa-lg"
+              style="color:white" aria-hidden="true"></i>
+              &nbsp;
+              <span class="side-menu__label" style="color: white !important">ผู้ใช้งาน</span><i class="angle fa fa-angle-right" style="color:white"></i></a>
+            <ul class="slide-menu">
+              <li>
+                <a href="/officer/list" class="slide-item" style="background-color:#06a6d6; color: white !important">
+                  การจัดการผู้ใช้งาน</a>
+              </li>
+            </ul>
+          </li>
 
-          <li>
+
+          <li class="slide">
+            <a class="side-menu__item" data-toggle="slide" href="#">
+              <img src="assets/images/chp/chp2.png"
+              width="30" height="30" /> &nbsp;
+              <span class="side-menu__label" style="color: white !important">ข้อมูลสุขภาพ</span><i class="angle fa fa-angle-right" style="color:white"></i></a>
+            <ul class="slide-menu">
+              <li>
+                <a href="#" class="slide-item" style="background-color:#06a6d6; color: white !important">
+                  ข้อมูลสุขภาพ สสส.</a>
+              </li>
+            </ul>
+          </li>
+
+
+          <li class="slide">
+            <a class="side-menu__item" data-toggle="slide" href="#">
+            <img
+                src="assets/images/chp/chp3.png" width="30" height="30" /> &nbsp;
+              <span class="side-menu__label" style="color: white !important">จัดการสิทธิ</span><i class="angle fa fa-angle-right" style="color:white"></i></a>
+            <ul class="slide-menu">
+              <li>
+                <a href="/benefit/list" class="slide-item" style="background-color:#06a6d6; color: white !important">
+                  จัดการสิทธิประโยชน์ส่งเสริมป้องกันโรค</a>
+              </li>
+              <li>
+                <a href="/event/list" class="slide-item" style="background-color:#06a6d6; color: white !important">
+                  จัดการกิจกรรมส่งเสริมป้องกันโรค</a>
+              </li>
+            </ul>
+          </li>
+
+          <li class="slide">
+            <a class="side-menu__item" data-toggle="slide" href="#">
+              <img src="assets/images/chp/chp4.png"
+              width="30" height="30" /> &nbsp;
+              <span class="side-menu__label" style="color: white !important">สรุปรายงาน</span><i class="angle fa fa-angle-right" style="color:white"></i></a>
+            <ul class="slide-menu">
+              <li>
+                <a href="#" class="slide-item" style="background-color:#06a6d6; color: white !important">
+                  สรุปรายงาน</a>
+              </li>
+            </ul>
+          </li>
+
+
+
+
+          <!-- <li>
             <a href="/officer/list" class="side-menu__item" style="color: white !important"><i class="fa fa-users fa-lg"
                 style="color:white" aria-hidden="true"></i> &nbsp;
-              การจัดการผู้ใช้งาน</a>
+              <span class="is-expanded">การจัดการผู้ใช้งาน </span> </a>
           </li>
           <li>
             <a href="#" class="side-menu__item" style="color: white !important"><img src="assets/images/chp/chp2.png"
                 width="30" height="30" /> &nbsp;
               ข้อมูลสุขภาพ สสส.</a>
           </li>
-
-
-          <!-- <li class="sub-slide ">
-            <a class="sub-side-menu__item" data-toggle="sub-slide" href="#"><span class="sub-side-menu__label"><img
-                  src="assets/images/chp/chp2.png" width="30" height="30" /> &nbsp;
-                จัดการสิทธิประโยชน์ส่งเสริมป้องกันโรค</span><i class="sub-angle fe fe-chevron-down"></i></a>
-            <ul class="slide-menu">
-              <li class="sub-slide ">
-                <a class="sub-side-menu__item" data-toggle="sub-slide" href="#"><span
-                    class="sub-side-menu__label">Organization</span><i class="sub-angle fe fe-chevron-down"></i></a>
-                <ul class="sub-slide-menu">
-                  <li>
-                    <a class="sub-slide-item" href="/base/company/form" class="slide-item">Company</a>
-                  </li>
-                </ul>
-              </li>
-            </ul>
-
-          </li> -->
-
-
           <li>
             <a href="/benefit/list" class="side-menu__item" style="color: white !important"><img
                 src="assets/images/chp/chp3.png" width="30" height="30" /> &nbsp;
@@ -198,215 +237,14 @@
                 width="30" height="30" /> &nbsp;
               สรุปรายงาน</a>
           </li>
+        </ul> -->
 
 
 
-          <!-- <li class="slide">
-            <a class="side-menu__item" data-toggle="slide" href="#">
-              <svg class="side-menu__icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
-                <polyline points="2 17 12 22 22 17"></polyline>
-                <polyline points="2 12 12 17 22 12"></polyline>
-              </svg>
-              <span class="side-menu__label">Base</span><i class="angle fa fa-angle-right"></i></a>
-            <ul class="slide-menu">
-              <li class="sub-slide ">
-                <a class="sub-side-menu__item" data-toggle="sub-slide" href="#"><span
-                    class="sub-side-menu__label">Organization</span><i class="sub-angle fe fe-chevron-down"></i></a>
-                <ul class="sub-slide-menu">
-                  <li>
-                    <a class="sub-slide-item" href="/base/company/form" class="slide-item">Company</a>
-                  </li>
-                  <li>
-                    <a class="sub-slide-item" href="/base/customer/list" class="slide-item">Customer</a>
-                  </li>
-                  <li>
-                    <a class="sub-slide-item" href="/base/branch/list" class="slide-item">Branch</a>
-                  </li>
-                  <li>
-                    <a class="sub-slide-item" href="/base/department/list" class="slide-item">Department</a>
-                  </li>
-                  <li>
-                    <a class="sub-slide-item" href="/base/position/list" class="slide-item">Position</a>
-                  </li>
-                  <li>
-                    <a class="sub-slide-item" href="/base/employee/list" class="slide-item">Employee</a>
-                  </li>
-                  <li>
-                    <a class="sub-slide-item" href="/base/permission/list" class="slide-item">Permission</a>
-                  </li>
-
-                </ul>
-              </li>
-              <li class="">
-                <a class="sub-side-menu__item" href="/base/doc/list"><span class="sub-side-menu__label">Doc
-                    Setting</span></a>
-
-              </li>
-              <li class="sub-slide ">
-                <a class="sub-side-menu__item" data-toggle="sub-slide" href="#"><span
-                    class="sub-side-menu__label">Item</span><i class="sub-angle fe fe-chevron-down"></i></a>
-                <ul class="sub-slide-menu">
-                  <li>
-                    <a class="sub-slide-item" href="/base/item/list-fg" class="slide-item">Item</a>
-                  </li>
-                  <li>
-                    <a class="sub-slide-item" href="/base/item-type/list" class="slide-item">
-                      ItemType</a>
-                  </li>
-                  <li>
-                    <a class="sub-slide-item" href="/base/unit/list" class="slide-item"> Unit</a>
-                  </li>
-                  <li>
-                    <a class="sub-slide-item" href="/base/unit-convertion/list" class="slide-item">
-                      Unit Convertion</a>
-                  </li>
-                </ul>
-              </li>
-              <li class="sub-slide ">
-                <a class="sub-side-menu__item" data-toggle="sub-slide" href="#"><span
-                    class="sub-side-menu__label">Location</span><i class="sub-angle fe fe-chevron-down"></i></a>
-                <ul class="sub-slide-menu">
-                  <li>
-                    <a class="sub-slide-item" href="/base/location/list" class="slide-item"> Location</a>
-                  </li>
-                  <li>
-                    <a class="sub-slide-item" href="/base/warehouses/list" class="slide-item">
-                      Warehouse</a>
-                  </li>
-                </ul>
-              </li>
-              <li class="sub-slide ">
-                <a class="sub-side-menu__item" data-toggle="sub-slide" href="#"><span
-                    class="sub-side-menu__label">Material</span><i class="sub-angle fe fe-chevron-down"></i></a>
-                <ul class="sub-slide-menu">
-                  <li>
-                    <a class="sub-slide-item" href="/base/spare-type/list" class="slide-item">
-                      SpareType</a>
-                  </li>
-                  <li>
-                    <a class="sub-slide-item" href="/base/material-grade/list" class="slide-item">
-                      MaterialGrade</a>
-                  </li>
-                  <li>
-                    <a class="sub-slide-item" href="/base/material-type/list" class="slide-item">
-                      MaterialType</a>
-                  </li>
-                  <li>
-                    <a class="sub-slide-item" href="/base/material-color/list" class="slide-item">
-                      MaterialColor</a>
-                  </li>
-                </ul>
-              </li>
-            </ul>
-          </li>
-          <li class="slide">
-            <a class="side-menu__item" data-toggle="slide" href="#">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                class="side-menu__icon">
-                <rect x="3" y="3" width="7" height="7"></rect>
-                <rect x="14" y="3" width="7" height="7"></rect>
-                <rect x="14" y="14" width="7" height="7"></rect>
-                <rect x="3" y="14" width="7" height="7"></rect>
-              </svg>
-              <span class="side-menu__label">Inventory</span><i class="angle fa fa-angle-right"></i></a>
-            <ul class="slide-menu">
-              <li>
-                <a href="/warehouse/deposit/list" class="slide-item">
-                  Deposit</a>
-              </li>
-              <li>
-                <a href="/warehouse/movement/list" class="slide-item">Movement</a>
-              </li>
-              <li>
-                <a href="/warehouse/withdraw/list" class="slide-item">
-                  Withdraw</a>
-              </li>
-              <li>
-                <a href="/warehouse/adjust/list" class="slide-item">
-                  Adjust</a>
-              </li>
-              <li>
-                <a href="/warehouse/item-lot/form" class="slide-item">
-                  Item-Lot</a>
-              </li>
-              <li>
-                <a href="/warehouse/stock-control/list" class="slide-item">
-                  stock-control</a>
-              </li>
-              <li class=""></li>
-              <li>
-                <a href="/reports" class="slide-item">
-                  Inventory Report</a>
-              </li>
-              <li>
-                <a href="/warehouse/forecast/list" class="slide-item">
-                  Forecast</a>
-              </li>
-              <li>
-                <a href="/warehouse/config-stock/list" class="slide-item">
-                  Config Stock</a>
-              </li>
-            </ul>
-          </li>
-          <li class="slide">
-            <a class="side-menu__item" data-toggle="slide" href="#">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                class="side-menu__icon">
-                <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
-                <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
-              </svg>
-              <span class="side-menu__label">Sale</span><i class="angle fa fa-angle-right"></i></a>
-            <ul class="slide-menu">
-              <li>
-                <a href="/warehouse/sale/list" class="slide-item"> Sale Order</a>
-              </li>
-              <li>
-                <a href="/warehouse/delivery/list" class="slide-item"> Delivery Order</a>
-              </li>
-              <li>
-                <a href="/warehouse/forecast/list" class="slide-item"> Forecast</a>
-              </li>
-              <li>
-                <a href="/sale/reports" class="slide-item"> REPORT</a>
-              </li>
-            </ul>
-          </li>
-          <li class="slide">
-            <a class="side-menu__item" data-toggle="slide" href="#">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                class="side-menu__icon">
-                <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
-                <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
-              </svg>
-              <span class="side-menu__label">Manufacturing</span><i class="angle fa fa-angle-right"></i></a>
-            <ul class="slide-menu">
-              <li>
-                <a href="/manufacture/job/list" class="slide-item"> Job</a>
-              </li>
-              <li>
-                <a href="/manufacture/machine/list" class="slide-item"> Machine</a>
-              </li>
-              <li>
-                <a href="/manufacture/bom/list" class="slide-item"> Bom</a>
-              </li>
-              <li>
-                <a href="/manufacture/routing/list" class="slide-item"> Routing</a>
-              </li>
-              <li>
-                <a href="/manufacture/station/list" class="slide-item"> Station</a>
-              </li>
-            </ul>
-          </li>-->
-
-        </ul>
 
 
-        <div class="app-sidebar-help">
+
+        <!-- <div class="app-sidebar-help">
           <div class="dropdown text-center">
             <div class="help d-flex">
               <a href="#" class="nav-link p-0 help-dropdown" data-toggle="dropdown">
@@ -426,7 +264,7 @@
                 <div class="border-bottom pb-3 pt-3 mb-3">
                   <p class="mb-1">Your Fax Number</p>
                   <a class="font-weight-bold" href="#">88 8888 8888</a>
-                </div>
+                </div> -->
       </aside>
       <!--aside closed-->
       <app-root></app-root>
