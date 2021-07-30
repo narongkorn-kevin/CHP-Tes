@@ -59,13 +59,10 @@
                                                 <label class="col-md-3 form-label">ช่วงอายุ :
                                                 </label>
                                                 <div class="col-md-9">
-                                                    <mat-select class="form-control" formControlName="age">
-                                                        <mat-option value="1">
-                                                            แรกเกิด - 20 ปี
-                                                        </mat-option>
-                                                        <mat-option value="2">
-                                                            20 - 60 ปี
-                                                        </mat-option>
+                                                    <mat-select class="form-control" formControlName="age_id">
+                                                        <mat-option *ngFor="let age of AgeData"
+                                                        [value]="age.id">
+                                                        {{age.name}} ปี</mat-option>
                                                     </mat-select>
                                                 </div>
                                             </div>
@@ -148,6 +145,7 @@
                         </div>
                     </div>
                 </form>
+                <div>Check ค่า: {{ this.benefitform.baseForm.value | json }}</div>
             </mat-tab>
         </mat-tab-group>
         <!-- End Row -->

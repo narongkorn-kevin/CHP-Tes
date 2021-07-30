@@ -1,19 +1,19 @@
 <style>
   thead,
   th {
-      border: 1px solid #dddddd;
-      color: #fff;
-      font-size: 18px;
-      font-weight: bold;
-      text-align: center;
+    border: 1px solid #dddddd;
+    color: #fff;
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
   }
 
   td {
-      border: 1px solid #dddddd;
+    border: 1px solid #dddddd;
   }
 
   tr {
-      background-color: #06a6d6;
+    background-color: #06a6d6;
   }
 </style>
 <div class="app-content main-content">
@@ -39,50 +39,47 @@
             <div>
               <h4 class="page-title">ข้อมูลการค้นหา</h4>
             </div>
-
-            <div class="row justify-content-center">
-              <div class="col-md-2 mb-2">
-                <label for="validationCustomUsername">กลุ่มบริการ</label>
-                <div class="input-group">
-                    <mat-select class="form-control" placeholder="ทั้งหมด">
-                      <mat-option *ngFor="let item of ServiceGroupData" [value]="item.id" >
+            <form [formGroup]="formFillter">
+              <div class="row justify-content-center">
+                <div class="col-md-2 mb-2">
+                  <label for="validationCustomUsername">กลุ่มบริการ</label>
+                  <div class="input-group">
+                    <mat-select class="form-control" placeholder="ทั้งหมด" formControlName="service_group_id">
+                      <mat-option *ngFor="let item of ServiceGroupData" [value]="item.id">
                         {{item.name}}
                       </mat-option>
                     </mat-select>
+                  </div>
                 </div>
-              </div>
-              <div class="col-md-2 mb-2">
-                <label for="validationCustomUsername">บริการ</label>
-                <div class="input-group">
-                  <mat-select class="form-control" placeholder="ทั้งหมด" >
-                    <mat-option *ngFor="let item of ServiceData" [value]="item.id">
-                      {{item.name}}
-                    </mat-option>
-                  </mat-select>
+                <div class="col-md-2 mb-2">
+                  <label for="validationCustomUsername">บริการ</label>
+                  <div class="input-group">
+                    <mat-select class="form-control" placeholder="ทั้งหมด" formControlName="service_id">
+                      <mat-option *ngFor="let item of ServiceData" [value]="item.id">
+                        {{item.name}}
+                      </mat-option>
+                    </mat-select>
+                  </div>
                 </div>
-              </div>
-              <div class="col-md-2 mb-2">
-                <label for="validationCustomUsername">ช่วงอายุ</label>
-                <div class="input-group">
-                  <mat-select class="form-control" placeholder="ทั้งหมด" >
-                    <mat-option value="1">
-                        แรกเกิด - 20 ปี
-                    </mat-option>
-                    <mat-option value="2">
-                        20 - 60 ปี
-                    </mat-option>
-                </mat-select>
+                <div class="col-md-2 mb-2">
+                  <label for="validationCustomUsername">ช่วงอายุ</label>
+                  <div class="input-group">
+                    <mat-select class="form-control" formControlName="age_id">
+                      <mat-option *ngFor="let age of AgeData" [value]="age.id">
+                        {{age.name}} ปี
+                      </mat-option>
+                    </mat-select>
+                  </div>
                 </div>
-              </div>
-              <div class="col-md-2 mb-2">
-                <div class="input-group">
-                  <button class="btn btn-primary" style="margin-top: 2rem !important;" id="btnSearch"
-                    type="button" (click)="Onsearch(formFillter)">ค้นหา</button>
+                <div class="col-md-2 mb-2">
+                  <div class="input-group">
+                    <button class="btn btn-primary" style="margin-top: 2rem !important;" id="btnSearch" type="button"
+                      (click)="Onsearch(formFillter)">ค้นหา</button>
 
+                  </div>
                 </div>
               </div>
-            </div>
-
+            </form>
             <br />
             <div class="card">
               <div class="card-body">
@@ -139,6 +136,7 @@
                         </tr>
                       </tbody>
                     </table>
+                    <div>Check ค่า: {{ this.formFillter.value | json }}</div>
                   </div>
                 </div>
               </div>
