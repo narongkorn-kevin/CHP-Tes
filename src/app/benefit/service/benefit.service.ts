@@ -88,6 +88,13 @@ export class BenefitService {
       .get<any>(`${environment.API_URL}/api/service`, this.httpOptions)
       .pipe(catchError(this.handlerError));
   }
+  
+  get_age(): Observable<ServiceGroupResponse> {
+    return this.http
+      .get<any>(`${environment.API_URL}/api/age`, this.httpOptions)
+      .pipe(catchError(this.handlerError));
+  }
+
 
   new(benefit: FormData): Observable<Benefit> {
     return this.http

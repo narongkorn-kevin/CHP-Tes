@@ -1,3 +1,4 @@
+import  Swal  from 'sweetalert2';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { BenefitService } from './../service/benefit.service';
 import { BenefitResponse } from './../../shared/models/base.interface';
@@ -19,6 +20,7 @@ import { Subject } from 'rxjs';
 import { DataTableDirective } from 'angular-datatables';
 import { HttpHeaders } from '@angular/common/http';
 import { NavigationExtras, Router } from '@angular/router';
+
 declare var $: any;
 const user = JSON.parse(localStorage.getItem('user')) || null;
 
@@ -43,6 +45,7 @@ export class ListComponent implements AfterViewInit, OnInit, OnDestroy {
   public dataRow: any[];
   public ServiceGroupData: any = [];
   public ServiceData: any = [];
+  public AgeData: any = [];
   formFillter: FormGroup;
 
 
@@ -57,9 +60,9 @@ export class ListComponent implements AfterViewInit, OnInit, OnDestroy {
     public fb: FormBuilder,
     private renderer: Renderer2) {
     this.formFillter = this.fb.group({
-      service_group_id: [''],
-      service_id: [''],
-      age_id: [''],
+      service_group_id: '',
+      service_id: '',
+      age_id: '',
     });
   }
 
@@ -76,6 +79,7 @@ export class ListComponent implements AfterViewInit, OnInit, OnDestroy {
     this.loadTable();
     this.GetServiceGroup();
     this.GetService();
+    this.GetAgeRange();
 
   }
 
@@ -90,6 +94,9 @@ export class ListComponent implements AfterViewInit, OnInit, OnDestroy {
       serverSide: true,
       processing: true,
       ajax: (dataTablesParameters: any, callback) => {
+        dataTablesParameters['service_group_id'] = null;
+        dataTablesParameters['service_id'] = null;
+        dataTablesParameters['age_id'] = null;
         that.benefitSvc.getAll(dataTablesParameters).subscribe(resp => {
           that.dataRow = resp.data.data;
           console.log('datatable', that.dataRow);
@@ -104,11 +111,7 @@ export class ListComponent implements AfterViewInit, OnInit, OnDestroy {
         { data: 'No' },
         { data: 'service_group_name' },
         { data: 'name' },
-        { data: 'age' },
-        // { data: 'updated_at' },
-        // { data: 'created_at' },
-        // { data: 'update_by' },
-        // { data: 'status' },
+        { data: 'age_id' },
         { data: 'action', orderable: false }
       ]
     };
@@ -116,38 +119,36 @@ export class ListComponent implements AfterViewInit, OnInit, OnDestroy {
   }
 
   onEdit(data): void {
-    // console.log(data);
-    // // return false
-    // const navigationExtras: NavigationExtras = {
-    //   state: {
-    //     item: {
-    //       id: data.id,
-    //       name: data.name,
-    //       status: data.status,
-    //       // name_th: data.name_th,
-    //       // name_en: data.name_en,
-    //       role: '',
-    //     }
-    //   }
-    // };
 
     this.router.navigate(['benefit/edit', data.id]);
   }
 
   onDelete(benefitId: number): void {
-    if (window.confirm('Do you really want remove this data')) {
-      this.benefitSvc
-        .delete(benefitId)
-        .pipe(takeUntil(this.destroy$))
-        .subscribe((res: BenefitResponse) => {
-          if (res.code == 201) {
-            this.rerender();
-          }
-          // this.branchSvc.getAll().subscribe((branch) => {
-          // this.dataRow = branch.data;
-          // });
-        });
-    }
+    Swal.fire({
+      title: 'Warning!',
+      text: "คุณต้องการลบริการ ใช่หรือไม่?",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#28a745',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'ตกลง',
+      cancelButtonText: 'ยกเลิก'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.benefitSvc
+          .delete(benefitId)
+          .pipe(takeUntil(this.destroy$))
+          .subscribe((res: BenefitResponse) => {
+            if (res.code == 201) {
+              this.rerender();
+            }
+            // this.branchSvc.getAll().subscribe((branch) => {
+            // this.dataRow = branch.data;
+            // });
+          });
+      }
+    });
+   
   }
   rerender(): void {
     this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
@@ -168,10 +169,53 @@ export class ListComponent implements AfterViewInit, OnInit, OnDestroy {
       console.log(this.ServiceData);
     });
   }
+  GetAgeRange(): void {
+    this.benefitSvc.get_age().subscribe((resp) => {
+      this.AgeData = resp.data;
+      console.log(this.AgeData);
+    });
+  }
 
+
+  // Onsearch(form: FormGroup): void {
+  //   console.log('test',form.value);
+
+  //   let formValue = form.value;
+  //   const that = this;
+  //   this.dtOptions = {
+  //     pagingType: 'full_numbers',
+  //     pageLength: 10,
+  //     serverSide: true,
+  //     processing: true,
+  //     ajax: (dataTablesParameters: any, callback) => {
+  //       dataTablesParameters['service_group_id'] = formValue.service_group_id;
+  //       dataTablesParameters['service_id'] = formValue.service_id;
+  //       dataTablesParameters['age_id'] = formValue.age_id;
+  //       that.benefitSvc.getAll(dataTablesParameters).subscribe(resp => {
+  //         that.dataRow = resp.data.data;
+  //         console.log('datatable', that.dataRow);
+  //         callback({
+  //           recordsTotal: resp.data.total,
+  //           recordsFiltered: resp.data.total,
+  //           data: []
+  //         });
+  //       });
+  //     },
+  //     columns: [
+  //       { data: 'No' },
+  //       { data: 'service_group_name' },
+  //       { data: 'name' },
+  //       { data: 'age_id' },
+  //       { data: 'action', orderable: false }
+  //     ]
+  //   };
+
+  // }
 
   Onsearch(form: FormGroup): void {
     console.log('test',form.value);
+
+    let formValue = form.value;
     const that = this;
     this.dtOptions = {
       pagingType: 'full_numbers',
@@ -179,9 +223,9 @@ export class ListComponent implements AfterViewInit, OnInit, OnDestroy {
       serverSide: true,
       processing: true,
       ajax: (dataTablesParameters: any, callback) => {
-        dataTablesParameters['service_group_id'] = form.value.service_group_id;
-        dataTablesParameters['service_id'] = form.value.service_id;
-        dataTablesParameters['age_id'] = form.value.age_id;
+        dataTablesParameters['service_group_id'] = formValue.service_group_id;
+        dataTablesParameters['service_id'] = formValue.service_id;
+        dataTablesParameters['age_id'] = formValue.age_id;
         that.benefitSvc.getAll(dataTablesParameters).subscribe(resp => {
           that.dataRow = resp.data.data;
           console.log('datatable', that.dataRow);
@@ -196,11 +240,7 @@ export class ListComponent implements AfterViewInit, OnInit, OnDestroy {
         { data: 'No' },
         { data: 'service_group_name' },
         { data: 'name' },
-        { data: 'age' },
-        // { data: 'updated_at' },
-        // { data: 'created_at' },
-        // { data: 'update_by' },
-        // { data: 'status' },
+        { data: 'age_id' },
         { data: 'action', orderable: false }
       ]
     };

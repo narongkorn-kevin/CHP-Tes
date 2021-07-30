@@ -10,7 +10,7 @@ import { BenefitService } from './../service/benefit.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { FormBuilder, FormArray, FormGroup, FormControl, Validators } from '@angular/forms';
-
+import Swal from 'sweetalert2';
 
 
 enum Action {
@@ -29,6 +29,7 @@ export class EditComponent implements OnInit {
   public diseaseData: any = [];
   public ServiceGroupData: any = [];
   public BenefitbyIdData: any = [];
+  public AgeData: any = [];
   benefitsForm : FormGroup;
   benefits1Form : FormGroup;
 
@@ -46,62 +47,25 @@ export class EditComponent implements OnInit {
     public benefitform: BaseFormBenefit
 
   ) {
-    this.benefitsForm = this.fb.group({
-      event: this.fb.array([]),
-      service_id: '',
-    })
-
-    this.benefits1Form = fb.group({
-      id: '',
-      service_group_id : '',
-      name: '',
-      group_taget: '',
-      pregnant: '',
-      age:'',
-      sex:'',
-      disease_id:'',
-    })
+    
    }
 
 
    ngOnDestroy(): void {
      this.subscription.unsubscribe();
-     this.addBenefit();
-     this.dateBenefit();
+   
 
    }
-   benefit(): FormArray {
-
-    return this.benefitsForm.get('event') as FormArray
-  }
-  newBenefit(): FormGroup {
-    return this.fb.group({
-      name: '',
-      seq: '',
-      user_per_year: '',
-      remark: '',
-    })
-  }
-  addBenefit(): void {
-    2
-    this.benefit().push(this.newBenefit());
-  }
-
-  dateBenefit(): void {
-    this.benefit().push(this.newBenefit());
-  }
-
-  removeBenefit(i: number): void {
-    this.benefit().removeAt(i);
-  }
-
+   
   ngOnInit(): void {
     this.activatedRoute.params.subscribe(params => {
       const id = params.id;
       this.GetBenefitById(id);
     });
+    
     this.GetDisease();
     this.GetServiceGroup();
+    this.GetAgeRange();
     
 
   }
@@ -118,29 +82,72 @@ export class EditComponent implements OnInit {
   GetServiceGroup(): void {
     this.benefitSvc.get_service_group().subscribe((resp: any) => {
       this.ServiceGroupData = resp.data;
-      setTimeout(() => {
-        
-        this.setSelect(1);
-      }, 1000);
-
       console.log('servicegroup',this.ServiceGroupData);
     });
   }
 
-  onUpdate(): void {
-    if (this.benefits1Form.invalid) {
-      return;
-    }
-    const formValue = this.benefits1Form.value;
-    console.log('test',this.benefits1Form.value);
-    if (this.actionTODO === Action.EDIT) {
-      this.benefitSvc.update(formValue.id, formValue).subscribe((res) => {
-        console.log('Edit ', res);
-        this.router.navigate(['benefit/list']);
-      });
-    }
+//   onUpdate(): void {
+//     if (this.benefitform.baseForm.invalid) {
+//       return;
+//     }
+//     const formValue = this.benefits1Form.value;
+//     console.log('test',this.benefits1Form.value);
+//     if (this.actionTODO === Action.EDIT) {
+//       this.benefitSvc.update(formValue.id, formValue).subscribe((res) => {
+//         console.log('Edit ', res);
+//         this.router.navigate(['benefit/list']);
+//       });
+//     }
 
+// }
+
+onUpdate(): void {
+  Swal.fire({
+    title: 'Warning!',
+    text: "คุณต้องการบันทึกข้อมูล ใช่หรือไม่?",
+    icon: 'question',
+    showCancelButton: true,
+    confirmButtonColor: '#28a745',
+    cancelButtonColor: '#d33',
+    confirmButtonText: 'ตกลง',
+    cancelButtonText: 'ยกเลิก'
+  }).then((result) => {
+    if (result.isConfirmed) {
+      if (this.benefitform.baseForm.invalid) {
+        return;
+      }
+      const formValue = this.benefitform.baseForm.value;
+      //console.log(this.officerForm.baseForm.value);
+
+      if (this.actionTODO === Action.EDIT) {
+        this.benefitSvc.update(formValue.id, formValue).subscribe((res) => {
+          Swal.fire({
+            title: 'Success!',
+            text: "ดำเนินการเสร็จสิ้น!",
+            icon: 'success',
+            showCancelButton: false,
+            confirmButtonColor: '#28a745',
+            confirmButtonText: 'ตกลง',
+          }).then((result) => {
+            if (result.isConfirmed) {
+              this.router.navigate(['benefit/list']);
+            }
+          })
+        });
+      }
+
+    }
+  });
 }
+
+GetAgeRange(): void {
+  this.benefitSvc.get_age().subscribe((resp) => {
+    this.AgeData = resp.data;
+    console.log('age',this.AgeData);
+  });
+}
+
+
 
 setSelect(id){
   let elm = document.getElementsByClassName("mat-pseudo-checkbox");
@@ -154,13 +161,12 @@ setSelect(id){
 GetBenefitById(id ): void {
   this.benefitSvc.getById(id).subscribe((resp:any) => {
     this.BenefitbyIdData = resp.data;
-    this.selectList = resp.data.service_groups;
 
-    this.benefits1Form.patchValue({
+    this.benefitform.baseForm.patchValue({
       id: this.BenefitbyIdData.id,
       name: this.BenefitbyIdData.name,
       pregnant: this.BenefitbyIdData.pregnant,
-      age: this.BenefitbyIdData.age,
+      age_id: this.BenefitbyIdData.age_id,
       sex: this.BenefitbyIdData.sex,
       disease_id: this.BenefitbyIdData.disease_id,
       group_taget: this.BenefitbyIdData.group_taget,
@@ -169,7 +175,7 @@ GetBenefitById(id ): void {
 
     });
     console.log('benefit',this.BenefitbyIdData)
-    console.log('benefits1Form',this.benefits1Form.value)
+    console.log('benefits1Form',this.benefitform.baseForm.value)
     console.log('ServiceGroupID',this.BenefitbyIdData.service_groups[0].id)
 
   });

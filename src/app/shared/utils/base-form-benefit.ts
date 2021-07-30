@@ -26,7 +26,7 @@ export class BaseFormBenefit {
       '',
 
     ],
-    age: [
+    age_id: [
       '',
 
     ],
