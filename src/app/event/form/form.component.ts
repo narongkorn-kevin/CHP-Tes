@@ -11,6 +11,7 @@ import {
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { FormBuilder, FormArray, FormGroup, FormControl, Validators } from '@angular/forms';
+import Swal from 'sweetalert2';
 
 enum Action {
   EDIT = 'edit',
@@ -85,27 +86,45 @@ export class FormComponent implements AfterViewInit, OnInit, OnDestroy {
   }
 
   onSubmit(): void {
-    this.isValidFormSubmitted = false;
-    if (this.event().invalid) {
-      return;
-    }
-    this.isValidFormSubmitted = true;
-    console.log(this.eventsForm.value);
+    Swal.fire({
+      title: 'Warning!',
+          text: "คุณต้องการบันทึกข้อมูล ใช่หรือไม่?",
+          icon: 'question',
+          showCancelButton: true,
+          confirmButtonColor: '#28a745',
+          cancelButtonColor: '#d33',
+          confirmButtonText: 'ตกลง',
+          cancelButtonText: 'ยกเลิก'
+    }).then((result) => {
+      if (result.isConfirmed){
+        if (this.eventsForm.invalid) {
+          return;
+        }
+        const formValue = this.eventsForm.value;
 
-    if (this.eventsForm.invalid) {
-      return;
-    }
+      if (this.actionTODO === Action.NEW) {
+        this.eventSvc.new(formValue).subscribe((res) => {
+          Swal.fire({
+            title: 'Success!',
+            text: "ดำเนินการเสร็จสิ้น!",
+            icon: 'success',
+            showCancelButton: false,
+            confirmButtonColor: '#28a745',
+            confirmButtonText: 'ตกลง',
+          }).then((result) => {
+            if (result.isConfirmed) {
+              this.router.navigate(['event/list']);
+            }
+          })
+        });
+      }
+      }
 
-    const formValue = this.eventsForm.value;
-
-   
-
-    if (this.actionTODO === Action.NEW) {
-      this.eventSvc.new(formValue).subscribe((res) => {
-        console.log('New ', res);
-        this.router.navigate(['event/list']);
-      });
-    }
+      
+    });
+  
+ 
+  
   }
   ngAfterViewInit(): void {
     console.log('test');

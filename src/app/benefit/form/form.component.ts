@@ -10,7 +10,7 @@ import { BenefitService } from './../service/benefit.service';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { FormBuilder, FormArray, FormGroup, FormControl, Validators } from '@angular/forms';
-
+import Swal from 'sweetalert2';
 
 
 enum Action {
@@ -39,55 +39,16 @@ export class FormComponent implements OnInit {
     public benefitform: BaseFormBenefit
 
   ) {
-    this.benefitsForm = this.fb.group({
-      event: this.fb.array([]),
-      service_id: '',
-    })
 
-    this.benefits1Form = fb.group({
-      service_group_id : '',
-      name: '',
-      group_taget: '',
-      pregnant: '',
-      age:'',
-      sex:'',
-      disease_id:'',
-    })
+   }
+   
+   ngOnDestroy(): void {
+     this.subscription.unsubscribe();
    }
    
 
-   ngOnDestroy(): void {
-     this.subscription.unsubscribe();
-     this.addBenefit();
-     this.dateBenefit();
-
-   }
-   benefit(): FormArray {
-
-    return this.benefitsForm.get('benefit') as FormArray
-  }
-  newBenefit(): FormGroup {
-    return this.fb.group({
-      name: '',
-      seq: '',
-      user_per_year: '',
-      remark: '',
-    })
-  }
-  addBenefit(): void {
-    2
-    this.benefit().push(this.newBenefit());
-  }
-
-  dateBenefit(): void {
-    this.benefit().push(this.newBenefit());
-  }
-
-  removeBenefit(i: number): void {
-    this.benefit().removeAt(i);
-  }
-
   ngOnInit(): void {
+    this.benefitform.baseForm.reset();
     this.GetDisease();
     this.GetServiceGroup();
   }
@@ -108,19 +69,81 @@ export class FormComponent implements OnInit {
     });
   }
 
-  onSubmit1(): void {
-    if (this.benefitform.baseForm.invalid) {
-      return;
-    }
-    const formValue = this.benefitform.baseForm.value;
+  onAdd(): void {
+Swal.fire({
+  title: 'Warning!',
+      text: "คุณต้องการบันทึกข้อมูล ใช่หรือไม่?",
+      icon: 'question',
+      showCancelButton: true,
+      confirmButtonColor: '#28a745',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'ตกลง',
+      cancelButtonText: 'ยกเลิก'
+}).then((result) => {
+      if (result.isConfirmed) {
+        if (this.benefitform.baseForm.invalid) {
+          return;
+        }
+        const formValue = this.benefitform.baseForm.value;
+        //console.log(this.officerForm.baseForm.value);
 
-    console.log('test',this.benefitform.baseForm.value);
-    if (this.actionTODO === Action.NEW) {
-      this.benefitSvc.new(formValue).subscribe((res) => {
-        console.log('New ', res);
-        this.router.navigate(['benefit/list']);
-      });
-    }
+        if (this.actionTODO === Action.NEW) {
+          this.benefitSvc.new(formValue).subscribe((res) => {
+            Swal.fire({
+              title: 'Success!',
+              text: "ดำเนินการเสร็จสิ้น!",
+              icon: 'success',
+              showCancelButton: false,
+              confirmButtonColor: '#28a745',
+              confirmButtonText: 'ตกลง',
+            }).then((result) => {
+              if (result.isConfirmed) {
+                this.router.navigate(['benefit/list']);
+              }
+            })
+          });
+        }
+       
+      }
+    });
+  }
 
-}
+  // onAdd(); void {
+  //   Swal.fire({
+  //     title: 'Warning!',
+  //     text: "คุณต้องการบันทึกข้อมูล ใช่หรือไม่?",
+  //     icon: 'question',
+  //     showCancelButton: true,
+  //     confirmButtonColor: '#28a745',
+  //     cancelButtonColor: '#d33',
+  //     confirmButtonText: 'ตกลง',
+  //     cancelButtonText: 'ยกเลิก'
+  //   }).then((result) => {
+  //     if (result.isConfirmed) {
+  //       if (this.benefitform.baseForm.invalid) {
+  //         return;
+  //       }
+  //       const formValue = this.officerForm.baseForm.value;
+  //       //console.log(this.officerForm.baseForm.value);
+
+  //       if (this.actionTODO === Action.NEW) {
+  //         this.officerServ.New(formValue).subscribe((res) => {
+  //           Swal.fire({
+  //             title: 'Success!',
+  //             text: "ดำเนินการเสร็จสิ้น!",
+  //             icon: 'success',
+  //             showCancelButton: false,
+  //             confirmButtonColor: '#28a745',
+  //             confirmButtonText: 'ตกลง',
+  //           }).then((result) => {
+  //             if (result.isConfirmed) {
+  //               this.router.navigate(['officer/list']);
+  //             }
+  //           })
+  //         });
+  //       }
+       
+  //     }
+  //   });
+  // }
 }
