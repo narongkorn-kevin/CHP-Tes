@@ -1,3 +1,4 @@
+import { MatInputModule } from '@angular/material/input';
 import { ReactiveFormsModule } from '@angular/forms';
 import { DataTablesModule } from 'angular-datatables';
 import { NgModule } from '@angular/core';
@@ -9,6 +10,8 @@ import { EditComponent } from './edit/edit.component';
 import { ListComponent } from './list/list.component';
 import {MatTabsModule} from '@angular/material/tabs';
 import {MatSelectModule} from '@angular/material/select';
+import { MatChip } from '@angular/material/chips';
+import {MatChipsModule} from '@angular/material/chips';
 
 
 @NgModule({

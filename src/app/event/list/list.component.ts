@@ -165,6 +165,13 @@ export class ListComponent implements AfterViewInit, OnInit, OnDestroy {
           search: { value: '', regex: false },
         },
         {
+          data: 'remark',
+          name: '',
+          searchable: true,
+          orderable: true,
+          search: { value: '', regex: false },
+        },
+        {
           data: 'action',
           name: '',
           searchable: true,
@@ -214,6 +221,7 @@ export class ListComponent implements AfterViewInit, OnInit, OnDestroy {
         { data: 'name' },
         { data: 'seq' },
         { data: 'use_per_year' },
+        { data: 'remark' },
         { data: 'action', orderable: false }
       ],
     };

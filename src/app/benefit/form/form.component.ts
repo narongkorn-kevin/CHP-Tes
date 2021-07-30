@@ -23,14 +23,14 @@ enum Action {
   styleUrls: ['./form.component.scss']
 })
 export class FormComponent implements OnInit {
-
+ 
   hide = true;
   actionTODO = Action.NEW;
   public diseaseData: any = [];
   public ServiceGroupData: any = [];
   public AgeData: any = [];
-  benefitsForm: FormGroup;
-  benefits1Form: FormGroup;
+  benefitsForm : FormGroup;
+  benefits1Form : FormGroup;
   private subscription: Subscription = new Subscription();
 
   constructor(
@@ -41,12 +41,12 @@ export class FormComponent implements OnInit {
 
   ) {
 
-  }
-
-  ngOnDestroy(): void {
-    this.subscription.unsubscribe();
-  }
-
+   }
+   
+   ngOnDestroy(): void {
+     this.subscription.unsubscribe();
+   }
+   
 
   ngOnInit(): void {
     this.benefitform.baseForm.reset();
@@ -79,8 +79,8 @@ export class FormComponent implements OnInit {
     });
   }
   onAdd(): void {
-    Swal.fire({
-      title: 'Warning!',
+Swal.fire({
+  title: 'Warning!',
       text: "คุณต้องการบันทึกข้อมูล ใช่หรือไม่?",
       icon: 'question',
       showCancelButton: true,
@@ -88,7 +88,7 @@ export class FormComponent implements OnInit {
       cancelButtonColor: '#d33',
       confirmButtonText: 'ตกลง',
       cancelButtonText: 'ยกเลิก'
-    }).then((result) => {
+}).then((result) => {
       if (result.isConfirmed) {
         if (this.benefitform.baseForm.invalid) {
           return;
@@ -112,9 +112,47 @@ export class FormComponent implements OnInit {
             })
           });
         }
-
+       
       }
     });
   }
 
+  // onAdd(); void {
+  //   Swal.fire({
+  //     title: 'Warning!',
+  //     text: "คุณต้องการบันทึกข้อมูล ใช่หรือไม่?",
+  //     icon: 'question',
+  //     showCancelButton: true,
+  //     confirmButtonColor: '#28a745',
+  //     cancelButtonColor: '#d33',
+  //     confirmButtonText: 'ตกลง',
+  //     cancelButtonText: 'ยกเลิก'
+  //   }).then((result) => {
+  //     if (result.isConfirmed) {
+  //       if (this.benefitform.baseForm.invalid) {
+  //         return;
+  //       }
+  //       const formValue = this.officerForm.baseForm.value;
+  //       //console.log(this.officerForm.baseForm.value);
+
+  //       if (this.actionTODO === Action.NEW) {
+  //         this.officerServ.New(formValue).subscribe((res) => {
+  //           Swal.fire({
+  //             title: 'Success!',
+  //             text: "ดำเนินการเสร็จสิ้น!",
+  //             icon: 'success',
+  //             showCancelButton: false,
+  //             confirmButtonColor: '#28a745',
+  //             confirmButtonText: 'ตกลง',
+  //           }).then((result) => {
+  //             if (result.isConfirmed) {
+  //               this.router.navigate(['officer/list']);
+  //             }
+  //           })
+  //         });
+  //       }
+       
+  //     }
+  //   });
+  // }
 }
