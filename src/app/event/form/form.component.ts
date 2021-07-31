@@ -32,6 +32,8 @@ export class FormComponent implements AfterViewInit, OnInit, OnDestroy {
   showPasswordField = true;
   hide = true;
   isValidFormSubmitted = null;
+  columns = [{ name: 'name'}];
+  filterData = [];
   private subscription: Subscription = new Subscription();
   public ServiceGroupData: any = [];
   public ServiceData: any = [];
@@ -155,6 +157,30 @@ export class FormComponent implements AfterViewInit, OnInit, OnDestroy {
       console.log(this.SeqData);
     });
   }
+
+  // onFilter(event) {
+  //     console.log('111',event);
+  //   // ตัวให้เป็นตัวเล็กให้หมด
+  //   let val = event.target.value.toLowerCase();
+  //   // หา ชื่อ คอลัมน์
+  //   let keys = Object.keys(this.columns[0]);
+  //   // หาจำนวนคอลัม
+  //   let colsAmt = keys.length;
+  //   // console.log('keys', keys);
+  //   this.ServiceData = this.filterData.filter(function (item) {
+  //     //console.log('colsAmt',colsAmt);
+  //     for (let i = 0; i < colsAmt; i++) {
+  //       //console.log(colsAmt);
+  //       if (item[keys[i]]) {
+  //         if (item[keys[i]].toString().toLowerCase().indexOf(val) !== -1 || !val) {
+  //           // ส่งคืนตัวที่เจอ
+  //           return true;
+  //         }
+  //       }
+  //     }
+  //   });
+  //   console.log('this.ItemData', this.ServiceData);
+  // }
 
   
 

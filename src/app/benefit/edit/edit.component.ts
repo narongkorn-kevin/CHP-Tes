@@ -149,32 +149,33 @@ GetAgeRange(): void {
 
 
 
-setSelect(id){
-  let elm = document.getElementsByClassName("mat-pseudo-checkbox");
-  console.log(elm);
-  alert(elm.length);
-  return;
-   let res = this.selectList.some(id);
-    console.log('res', res);
-    return res;
-}
+// setSelect(id){
+//   let elm = document.getElementsByClassName("mat-pseudo-checkbox");
+//   console.log(elm);
+//   alert(elm.length);
+//   return;
+//    let res = this.selectList.some(id);
+//     console.log('res', res);
+//     return res;
+// }
 GetBenefitById(id ): void {
   this.benefitSvc.getById(id).subscribe((resp:any) => {
     this.BenefitbyIdData = resp.data;
-
+    var num = this.BenefitbyIdData.pregnant;
+    var n = num.toString();
+    console.log('benefit',this.BenefitbyIdData)
     this.benefitform.baseForm.patchValue({
       id: this.BenefitbyIdData.id,
       name: this.BenefitbyIdData.name,
-      pregnant: this.BenefitbyIdData.pregnant,
+      pregnant: n,
       age_id: this.BenefitbyIdData.age_id,
       sex: this.BenefitbyIdData.sex,
       disease_id: this.BenefitbyIdData.disease_id,
       group_taget: this.BenefitbyIdData.group_taget,
-      //service_group_id: this.BenefitbyIdData.service_groups[0].id,
+      service_group_id: this.BenefitbyIdData.service_groups[0].name,
       
-
     });
-    console.log('benefit',this.BenefitbyIdData)
+    
     console.log('benefits1Form',this.benefitform.baseForm.value)
     console.log('ServiceGroupID',this.BenefitbyIdData.service_groups[0].id)
 
