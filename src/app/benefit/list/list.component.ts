@@ -48,6 +48,7 @@ export class ListComponent implements AfterViewInit, OnInit, OnDestroy {
   filteredFruits: Observable<any[]>;
 
   fruits = [
+    'Lemon',
   ];
 
   allFruits = [
@@ -70,6 +71,7 @@ export class ListComponent implements AfterViewInit, OnInit, OnDestroy {
   public ServiceGroupData: any = [];
   public ServiceData: any = [];
   // public allFruits: any = [];
+  // public fruits: any = [];
   public AgeData: any = [];
   formFillter: FormGroup;
 
@@ -219,7 +221,8 @@ export class ListComponent implements AfterViewInit, OnInit, OnDestroy {
   GetServiceGroup(): void {
     this.benefitSvc.get_service_group().subscribe((resp) => {
       this.ServiceGroupData = resp.data;
-      console.log(this.ServiceGroupData);
+      this.allFruits = this.ServiceGroupData;
+      console.log('allfruit',this.allFruits);
     });
   }
   GetService(): void {
