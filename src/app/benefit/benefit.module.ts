@@ -1,9 +1,13 @@
+<<<<<<< HEAD
 import { MatSortModule } from '@angular/material/sort';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTreeModule } from '@angular/material/tree';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
 import { HttpClientModule } from '@angular/common/http';
+=======
+import { MatInputModule } from '@angular/material/input';
+>>>>>>> 3e0b1f46e386b314c6d37cdfc6d93c593765233d
 import { ReactiveFormsModule } from '@angular/forms';
 import { DataTablesModule } from 'angular-datatables';
 import {MatBadgeModule} from '@angular/material/badge';
