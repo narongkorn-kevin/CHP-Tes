@@ -41,23 +41,20 @@ export class ListComponent implements AfterViewInit, OnInit, OnDestroy {
   removable: boolean = true;
   addOnBlur: boolean = false;
 
+
   separatorKeysCodes = [ENTER, COMMA];
 
   fruitCtrl = new FormControl();
+  ServiceCtrl = new FormControl();
 
   filteredFruits: Observable<any[]>;
+  filteredService: Observable<any[]>;
 
-  fruits = [
-    'Lemon',
-  ];
+  fruits = [ ];
+  ServiceSelect = [ ];
 
-  allFruits = [
-    'Apple',
-    'Lemon',
-    'Lime',
-    'Orange',
-    'Strawberry'
-  ];
+  allFruits = [''];
+  AllServiceSelect = [''];
 
 
   httpOptions = {
@@ -95,8 +92,14 @@ export class ListComponent implements AfterViewInit, OnInit, OnDestroy {
 
 
     this.filteredFruits = this.fruitCtrl.valueChanges.pipe(
-      startWith(''),
+      startWith(null),
       map((fruit: string | null) => fruit ? this.filter(fruit) : this.allFruits.slice()));
+
+      this.filteredService = this.ServiceCtrl.valueChanges.pipe(
+        startWith(null),
+        map((fruit: string | null) => fruit ? this.filter(fruit) : this.allFruits.slice()));
+
+
 
 
   }
@@ -104,6 +107,7 @@ export class ListComponent implements AfterViewInit, OnInit, OnDestroy {
   add(event: MatChipInputEvent): void {
     const input = event.input;
     const value = event.value;
+    console.log('event',event);
 
 
   }
@@ -122,6 +126,7 @@ export class ListComponent implements AfterViewInit, OnInit, OnDestroy {
 
   selected(event: MatAutocompleteSelectedEvent): void {
     this.fruits.push(event.option.viewValue);
+    console.log('selected event',event.option.viewValue);
     this.fruitInput.nativeElement.value = '';
     this.fruitCtrl.setValue(null);
   }
@@ -223,6 +228,7 @@ export class ListComponent implements AfterViewInit, OnInit, OnDestroy {
       this.ServiceGroupData = resp.data;
       this.allFruits = this.ServiceGroupData;
       console.log('allfruit',this.allFruits);
+      this.fruitCtrl.setValue(null);
     });
   }
   GetService(): void {

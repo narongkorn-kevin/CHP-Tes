@@ -84,7 +84,7 @@
                           <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
                         </mat-chip>
                         <input
-                          placeholder="ทั้งหมด"
+                          placeholder="เลือกกลุ่มบริการ"
                           #fruitInput
                           [formControl]="fruitCtrl"
                           [matAutocomplete]="auto"
@@ -106,11 +106,39 @@
                 <div class="col-md-2 mb-2">
                   <label for="validationCustomUsername">บริการ</label>
                   <div class="input-group">
-                    <mat-select class="form-control" placeholder="ทั้งหมด" formControlName="service_id">
+                    <!-- <mat-select class="form-control" placeholder="ทั้งหมด" formControlName="service_id">
                       <mat-option *ngFor="let item of ServiceData" [value]="item.id">
                         {{item.name}}
                       </mat-option>
-                    </mat-select>
+                    </mat-select> -->
+                    <mat-form-field class="demo-chip-list">
+                      <mat-chip-list #chipList>
+                        <mat-chip
+                          *ngFor="let fruit of fruits"
+                          [selectable]="selectable"
+                          [removable]="removable"
+                          (removed)="remove(fruit)">
+                          {{fruit}}
+                          <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+                        </mat-chip>
+                        <input
+                          placeholder="เลือกบริการ"
+                          #fruitInput
+                          [formControl]="fruitCtrl"
+                          [matAutocomplete]="auto"
+                          [matChipInputFor]="chipList"
+                          [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                          [matChipInputAddOnBlur]="addOnBlur"
+                          (matChipInputTokenEnd)="add($event)"
+                          formControlName="service_group_id"
+                        />
+                      </mat-chip-list>
+                      <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
+                        <mat-option *ngFor="let fruit of filteredFruits | async" [value]="fruit.id">
+                          {{ fruit.name }}
+                        </mat-option>
+                      </mat-autocomplete>
+                    </mat-form-field>
                   </div>
                 </div>
                 <div class="col-md-2 mb-2">
