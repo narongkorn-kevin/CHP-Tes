@@ -51,11 +51,7 @@ export class ListComponent implements AfterViewInit, OnInit, OnDestroy {
   ];
 
   allFruits = [
-    'Apple',
-    'Lemon',
-    'Lime',
-    'Orange',
-    'Strawberry'
+    
   ];
 
 
@@ -225,6 +221,7 @@ export class ListComponent implements AfterViewInit, OnInit, OnDestroy {
   GetService(): void {
     this.benefitSvc.get_service().subscribe((resp) => {
       this.ServiceData = resp.data;
+      this.allFruits = this.ServiceData;
       console.log(this.ServiceData);
     });
   }
