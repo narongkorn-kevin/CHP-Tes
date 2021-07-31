@@ -1,17 +1,32 @@
 import { Event } from '@app/shared/models/base.interface'
-import { takeUntil } from 'rxjs/operators';
+import { takeUntil, startWith, map } from 'rxjs/operators';
 import { EventService } from './../service/event.service';
 import {
   AfterViewInit,
   Component,
   OnInit,
+  Renderer2,
+  ElementRef,
   ViewChild,
-  OnDestroy,
+  OnDestroy
 } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { FormBuilder, FormArray, FormGroup, FormControl, Validators } from '@angular/forms';
 import Swal from 'sweetalert2';
+
+import { COMMA, ENTER } from '@angular/cdk/keycodes';
+import { MatTableDataSource } from '@angular/material/table';
+import { MatSort } from '@angular/material/sort';
+import { MatChipInputEvent } from '@angular/material/chips';
+import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
+import { HttpHeaders } from '@angular/common/http';
+import { Subject, Observable } from 'rxjs';
+import { DataTableDirective } from 'angular-datatables';
+
+//////////////////////////
+
+//////////////////////////
 
 enum Action {
   EDIT = 'edit',
@@ -38,6 +53,11 @@ export class FormComponent implements AfterViewInit, OnInit, OnDestroy {
   public ServiceGroupData: any = [];
   public ServiceData: any = [];
   public SeqData: any = [];
+//////////////////////////
+myControl = new FormControl();
+options: string[] = [];
+filteredOptions: Observable<string[]>;
+  //////////////////////////
 
   constructor(
     private eventSvc: EventService,
@@ -49,10 +69,19 @@ export class FormComponent implements AfterViewInit, OnInit, OnDestroy {
       service_id: '',
       event: this.fb.array([], [Validators.required]),
 
+      
+
 
     });
+////////////////////////////
+  
+////////////////////////////
 
   }
+////////////////////////////
+
+
+  //////////////////////
 
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
@@ -125,8 +154,6 @@ export class FormComponent implements AfterViewInit, OnInit, OnDestroy {
       
     });
   
- 
-  
   }
   ngAfterViewInit(): void {
     console.log('test');
@@ -135,14 +162,31 @@ export class FormComponent implements AfterViewInit, OnInit, OnDestroy {
   ngOnInit(): void {
     this.GetService();
     this.GetSequence();
+    ////
+    this.filteredOptions = this.myControl.valueChanges
+      .pipe(
+        startWith(''),
+        map(value => this._filter(value))
+      );
+      ////
   }
+////
+  private _filter(value: string): string[] {
+    const filterValue = value.toLowerCase();
+    console.log('filter',filterValue);
+    return this.options.filter(option => option.toLowerCase().includes(filterValue));
+    
+  }
+  
 
   GetService(): void {
     this.eventSvc.get_service().subscribe((resp) => {
       this.ServiceData = resp.data;
       console.log('service',this.ServiceData);
+      this.options = this.ServiceData;
     });
   }
+
 
   GetServiceGroup(): void {
     this.eventSvc.get_service_group().subscribe((resp) => {
@@ -157,33 +201,6 @@ export class FormComponent implements AfterViewInit, OnInit, OnDestroy {
       console.log(this.SeqData);
     });
   }
-
-  // onFilter(event) {
-  //     console.log('111',event);
-  //   // ตัวให้เป็นตัวเล็กให้หมด
-  //   let val = event.target.value.toLowerCase();
-  //   // หา ชื่อ คอลัมน์
-  //   let keys = Object.keys(this.columns[0]);
-  //   // หาจำนวนคอลัม
-  //   let colsAmt = keys.length;
-  //   // console.log('keys', keys);
-  //   this.ServiceData = this.filterData.filter(function (item) {
-  //     //console.log('colsAmt',colsAmt);
-  //     for (let i = 0; i < colsAmt; i++) {
-  //       //console.log(colsAmt);
-  //       if (item[keys[i]]) {
-  //         if (item[keys[i]].toString().toLowerCase().indexOf(val) !== -1 || !val) {
-  //           // ส่งคืนตัวที่เจอ
-  //           return true;
-  //         }
-  //       }
-  //     }
-  //   });
-  //   console.log('this.ItemData', this.ServiceData);
-  // }
-
-  
-
 
 
 

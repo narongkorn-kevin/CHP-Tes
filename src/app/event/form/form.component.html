@@ -24,6 +24,25 @@
             </div>
         </div>
         <!--End Page header-->
+
+        <!-- <form class="example-form">
+            <mat-form-field class="example-full-width" appearance="fill">
+              <mat-label>Number</mat-label>
+              <input type="text"
+                     placeholder="Pick one"
+                     aria-label="Number"
+                     matInput
+                     [formControl]="myControl"
+                     [matAutocomplete]="auto">
+              <mat-autocomplete #auto="matAutocomplete">
+                <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+                  {{option}}
+                </mat-option>
+              </mat-autocomplete>
+            </mat-form-field>
+          </form> -->
+
+        
         <form [formGroup]="eventsForm" (ngSubmit)="onSubmit()">
 
             <div class="row">
@@ -38,10 +57,26 @@
                                     <div class="form-group row">
                                         <label class="col-md-3 form-label">กิจกรรมหลัก:</label>
                                         <div class="col-md-9">
-                                            <mat-select formControlName="service_id" class="form-control">
+                                            <!-- <mat-select formControlName="service_id" class="form-control">
                                                 <mat-option *ngFor="let service of ServiceData" [value]="service.id">
                                                     {{service.name}}</mat-option>
-                                            </mat-select>
+                                            </mat-select> -->
+                                            <mat-form-field class="example-full-width" appearance="fill">
+                                                <mat-label>Number</mat-label>
+                                                <input type="text"
+                                                       placeholder="Pick one"
+                                                       aria-label="Number"
+                                                       matInput
+                                                       [formControl]="myControl"
+                                                       [matAutocomplete]="auto">    
+                                                <mat-autocomplete #auto="matAutocomplete">
+                                                  <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+                                                    {{option}}
+                                                  </mat-option>
+                                                </mat-autocomplete>
+                                              </mat-form-field>
+
+                                         
                                             
                                         </div>
                                     </div>
@@ -161,6 +196,7 @@
             </div>
             <!-- End Row -->
         </form>
+          
     </div>
 </div>
 <!-- end app-content-->
