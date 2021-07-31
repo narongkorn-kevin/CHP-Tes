@@ -1,9 +1,10 @@
-import  Swal  from 'sweetalert2';
-import { FormGroup, FormBuilder } from '@angular/forms';
+import Swal from 'sweetalert2';
+import { COMMA, ENTER } from '@angular/cdk/keycodes';
+import { FormGroup, FormBuilder, FormControl } from '@angular/forms';
 import { BenefitService } from './../service/benefit.service';
 import { BenefitResponse } from './../../shared/models/base.interface';
 
-import { takeUntil } from 'rxjs/operators';
+import { startWith, takeUntil, map } from 'rxjs/operators';
 import {
   AfterViewInit,
   Component,
@@ -16,10 +17,12 @@ import {
 import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
 import { MatDialog } from '@angular/material/dialog';
-import { Subject } from 'rxjs';
+import { Subject, Observable } from 'rxjs';
 import { DataTableDirective } from 'angular-datatables';
 import { HttpHeaders } from '@angular/common/http';
 import { NavigationExtras, Router } from '@angular/router';
+import { MatChipInputEvent } from '@angular/material/chips';
+import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 
 declare var $: any;
 const user = JSON.parse(localStorage.getItem('user')) || null;
@@ -33,6 +36,27 @@ const user = JSON.parse(localStorage.getItem('user')) || null;
 export class ListComponent implements AfterViewInit, OnInit, OnDestroy {
   displayedColumns: string[] = ['id', 'role', 'username', 'actions'];
   dataSource = new MatTableDataSource();
+  visible: boolean = true;
+  selectable: boolean = true;
+  removable: boolean = true;
+  addOnBlur: boolean = false;
+
+  separatorKeysCodes = [ENTER, COMMA];
+
+  fruitCtrl = new FormControl();
+
+  filteredFruits: Observable<any[]>;
+
+  fruits = [
+  ];
+
+  allFruits = [
+    'Apple',
+    'Lemon',
+    'Lime',
+    'Orange',
+    'Strawberry'
+  ];
 
 
   httpOptions = {
@@ -45,10 +69,12 @@ export class ListComponent implements AfterViewInit, OnInit, OnDestroy {
   public dataRow: any[];
   public ServiceGroupData: any = [];
   public ServiceData: any = [];
+  // public allFruits: any = [];
   public AgeData: any = [];
   formFillter: FormGroup;
 
 
+  @ViewChild('fruitInput') fruitInput: ElementRef;
 
   @ViewChild(DataTableDirective)
   dtElement!: DataTableDirective;
@@ -64,7 +90,40 @@ export class ListComponent implements AfterViewInit, OnInit, OnDestroy {
       service_id: '',
       age_id: '',
     });
+
+
+    this.filteredFruits = this.fruitCtrl.valueChanges.pipe(
+      startWith(''),
+      map((fruit: string | null) => fruit ? this.filter(fruit) : this.allFruits.slice()));
+
+
   }
+
+  add(event: MatChipInputEvent): void {
+    const input = event.input;
+    const value = event.value;
+
+
+  }
+  remove(fruit: any): void {
+    const index = this.fruits.indexOf(fruit);
+
+    if (index >= 0) {
+      this.fruits.splice(index, 1);
+    }
+  }
+
+  filter(name: string) {
+    return this.allFruits.filter(fruit =>
+        fruit.toLowerCase().indexOf(name.toLowerCase()) === 0);
+  }
+
+  selected(event: MatAutocompleteSelectedEvent): void {
+    this.fruits.push(event.option.viewValue);
+    this.fruitInput.nativeElement.value = '';
+    this.fruitCtrl.setValue(null);
+  }
+
 
   ngOnDestroy(): void {
     this.destroy$.next({});
@@ -111,7 +170,7 @@ export class ListComponent implements AfterViewInit, OnInit, OnDestroy {
         { data: 'No' },
         { data: 'service_group_name' },
         { data: 'name' },
-        { data: 'age_id' },
+        { data: 'age_id.name' },
         { data: 'action', orderable: false }
       ]
     };
@@ -126,7 +185,7 @@ export class ListComponent implements AfterViewInit, OnInit, OnDestroy {
   onDelete(benefitId: number): void {
     Swal.fire({
       title: 'Warning!',
-      text: "คุณต้องการลบริการ ใช่หรือไม่?",
+      text: "คุณต้องการลบบริการ ใช่หรือไม่?",
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#28a745',
@@ -148,7 +207,7 @@ export class ListComponent implements AfterViewInit, OnInit, OnDestroy {
           });
       }
     });
-   
+
   }
   rerender(): void {
     this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
@@ -214,36 +273,62 @@ export class ListComponent implements AfterViewInit, OnInit, OnDestroy {
 
   Onsearch(form: FormGroup): void {
     console.log('test',form.value);
-
-    let formValue = form.value;
-    const that = this;
-    this.dtOptions = {
-      pagingType: 'full_numbers',
-      pageLength: 10,
-      serverSide: true,
-      processing: true,
-      ajax: (dataTablesParameters: any, callback) => {
-        dataTablesParameters['service_group_id'] = formValue.service_group_id;
-        dataTablesParameters['service_id'] = formValue.service_id;
-        dataTablesParameters['age_id'] = formValue.age_id;
-        that.benefitSvc.getAll(dataTablesParameters).subscribe(resp => {
-          that.dataRow = resp.data.data;
-          console.log('datatable', that.dataRow);
-          callback({
-            recordsTotal: resp.data.total,
-            recordsFiltered: resp.data.total,
-            data: []
-          });
-        });
-      },
+    var data = {
+      draw: 1,
       columns: [
-        { data: 'No' },
-        { data: 'service_group_name' },
-        { data: 'name' },
-        { data: 'age_id' },
-        { data: 'action', orderable: false }
-      ]
+        {
+          data: 'No',
+          name: '',
+          searchable: true,
+          orderable: true,
+          search: { value: '', regex: false },
+        },
+        {
+          data: 'service_group_name',
+          name: '',
+          searchable: true,
+          orderable: true,
+          search: { value: '', regex: false },
+        },
+        {
+          data: 'name',
+          name: '',
+          searchable: true,
+          orderable: true,
+          search: { value: '', regex: false },
+        },
+        {
+          data: 'age_id.name',
+          name: '',
+          searchable: true,
+          orderable: true,
+          search: { value: '', regex: false },
+        },
+        {
+          data: 'action',
+          name: '',
+          searchable: true,
+          orderable: false,
+          search: { value: '', regex: false },
+        },
+      ],
+      order: [{ column: 0, dir: 'asc' }],
+      start: 0,
+      length: 10,
+      search: { value: '', regex: false },
     };
+    // this.dataRow = this.dataRowFilter.filter((item) => {
+    //   if (item.warehouse_id == event) {
+    //      return item;
+    //   }
+    // });
+    data['service_group_id'] = form.value.service_group_id;
+    data['service_id'] = form.value.service_id;
+    data['age_id'] = form.value.age_id;
+    this.benefitSvc.getAll(data).subscribe((resp) => {
+    this.dataRow = resp.data.data;
+    console.log('555',this.dataRow)
+    });
 
   }
 
