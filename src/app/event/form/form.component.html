@@ -42,7 +42,7 @@
             </mat-form-field>
           </form> -->
 
-        
+
         <form [formGroup]="eventsForm" (ngSubmit)="onSubmit()">
 
             <div class="row">
@@ -63,21 +63,16 @@
                                             </mat-select> -->
                                             <mat-form-field class="example-full-width" appearance="fill">
                                                 <mat-label>Number</mat-label>
-                                                <input type="text"
-                                                       placeholder="Pick one"
-                                                       aria-label="Number"
-                                                       matInput
-                                                       [formControl]="myControl"
-                                                       [matAutocomplete]="auto">    
-                                                <mat-autocomplete #auto="matAutocomplete">
-                                                  <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
-                                                    {{option}}
-                                                  </mat-option>
-                                                </mat-autocomplete>
-                                              </mat-form-field>
+                                                <input type="text" placeholder="Pick one" aria-label="Number" matInput
+                                                    [formControl]="myControl" [matAutocomplete]="auto">
 
-                                         
-                                            
+                                                <mat-autocomplete #auto="matAutocomplete">
+                                                    <mat-option *ngFor="let option of filteredOptions | async"
+                                                        [value]="option.id">
+                                                        {{option.name}}
+                                                    </mat-option>
+                                                </mat-autocomplete>
+                                            </mat-form-field>
                                         </div>
                                     </div>
                                 </div>
@@ -125,25 +120,23 @@
                                                     <tr>
                                                         <th colspan="5"></th>
                                                         <th width="150px">
-                                                            <button type="button" 
-                                                            (click)="addEvent()"
-                                                            class="btn btn-primary">
+                                                            <button type="button" (click)="addEvent()"
+                                                                class="btn btn-primary">
                                                                 เพิ่ม
                                                             </button>
                                                         </th>
                                                     </tr>
-                                                    <tr *ngFor="depo; of: event().controls; let i = index" [formGroupName]="i">
+                                                    <tr *ngFor="depo; of: event().controls; let i = index"
+                                                        [formGroupName]="i">
                                                         <th scope="row">{{ i + 1 }}</th>
                                                         <td>
-                                                            <input type="text" 
-                                                            formControlName="name"
-                                                            class="form-control"
-                                                            placeholder="กิจกรรมสำคัญที่จะได้รับ" />
+                                                            <input type="text" formControlName="name"
+                                                                class="form-control"
+                                                                placeholder="กิจกรรมสำคัญที่จะได้รับ" />
                                                         </td>
                                                         <td>
                                                             <div>
-                                                                <mat-select formControlName="seq"
-                                                                class="form-control">
+                                                                <mat-select formControlName="seq" class="form-control">
                                                                     <mat-option *ngFor="let service of SeqData"
                                                                         [value]="service.name">
                                                                         {{service.name}}
@@ -152,21 +145,15 @@
                                                             </div>
                                                         </td>
                                                         <td>
-                                                            <input type="text"
-                                                            formControlName="use_per_year"
-                                                            class="form-control" placeholder="เบิกได้ / ปี" />
+                                                            <input type="text" formControlName="use_per_year"
+                                                                class="form-control" placeholder="เบิกได้ / ปี" />
                                                         </td>
                                                         <td>
-                                                            <input
-                                                            type="text"
-                                                            formControlName="remark"
-                                                            class="form-control"
-                                                            placeholder="หมายเหตุ" />
+                                                            <input type="text" formControlName="remark"
+                                                                class="form-control" placeholder="หมายเหตุ" />
                                                         </td>
                                                         <td>
-                                                            <button 
-                                                            (click)="removeEvent(i)" 
-                                                            class="btn btn-danger">
+                                                            <button (click)="removeEvent(i)" class="btn btn-danger">
                                                                 ลบ
                                                             </button>
                                                         </td>
@@ -196,7 +183,7 @@
             </div>
             <!-- End Row -->
         </form>
-          
+
     </div>
 </div>
 <!-- end app-content-->
