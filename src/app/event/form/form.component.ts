@@ -57,6 +57,7 @@ export class FormComponent implements AfterViewInit, OnInit, OnDestroy {
   myControl = new FormControl();
   options: any = [];
   filteredOptions: Observable<string[]>;
+  getId: any;
   //**filterOption **//
 
   constructor(
@@ -67,8 +68,10 @@ export class FormComponent implements AfterViewInit, OnInit, OnDestroy {
 
     this.eventsForm = this.fb.group({
       service_id: '',
+      service_id2: this.myControl,
       event: this.fb.array([], [Validators.required]),
     });
+    
   }
 
   ngOnDestroy(): void {
@@ -154,25 +157,24 @@ export class FormComponent implements AfterViewInit, OnInit, OnDestroy {
         startWith(''),
         map(value => this._filter(value))
       );
+      
     //**filterOption **//
   }
   //**filterOption **//
   private _filter(value: string): string[] {
-    const filterValue = value.toLowerCase();
+    const filterValue = value;
+    this.getId = value;
+    console.log('Mycontrol',this.getId)
     console.log('filter', filterValue);
     return this.options.filter(option => option.name.toLowerCase().includes(filterValue));
     //**filterOption **//
+    
   }
 
   GetService(): void {
     this.eventSvc.get_service().subscribe((resp) => {
       this.ServiceData = resp.data;
       console.log('service', this.ServiceData);
-      // this.myArray.forEach((currentValue, index) => {
-      //   if(!currentValue.name) {
-      //       this.myArray.splice(index, 1);
-      //   }
-      // });
       this.options = this.ServiceData;
     });
   }
@@ -189,6 +191,14 @@ export class FormComponent implements AfterViewInit, OnInit, OnDestroy {
       this.SeqData = resp.data;
       console.log(this.SeqData);
     });
+  }
+
+  onChangeId(id: any): void{
+    this.getId = id;
+    this.eventsForm.patchValue({
+      service_id: id
+    })
+    console.log('id',id)
   }
 
 }

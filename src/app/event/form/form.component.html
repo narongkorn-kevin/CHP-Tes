@@ -44,7 +44,6 @@
 
 
         <form [formGroup]="eventsForm" (ngSubmit)="onSubmit()">
-
             <div class="row">
                 <div class="col-lg-12 col-md-12">
                     <div class="card">
@@ -55,20 +54,28 @@
                             <div class="row">
                                 <div class="col-lg-4 col-md-12">
                                     <div class="form-group row">
-                                        <label class="col-md-3 form-label">กิจกรรมหลัก:</label>
                                         <div class="col-md-9">
                                             <!-- <mat-select formControlName="service_id" class="form-control">
                                                 <mat-option *ngFor="let service of ServiceData" [value]="service.id">
                                                     {{service.name}}</mat-option>
                                             </mat-select> -->
                                             <mat-form-field class="example-full-width" appearance="fill">
-                                                <mat-label>Number</mat-label>
-                                                <input type="text" placeholder="Pick one" aria-label="Number" matInput
-                                                    [formControl]="myControl" [matAutocomplete]="auto">
-
+                                                <mat-label>กิจกรรมหลัก</mat-label>
+                                                <input 
+                                                type="text"
+                                                placeholder="เลือกกิจกรรมหลัก"
+                                                aria-label="Number"
+                                                matInput
+                                                [formControl]="myControl"
+                                                [matAutocomplete]="auto"
+                                                Data-value=""
+                                                />
                                                 <mat-autocomplete #auto="matAutocomplete">
                                                     <mat-option *ngFor="let option of filteredOptions | async"
-                                                        [value]="option.id">
+                                                        [value]="option.name"
+                                                        (click)="onChangeId(option.id)"
+                                                        
+                                                        >
                                                         {{option.name}}
                                                     </mat-option>
                                                 </mat-autocomplete>
@@ -183,6 +190,7 @@
             </div>
             <!-- End Row -->
         </form>
+        <div>Check ค่า: {{ this.eventsForm.value | json }}</div>
 
     </div>
 </div>
