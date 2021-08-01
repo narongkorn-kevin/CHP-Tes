@@ -151,7 +151,10 @@ export class FormEventComponent implements AfterViewInit, OnInit, OnDestroy {
               confirmButtonText: 'ตกลง',
             }).then((result) => {
               if (result.isConfirmed) {
-                this.router.navigate(['event/list']);
+               
+                  this.rerender();
+
+                // this.router.navigate(['event/form-event']);
               }
             })
           });

@@ -96,11 +96,6 @@
                 <div class="col-md-2 mb-2">
                   <label for="validationCustomUsername">บริการ</label>
                   <div class="input-group">
-                    <!-- <mat-select class="form-control" placeholder="ทั้งหมด" formControlName="service_id">
-                      <mat-option *ngFor="let item of ServiceData" [value]="item.id">
-                        {{item.name}}
-                      </mat-option>
-                    </mat-select> -->
                     <mat-form-field class="demo-chip-list">
                       <mat-chip-list #chipList2>
                         <mat-chip *ngFor="let service of ServiceSelects" [selectable2]="selectable2"
