@@ -220,6 +220,12 @@ export class ListComponent implements AfterViewInit, OnInit, OnDestroy {
 
 
 
+    // this.filteredFruits = this.fruitCtrl.valueChanges
+    // .pipe(
+    //   startWith(''),
+    //   map(value => this._filter(value))
+    // );
+
     this.filteredFruits = this.fruitCtrl.valueChanges.pipe(
       startWith(null),
       map((fruit: string | null) => fruit ? this.filter(fruit) : this.allFruits.slice()));
@@ -233,8 +239,17 @@ export class ListComponent implements AfterViewInit, OnInit, OnDestroy {
       map((age: string | null) => age ? this.filter(age) : this.AllAgeSelect.slice()));
 
 
+
+
   }
 
+  // private _filter(value: string): string[] {
+  //   const filterValue = value;
+  //   console.log('filter', filterValue);
+  //   return this.fruits.filter(fruit => fruit.name.toLowerCase().includes(filterValue));
+  //   //**filterOption **//
+
+  // }
   loadTable(): void {
 
 
@@ -320,6 +335,7 @@ export class ListComponent implements AfterViewInit, OnInit, OnDestroy {
     this.benefitSvc.get_service_group().subscribe((resp) => {
       this.ServiceGroupData = resp.data;
       this.allFruits = this.ServiceGroupData;
+      // this.fruits = this.ServiceGroupData;
       console.log('allfruit', this.allFruits);
       this.fruitCtrl.setValue(null);
     });
