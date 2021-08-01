@@ -108,6 +108,7 @@
                         <div class="col-md-9">
 
                           <mat-select class="form-control" formControlName="disease_id">
+                            <mat-option  [value]="" disabled>--กรุณาเลือก--</mat-option>
                             <mat-option *ngFor="let item of diseaseData" [value]="item.id">
                               {{item.name}}
                             </mat-option>
