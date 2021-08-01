@@ -37,24 +37,37 @@ export class ListComponent implements AfterViewInit, OnInit, OnDestroy {
   displayedColumns: string[] = ['id', 'role', 'username', 'actions'];
   dataSource = new MatTableDataSource();
   visible: boolean = true;
+  visible2: boolean = true;
+  visible3: boolean = true;
   selectable: boolean = true;
+  selectable2: boolean = true;
+  selectable3: boolean = true;
   removable: boolean = true;
+  removable2: boolean = true;
+  removable3: boolean = true;
   addOnBlur: boolean = false;
+  addOnBlur2: boolean = false;
+  addOnBlur3: boolean = false;
 
 
   separatorKeysCodes = [ENTER, COMMA];
 
   fruitCtrl = new FormControl();
   ServiceCtrl = new FormControl();
+  AgeCtrl = new FormControl();
 
   filteredFruits: Observable<any[]>;
   filteredService: Observable<any[]>;
+  filteredAge: Observable<any[]>;
 
-  fruits = [ ];
-  ServiceSelect = [ ];
+  fruits = [];
+  ServiceSelects = [];
+  AgeSelects = [];
 
-  allFruits = [''];
-  AllServiceSelect = [''];
+
+  allFruits: any = [''];
+  AllServiceSelect: any = [''];
+  AllAgeSelect: any = [''];
 
 
   httpOptions = {
@@ -74,6 +87,8 @@ export class ListComponent implements AfterViewInit, OnInit, OnDestroy {
 
 
   @ViewChild('fruitInput') fruitInput: ElementRef;
+  @ViewChild('serviceInput') serviceInput: ElementRef;
+  @ViewChild('ageInput') ageInput: ElementRef;
 
   @ViewChild(DataTableDirective)
   dtElement!: DataTableDirective;
@@ -91,15 +106,6 @@ export class ListComponent implements AfterViewInit, OnInit, OnDestroy {
     });
 
 
-    this.filteredFruits = this.fruitCtrl.valueChanges.pipe(
-      startWith(null),
-      map((fruit: string | null) => fruit ? this.filter(fruit) : this.allFruits.slice()));
-
-      this.filteredService = this.ServiceCtrl.valueChanges.pipe(
-        startWith(null),
-        map((fruit: string | null) => fruit ? this.filter(fruit) : this.allFruits.slice()));
-
-
 
 
   }
@@ -107,7 +113,7 @@ export class ListComponent implements AfterViewInit, OnInit, OnDestroy {
   add(event: MatChipInputEvent): void {
     const input = event.input;
     const value = event.value;
-    console.log('event',event);
+    console.log('event', event);
 
 
   }
@@ -117,18 +123,83 @@ export class ListComponent implements AfterViewInit, OnInit, OnDestroy {
     if (index >= 0) {
       this.fruits.splice(index, 1);
     }
+    this.formFillter.patchValue({ service_group_id: null });
   }
 
   filter(name: string) {
     return this.allFruits.filter(fruit =>
-        fruit.toLowerCase().indexOf(name.toLowerCase()) === 0);
+      fruit.toLowerCase().indexOf(name.toLowerCase()) === 0);
   }
 
   selected(event: MatAutocompleteSelectedEvent): void {
     this.fruits.push(event.option.viewValue);
-    console.log('selected event',event.option.viewValue);
+    console.log('selected event', event.option.viewValue);
     this.fruitInput.nativeElement.value = '';
     this.fruitCtrl.setValue(null);
+  }
+  // Select Service
+
+  addService(event: MatChipInputEvent): void {
+    const input = event.input;
+    const value = event.value;
+    console.log('event', event);
+
+
+  }
+  removeService(service: any): void {
+    const index = this.ServiceSelects.indexOf(service);
+
+    if (index >= 0) {
+      this.ServiceSelects.splice(index, 1);
+    }
+    this.formFillter.patchValue({ service_id: null });
+  }
+
+  filterService(name: string) {
+    return this.AllServiceSelect.filter(service =>
+      service.toLowerCase().indexOf(name.toLowerCase()) === 0);
+  }
+
+  selectedService(event: MatAutocompleteSelectedEvent): void {
+    this.ServiceSelects.push(event.option.viewValue);
+    console.log('selected service event', event.option.viewValue);
+    this.serviceInput.nativeElement.value = '';
+    this.ServiceCtrl.setValue(null);
+  }
+
+
+
+  // Select Age
+
+  addAge(event: MatChipInputEvent): void {
+    const input = event.input;
+    const value = event.value;
+    console.log('event', event);
+
+
+  }
+  removeAge(age: any): void {
+    const index = this.AgeSelects.indexOf(age);
+
+    if (index >= 0) {
+      this.AgeSelects.splice(index, 1);
+
+    }
+    this.formFillter.patchValue({ age_id: null });
+
+    // this.formFillter.age_id.reset();
+  }
+
+  filterAge(name: string) {
+    return this.AllAgeSelect.filter(age =>
+      age.toLowerCase().indexOf(name.toLowerCase()) === 0);
+  }
+
+  selectedAge(event: MatAutocompleteSelectedEvent): void {
+    this.AgeSelects.push(event.option.viewValue);
+    console.log('selectedage event', event);
+    this.ageInput.nativeElement.value = '';
+    this.AgeCtrl.setValue(null);
   }
 
 
@@ -146,6 +217,21 @@ export class ListComponent implements AfterViewInit, OnInit, OnDestroy {
     this.GetServiceGroup();
     this.GetService();
     this.GetAgeRange();
+
+
+
+    this.filteredFruits = this.fruitCtrl.valueChanges.pipe(
+      startWith(null),
+      map((fruit: string | null) => fruit ? this.filter(fruit) : this.allFruits.slice()));
+
+    this.filteredService = this.ServiceCtrl.valueChanges.pipe(
+      startWith(null),
+      map((service: string | null) => service ? this.filter(service) : this.AllServiceSelect.slice()));
+
+    this.filteredAge = this.AgeCtrl.valueChanges.pipe(
+      startWith(null),
+      map((age: string | null) => age ? this.filter(age) : this.AllAgeSelect.slice()));
+
 
   }
 
@@ -234,27 +320,30 @@ export class ListComponent implements AfterViewInit, OnInit, OnDestroy {
     this.benefitSvc.get_service_group().subscribe((resp) => {
       this.ServiceGroupData = resp.data;
       this.allFruits = this.ServiceGroupData;
-      console.log('allfruit',this.allFruits);
+      console.log('allfruit', this.allFruits);
       this.fruitCtrl.setValue(null);
     });
   }
   GetService(): void {
     this.benefitSvc.get_service().subscribe((resp) => {
       this.ServiceData = resp.data;
-      this.allFruits = this.ServiceData;
+      this.AllServiceSelect = this.ServiceData;
       console.log(this.ServiceData);
+      this.ServiceCtrl.setValue(null);
     });
   }
   GetAgeRange(): void {
     this.benefitSvc.get_age().subscribe((resp) => {
       this.AgeData = resp.data;
-      console.log(this.AgeData);
+      this.AllAgeSelect = this.AgeData;
+      console.log('agedata', this.AllAgeSelect);
+      this.AgeCtrl.setValue(null);
     });
   }
 
 
   Onsearch(form: FormGroup): void {
-    console.log('test',form.value);
+    console.log('test', form.value);
     var data = {
       draw: 1,
       columns: [
@@ -308,8 +397,8 @@ export class ListComponent implements AfterViewInit, OnInit, OnDestroy {
     data['service_id'] = form.value.service_id;
     data['age_id'] = form.value.age_id;
     this.benefitSvc.getAll(data).subscribe((resp) => {
-    this.dataRow = resp.data.data;
-    console.log('555',this.dataRow)
+      this.dataRow = resp.data.data;
+      console.log('555', this.dataRow)
     });
 
   }
