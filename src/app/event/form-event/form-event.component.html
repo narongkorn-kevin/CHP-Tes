@@ -39,7 +39,7 @@
                                     <div class="form-group row">
                                         <label class="col-md-3 form-label">กิจกรรมหลัก:</label>
                                         <div class="col-md-9">
-                                            <mat-select formControlName="service_id" class="form-control">
+                                            <mat-select formControlName="service_id" class="form-control" disabled>
                                                 <mat-option *ngFor="let service of ServiceData"
                                                     [value]="service.id">
                                                     {{service.name}}</mat-option>
