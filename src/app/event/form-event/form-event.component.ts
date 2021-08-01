@@ -14,6 +14,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { FormBuilder, FormArray, FormGroup, FormControl, Validators } from '@angular/forms';
 import Swal from 'sweetalert2';
+import { EventResponse } from './../../shared/models/base.interface';
 
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { MatTableDataSource } from '@angular/material/table';
@@ -39,6 +40,9 @@ enum Action {
   styleUrls: ['./form-event.component.scss']
 })
 export class FormEventComponent implements AfterViewInit, OnInit, OnDestroy {
+
+  @ViewChild(DataTableDirective)
+  dtElement!: DataTableDirective;
 
   public dtOptions: DataTables.Settings = {};
 
@@ -319,6 +323,41 @@ loadTable(id): void {
   };
 }
 /////////Datatable////////
+onDelete(eventId: number): void {
+  
+  Swal.fire({
+    title: 'Warning!',
+    text: "คุณต้องการลบกิจกรรม ใช่หรือไม่?",
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonColor: '#28a745',
+    cancelButtonColor: '#d33',
+    confirmButtonText: 'ตกลง',
+    cancelButtonText: 'ยกเลิก'
+  }).then((result) => {
+    if (result.isConfirmed) {
+      this.eventSvc
+      .delete(eventId)
+          .pipe(takeUntil(this.destroy$))
+          .subscribe((res: EventResponse) => {
+            if (res.code == 201) {
+              this.rerender();
+            }
+            // this.branchSvc.getAll().subscribe((branch) => {
+            // this.dataRow = branch.data;
+            // });
+          });
+    }
+  });
+}
+rerender(): void {
+  this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
+    dtInstance.ajax.reload();
+  });
+}
+
+
+
 
 
 
