@@ -184,14 +184,17 @@
                       </thead>
                       <tbody>
                         <tr *ngFor="let item of dataRow; let i = index">
-                          <td>{{ i + 1 }}</td>
-                          <td>{{ item.service_group_name }}</td>
-                          <td>{{ item.name }}</td>
-                          <td>{{ item.age_id }}</td>
+                          <td style="width: 5%; text-align: center;">{{ i + 1 }}</td>
+                          <td style="width: 40%;">{{ item.service_group_name }}</td>
+                          <td style="width: 40%;">{{ item.name }}</td>
+                          <td *ngIf="item.age_id  === null;" style="width: 10%;"></td>
+                          <td *ngIf="item.age_id  !== null;" style="width: 10%;text-align: center;">{{ item.age.name }}</td>
+                          <!-- <td *ngIf="item.age  != '';"> {{ item.age.name }} </td>
+                          <td *ngIf="item.age  == '';"></td> -->
                           <!-- <td>{{ item.update_by }}</td>
                           <td>{{ item.created_at }}</td>
                           <td>{{ item.updated_at }}</td> -->
-                          <td>
+                          <td style="width: 5%;text-align: center;">
                             <div class="btn-list">
                               <button type="button" (click)="onAddEvent(item.id)" class="btn btn-icon btn-primary">
                                 <i class="fa fa-plus"> กิจกรรม</i>
