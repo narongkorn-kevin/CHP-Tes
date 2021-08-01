@@ -200,6 +200,9 @@
                           <td>{{ item.updated_at }}</td> -->
                           <td>
                             <div class="btn-list">
+                              <button type="button" (click)="onAddEvent(item.id)" class="btn btn-icon btn-primary">
+                                <i class="fa fa-plus"> กิจกรรม</i>
+                              </button>
                               <button type="button" (click)="onEdit(item)" class="btn btn-icon btn-success">
                                 <i class="fa fa-edit"></i>
                               </button>

@@ -110,13 +110,13 @@ export class ListComponent implements AfterViewInit, OnInit, OnDestroy {
     });
   }
 
-
   GetServiceGroup(): void {
     this.eventSvc.get_service_group().subscribe((resp) => {
       this.ServiceGroupData = resp.data;
       console.log(this.ServiceGroupData);
     });
   }
+  
   GetService(): void {
     this.eventSvc.get_service().subscribe((resp) => {
       this.ServiceData = resp.data;

@@ -132,7 +132,6 @@ export class EditComponent implements OnInit {
 
   GetEventByID(id): void {
 
-  
     this.eventSvc.getById(id).subscribe(resp => {
       this.ItemData = resp.data;
       var stringToConvert = this.ItemData.seq;

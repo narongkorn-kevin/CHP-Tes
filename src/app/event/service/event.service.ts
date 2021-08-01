@@ -93,6 +93,11 @@ export class EventService {
       .get<any>(`${environment.API_URL}/api/service`, this.httpOptions)
       .pipe(catchError(this.handlerError));
   }
+  get_event(): Observable<EventResponse> {
+    return this.http
+      .get<any>(`${environment.API_URL}/api/event`, this.httpOptions)
+      .pipe(catchError(this.handlerError));
+  }
 
   new(event: FormData): Observable<Event> {
     return this.http
@@ -104,6 +109,7 @@ getById(eventId: number): Observable<BenefitResponse> {
   return this.http
     .get<any>(`${environment.API_URL}/api/event/${eventId}`, this.httpOptions)
     .pipe(catchError(this.handlerError));
+    
 }
 update(eventId: number,benefit: Benefit): Observable<Event> {
   return this.http

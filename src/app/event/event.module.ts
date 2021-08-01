@@ -70,9 +70,10 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CdkTableModule } from '@angular/cdk/table';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { FormEventComponent } from './form-event/form-event.component';
 
 @NgModule({
-  declarations: [FormComponent, EditComponent, ListComponent],
+  declarations: [FormComponent, EditComponent, ListComponent, FormEventComponent],
   imports: [
     CommonModule,
     EventRoutingModule,

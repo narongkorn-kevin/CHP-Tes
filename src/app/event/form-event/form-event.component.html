@@ -25,24 +25,6 @@
         </div>
         <!--End Page header-->
 
-        <!-- <form class="example-form">
-            <mat-form-field class="example-full-width" appearance="fill">
-              <mat-label>Number</mat-label>
-              <input type="text"
-                     placeholder="Pick one"
-                     aria-label="Number"
-                     matInput
-                     [formControl]="myControl"
-                     [matAutocomplete]="auto">
-              <mat-autocomplete #auto="matAutocomplete">
-                <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
-                  {{option}}
-                </mat-option>
-              </mat-autocomplete>
-            </mat-form-field>
-          </form> -->
-
-
         <form [formGroup]="eventsForm" (ngSubmit)="onSubmit()">
             <div class="row">
                 <div class="col-lg-12 col-md-12">
@@ -52,37 +34,19 @@
                         </div>
                         <div class="card-body">
                             <div class="row">
+                                
                                 <div class="col-lg-4 col-md-12">
                                     <div class="form-group row">
+                                        <label class="col-md-3 form-label">กิจกรรมหลัก:</label>
                                         <div class="col-md-9">
-                                            <!-- <mat-select formControlName="service_id" class="form-control">
-                                                <mat-option *ngFor="let service of ServiceData" [value]="service.id">
+                                            <mat-select formControlName="service_id" class="form-control">
+                                                <mat-option *ngFor="let service of ServiceData"
+                                                    [value]="service.id">
                                                     {{service.name}}</mat-option>
-                                            </mat-select> -->
-                                            <mat-form-field class="example-full-width" appearance="fill">
-                                                <mat-label>กิจกรรมหลัก</mat-label>
-                                                <input 
-                                                type="text"
-                                                placeholder="เลือกกิจกรรมหลัก"
-                                                aria-label="Number"
-                                                matInput
-                                                [formControl]="myControl"
-                                                [matAutocomplete]="auto"
-                                                Data-value=""
-                                                />
-                                                <mat-autocomplete #auto="matAutocomplete">
-                                                    <mat-option *ngFor="let option of filteredOptions | async"
-                                                        [value]="option.name"
-                                                        (click)="onChangeId(option.id)"
-                                                        >
-                                                        {{option.name}}
-                                                    </mat-option>
-                                                </mat-autocomplete>
-                                            </mat-form-field>
+                                            </mat-select>
                                         </div>
                                     </div>
                                 </div>
-                               
                                 <div class="col-lg-12 col-md-12">
                                     <div class="form-group row">
                                         <label class="col-md-3 form-label">กิจกรรมสำคัญที่จะได้รับ
@@ -165,9 +129,63 @@
                     </div>
                 </div>
             </div>
-            <!-- End Row -->
         </form>
+            <!-- End Row -->
         <!-- <div>Check ค่า: {{ this.eventsForm.value | json }}</div> -->
+          <div class="card">
+            <div class="card-body">
+              <div class="row">
+                <div class="col mb-4">
+                </div>
+                <div class="col col-auto mb-4">
+                </div>
+              </div>
+              <div class="">
+                <div class="table-responsive">
+                  <table datatable [dtOptions]="dtOptions" id="example"
+                    class="table table-striped card-table table-vcenter text-nowrap mb-0">
+                    <thead>
+                      <tr>
+                        <th width=5% class="border-bottom-0">ลำดับ.</th>
+                        <th width=40% class="border-bottom-0">กิจกรรมสำคัญที่จะได้รับ</th>
+                        <th width=20% class="border-bottom-0">ความถี่</th>
+                        <th width=10% class="border-bottom-0">เบิกได้/ปี</th>
+                        <th width=20% class="border-bottom-0">หมายเหตุ</th>
+                        
+                        <th class="border-bottom-0">จัดการ</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let item of dataRow; let i = index">
+                        <td >{{ i + 1 }}</td>
+                        <td style="white-space:normal;" >{{ item.name }}</td>
+                        <td style="white-space:normal;" >{{ item.seq }}</td>
+                        <td >{{ item.use_per_year }}</td>
+                        <td style="white-space:normal;">{{ item.remark }}</td>
+                        <td>
+                          <div class="btn-list">
+                            <button type="button" (click)="onEdit(item)" class="btn btn-icon btn-success">
+                              <i class="fa fa-edit"></i>
+                            </button>
+                            <button type="button" (click)="onDelete(item.id)" class="btn btn-icon btn-danger">
+                              <i class="fa fa-trash"></i>
+
+                            </button>
+                          </div>
+                        </td>
+                      </tr>
+                    </tbody>
+                    <tbody *ngIf="dataRow?.length == 0">
+                      <tr>
+                        <td colspan="7" class="no-data-available">No data!</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+
 
     </div>
 </div>

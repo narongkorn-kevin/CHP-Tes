@@ -189,6 +189,13 @@ export class ListComponent implements AfterViewInit, OnInit, OnDestroy {
     this.router.navigate(['benefit/edit', data.id]);
   }
 
+  onAddEvent(data): void {
+
+    console.log('id',data);
+
+    this.router.navigate(['event/form-event', data]);
+  }
+
   onDelete(benefitId: number): void {
     Swal.fire({
       title: 'Warning!',
@@ -245,41 +252,6 @@ export class ListComponent implements AfterViewInit, OnInit, OnDestroy {
     });
   }
 
-
-  // Onsearch(form: FormGroup): void {
-  //   console.log('test',form.value);
-
-  //   let formValue = form.value;
-  //   const that = this;
-  //   this.dtOptions = {
-  //     pagingType: 'full_numbers',
-  //     pageLength: 10,
-  //     serverSide: true,
-  //     processing: true,
-  //     ajax: (dataTablesParameters: any, callback) => {
-  //       dataTablesParameters['service_group_id'] = formValue.service_group_id;
-  //       dataTablesParameters['service_id'] = formValue.service_id;
-  //       dataTablesParameters['age_id'] = formValue.age_id;
-  //       that.benefitSvc.getAll(dataTablesParameters).subscribe(resp => {
-  //         that.dataRow = resp.data.data;
-  //         console.log('datatable', that.dataRow);
-  //         callback({
-  //           recordsTotal: resp.data.total,
-  //           recordsFiltered: resp.data.total,
-  //           data: []
-  //         });
-  //       });
-  //     },
-  //     columns: [
-  //       { data: 'No' },
-  //       { data: 'service_group_name' },
-  //       { data: 'name' },
-  //       { data: 'age_id' },
-  //       { data: 'action', orderable: false }
-  //     ]
-  //   };
-
-  // }
 
   Onsearch(form: FormGroup): void {
     console.log('test',form.value);
