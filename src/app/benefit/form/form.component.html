@@ -72,7 +72,9 @@
                         <label class="col-md-3 form-label">ช่วงอายุ :
                         </label>
                         <div class="col-md-9">
+
                           <mat-select class="form-control" formControlName="age_id">
+                          <mat-option [value]="">ทั้งหมด</mat-option>
                             <mat-option *ngFor="let age of AgeData" [value]="age.id">
                               {{age.name}} ปี</mat-option>
                           </mat-select>
@@ -123,10 +125,10 @@
                         </label>
                         <div class="col-md-9">
                           <mat-select class="form-control" formControlName="pregnant">
-                            <mat-option value="1">
+                            <mat-option value="0">
                               ไม่ตั้งครรภ์
                             </mat-option>
-                            <mat-option value="2">
+                            <mat-option value="1">
                               ตั้งครรภ์
                             </mat-option>
 

@@ -33,7 +33,8 @@
                                                             {{service.name}}</mat-option>
                                                     </mat-select> -->
                                                     <div>
-                                                        <input type="text" class="form-control" formControlName="service_group_id" />
+                                                        <input type="text" class="form-control"
+                                                            formControlName="service_group_id" />
                                                     </div>
                                                 </div>
                                             </div>
@@ -62,10 +63,11 @@
                                                 <label class="col-md-3 form-label">ช่วงอายุ :
                                                 </label>
                                                 <div class="col-md-9">
+
                                                     <mat-select class="form-control" formControlName="age_id">
-                                                        <mat-option *ngFor="let age of AgeData"
-                                                        [value]="age.id">
-                                                        {{age.name}} ปี</mat-option>
+                                                        <mat-option [value]="">ทั้งหมด</mat-option>
+                                                        <mat-option *ngFor="let age of AgeData" [value]="age.id">
+                                                            {{age.name}} ปี</mat-option>
                                                     </mat-select>
                                                 </div>
                                             </div>
@@ -76,6 +78,9 @@
                                                 </label>
                                                 <div class="col-md-9">
                                                     <mat-select class="form-control" formControlName="sex">
+                                                        <mat-option value="">
+                                                            ทั้งหมด
+                                                        </mat-option>
                                                         <mat-option value="1">
                                                             ชาย
                                                         </mat-option>
@@ -83,7 +88,7 @@
                                                             หญิง
                                                         </mat-option>
                                                         <mat-option value="3">
-                                                            กลาง
+                                                            เพศที่ 3
                                                         </mat-option>
                                                     </mat-select>
                                                 </div>
@@ -103,20 +108,20 @@
                                                 </div>
                                             </div>
                                         </div>
-                                      
+
                                         <div class="col-lg-6 col-md-12">
                                             <div class="form-group row">
                                                 <label class="col-md-3 form-label">สถานะตั้งครรภ์ :
                                                 </label>
-                                                <div class="col-md-9"> 
+                                                <div class="col-md-9">
                                                     <mat-select class="form-control" formControlName="pregnant">
-                                                        <mat-option value=1>
+                                                        <mat-option value=0>
                                                             ไม่ตั้งครรภ์
                                                         </mat-option>
-                                                        <mat-option value=2>
+                                                        <mat-option value=1>
                                                             ตั้งครรภ์
                                                         </mat-option>
-                                                        
+
                                                     </mat-select>
                                                 </div>
                                             </div>
@@ -150,7 +155,7 @@
                 </form>
                 <!-- <div>Check ค่า: {{ this.benefitform.baseForm.value | json }}</div> -->
 
-                
+
             </mat-tab>
         </mat-tab-group>
         <!-- End Row -->
