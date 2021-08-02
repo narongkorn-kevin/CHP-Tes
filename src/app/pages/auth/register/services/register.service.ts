@@ -9,7 +9,7 @@ import {
 import { Observable, throwError } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { environment } from '@env/environment';
-import { RegisterResponse, Register, PermissionResponse, DepartmentResponse, BranchResponse, PositionResponse } from '@app/shared/models/base.interface';
+import { RegisterResponse, Register, PermissionResponse,  } from '@app/shared/models/base.interface';
 import { catchError, map } from 'rxjs/operators';
 const user = JSON.parse(localStorage.getItem('user')) || null;
 @Injectable({
@@ -46,23 +46,9 @@ export class RegisterService {
   //       }));
   // }
 
-  getDepartment(): Observable<DepartmentResponse> {
-    return this.http
-      .get<any>(`${environment.API_URL}/api/get_department`)
-      .pipe(catchError(this.handlerError));
-  }
+  
 
-  getBranch(): Observable<BranchResponse> {
-    return this.http
-      .get<any>(`${environment.API_URL}/api/get_branch`)
-      .pipe(catchError(this.handlerError));
-  }
 
-  getPosition(): Observable<PositionResponse> {
-    return this.http
-      .get<any>(`${environment.API_URL}/api/get_position`)
-      .pipe(catchError(this.handlerError));
-  }
 
   getPermission(): Observable<PermissionResponse> {
     return this.http

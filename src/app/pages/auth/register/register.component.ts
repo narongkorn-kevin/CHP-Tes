@@ -58,32 +58,13 @@ export class RegisterComponent implements AfterViewInit, OnInit, OnDestroy {
     })(jQuery);
     // this.employeeForm.baseForm.get('role').setValidators(null);
     // this.employeeForm.baseForm.get('role').updateValueAndValidity();
-    this.GetDepartment();
-    this.GetBranch();
-    this.GetPosition();
-    this.GetPermission();
+
 
   }
 
-  GetDepartment(): void {
-    this.registerSvc.getDepartment().subscribe(resp => {
-      this.DepartmentData = resp.data;
-      console.log(this.DepartmentData);
-    });
 
-  }
   GetBranch(): void {
-    this.registerSvc.getBranch().subscribe(resp => {
-      this.BranchData = resp.data;
-      console.log(this.BranchData);
-    });
-
-  }
-  GetPosition(): void {
-    this.registerSvc.getPosition().subscribe(resp => {
-      this.PositionData = resp.data;
-      console.log(this.PositionData);
-    });
+  
 
   }
   GetPermission(): void {

@@ -1,5 +1,4 @@
-import { Department } from './../../models/base.interface';
-import { EmployeeService } from './../../../pages/base/employee/services/employee.service';
+
 import { UserResponse } from './../../models/user.interface';
 
 import {
@@ -34,7 +33,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   constructor(
     private authSvc: AuthService,
-    private employeeSvc: EmployeeService
+   
   ) {}
 
   ngOnInit(): void {
@@ -61,14 +60,4 @@ export class HeaderComponent implements OnInit, OnDestroy {
     this.authSvc.logout();
   }
 
-  GetProfile(): void {
-    this.employeeSvc.getProfile().subscribe((resp) => {
-      this.ProfileData = resp.data;
-      this.ProfileName = this.ProfileData.name.split(' ')[0];
-      this.ProfileDepName = this.ProfileData.department.name;
-
-      // ProfileData.name.split(" ")[0]
-      console.log(this.ProfileData);
-    });
-  }
 }
